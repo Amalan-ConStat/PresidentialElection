@@ -27,7 +27,11 @@ true except for the last row. First 6 rows are for candidates names, follwed by
 No of Valid Votes, No of Rejected Votes, Total No of votes polled and finally
 No of Registered Electors.
 
-![]()
+![](Fig1.JPG)
+
+# Issues in the table
+
+* 
 
 # Process of Extraction
 
@@ -67,6 +71,32 @@ Election1994<-do.call("rbind",Election1994)
 
 # Validating Data Extracted
 
+Checking for Number of Registered Electors.
+
+```{r Validating the data}
+# Extracting only Final District District Results of 
+# Number of Registered Electors
+# and then adding all the votes 
+ElecFinal1994<-subset(Election1994,Electorate=="Final District Results" 
+                      & ColNames=="No of Registered Electors")
+# added votes will be cross checked with the pdf document
+ElecFinal1994[,sum(Votes),by="ColNames"]
+
+# Extracting except Final District District Results of 
+# Number of Registered Electors
+# and then adding all the votes 
+ElecFinal1994<-subset(Election1994,Electorate!="Final District Results" 
+                      & Electorate!="Postal Votes"
+                      & ColNames=="No of Registered Electors")
+# added votes will be cross checked with the pdf document
+ElecFinal1994[,sum(Votes),by="ColNames"]
+```
+
+Comparing final tally votes of Mrs. Chandrika Bandaranaike Kumarathunga 
+from the pdf file to the data extracted as below. 
+
+![](Fig2.JPG)
+
 ```{r Validating the data 1}
 # Extracting only Final District District Results of 
 # Mrs. Chandrika Bandaranaike Kumarathunga
@@ -85,7 +115,12 @@ ElecFinal1994<-subset(Election1994,Electorate!="Final District Results"
 ElecFinal1994[,sum(Votes),by="ColNames"]
 ```
 
+It seems data extraction is successful. 
 
+Similarly comparing final tally votes of Mrs. Wajira Srimathi Disaanayake 
+from the pdf file to the data extracted as below. 
+
+![](Fig2.JPG)
 
 ```{r Vaildating the data 2}
 # Extracting only Final District District Results of 
@@ -105,5 +140,8 @@ ElecFinal1994<-subset(Election1994,Electorate!="Final District Results"
 ElecFinal1994[,sum(Votes,na.rm = TRUE),by="ColNames"]
 ```
 
+According to the above summation the tally is 2715283 
+which is different from the pdf file. The difference 
+is 2 votes. Does that mean their tally is ......! . 
 
 *THANK YOU*

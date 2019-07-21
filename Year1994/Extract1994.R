@@ -181,7 +181,7 @@ Extract_table1994<-function(page,NE=FALSE,Col=FALSE,Gam=FALSE,Ma=FALSE,Ja=FALSE,
   # removing that extrac column which is repeated because of pervious non numierc value
   Table1<-Table1[,-dim(Table1)[2]]
   # extracting votes from the table
-  Votes<-as.numeric(str_remove(Table1[seq(1,dim(Table1)[1],2),],","))
+  Votes<-as.numeric(str_remove_all(Table1[seq(1,dim(Table1)[1],2),],","))
   # extracting percentages from the table
   Perc<-as.numeric(str_remove(rbind(Table1[seq(2,(dim(Table1)[1]-1),2),],NA),"%"))
   # names on the table, which are in the same order for all tables
