@@ -1,0 +1,116 @@
+---
+title: "Year2005"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,warning = TRUE)
+library(data.table)
+library(stringr)
+library(splitstackshape)
+library(pdftools)
+```
+
+
+```{r}
+source("Extract2005.R")
+
+SL_PE_2005<-pdf_text("PresidentialElections2005(district).pdf")
+
+Election2005<-NULL
+
+# Colombo
+Election2005[[1]]<-Extract_Inittable2005(page=1,nc=6,colo=TRUE)
+Election2005[[2]]<-Extract_othertable2005(page=2,District="COLOMBO",nc=6,other = FALSE)     
+Election2005[[3]]<-Extract_othertable2005(page=3,District = "COLOMBO",nc=5)
+
+# Gampaha
+Election2005[[4]]<-Extract_Inittable2005(page=4,nc=6)
+Election2005[[5]]<-Extract_othertable2005(page=5,District="GAMPAHA",nc=6,other = FALSE)     
+Election2005[[6]]<-Extract_othertable2005(page=6,District="GAMPAHA",nc=3)
+
+# Kalutara
+Election2005[[7]]<-Extract_Inittable2005(page=7,nc=6)
+Election2005[[8]]<-Extract_othertable2005(page=8,District = "KALUTARA",nc=4) 
+
+# Kandy
+Election2005[[9]]<-Extract_Inittable2005(page=9,nc=6)
+Election2005[[10]]<-Extract_othertable2005(page=10,District = "MAHANUWARA",nc=6,other = FALSE)     
+Election2005[[11]]<-Extract_othertable2005(page=11,District = "MAHANUWARA",nc=3)
+
+# Matale
+Election2005[[12]]<-Extract_Inittable2005(page=12,nc=6,other = TRUE)
+
+# Nuwara-Eliya
+Election2005[[13]]<-Extract_Inittable2005(page=13,nc=6,other = TRUE,NE=TRUE)
+
+# Galle
+Election2005[[14]]<-Extract_Inittable2005(page=14,nc=6)
+Election2005[[15]]<-Extract_othertable2005(page=15,District = "GALLE",nc=6)     
+
+# Matara
+Election2005[[16]]<-Extract_Inittable2005(page=16,nc=6)
+Election2005[[17]]<-Extract_othertable2005(page=17,District="MATARA",nc=3)
+
+# Hambantota
+Election2005[[18]]<-Extract_Inittable2005(page=18,nc=6,other = TRUE)
+
+# Jaffna
+Election2005[[19]]<-Extract_Inittable2005(page=19,nc=6,jaff = TRUE)
+Election2005[[20]]<-Extract_othertable2005(page=20,District = "JAFFNA",nc=8,dis = TRUE,jaff=TRUE)
+
+# Vanni
+Election2005[[21]]<-Extract_Inittable2005(page=21,nc=6,other = TRUE,dis = TRUE)
+
+# Batticaloa
+Election2005[[22]]<-Extract_Inittable2005(page=22,nc=5,other=TRUE)
+
+# Ampara /Digamadulla
+Election2005[[23]]<-Extract_Inittable2005(page=23,nc=6,other = TRUE,amp = TRUE)
+
+# Trincomalee
+Election2005[[24]]<-Extract_Inittable2005(page=24,nc=6,other=TRUE,dis=TRUE)
+
+# Kurunegala
+Election2005[[25]]<-Extract_Inittable2005(page=25,nc=5)
+Election2005[[26]]<-Extract_othertable2005(page=26,District = "KURUNEGALA",nc=5,other = FALSE)     
+Election2005[[27]]<-Extract_othertable2005(page=27,District = "KURUNEGALA",nc=6)
+
+# Puttalam
+Election2005[[28]]<-Extract_Inittable2005(page=28,nc=7,other=TRUE)
+
+# Anuradhapura
+Election2005[[29]]<-Extract_Inittable2005(page=29,nc=5,anu = TRUE)
+Election2005[[30]]<-Extract_othertable2005(page=30,District = "ANURADHAPURA",nc=4)     
+
+# Polonnaruwa
+Election2005[[31]]<-Extract_Inittable2005(page=31,nc=5,other=TRUE)
+
+# Badulla
+Election2005[[32]]<-Extract_Inittable2005(page=32,nc=5)
+Election2005[[33]]<-Extract_othertable2005(page=33,District = "BADULLA",nc=6)     
+
+# Monaragala
+Election2005[[34]]<-Extract_Inittable2005(page=34,nc=5,other = TRUE)
+
+# Ratnapura
+Election2005[[35]]<-Extract_Inittable2005(page=35,nc=6)
+Election2005[[36]]<-Extract_othertable2005(page=36,District = "RATNAPURA",nc=4)
+
+# Kegalle
+Election2005[[37]]<-Extract_Inittable2005(page=37,nc=6)
+Election2005[[38]]<-Extract_othertable2005(page=38,District = "KEGALLE",nc=5)     
+
+Election2005<-do.call("rbind",Election2005)
+
+Election2005[,c("Votes","Percentage")]<-lapply(Election2005[,c("Votes","Percentage")], function(x) as.numeric(as.character(x)))
+
+ElecFinal2005<-subset(Election2005,Electorate=="Total" & ColNames=="Mahinda Rajapaksha")
+ElecFinal2005[,sum(Votes),by="ColNames"]
+
+ElecFinal2005<-subset(Election2005,Electorate=="Total" & ColNames=="Ranil Wickramasinghe")
+ElecFinal2005[,sum(Votes),by="ColNames"]
+
+unique(Election2005$ColNames)
+```
+

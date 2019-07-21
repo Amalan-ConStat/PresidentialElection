@@ -1,0 +1,179 @@
+---
+title: "Year2010"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,warning = FALSE)
+library(data.table)
+library(stringr)
+library(splitstackshape)
+library(pdftools)
+```
+
+```{r}
+SL_PE_2010<-pdf_text("PresidentialElections2010.pdf")
+
+source("Extract2010.R")
+
+# creating the Null Election2010 data frame----
+Election2010<-NULL
+
+# Colombo District----
+for (i in 2:9) 
+        {
+        Election2010[[i]]<-Extract_twotable2010(i,"Colombo")
+        }
+Election2010[[10]]<-Extract_onetable2010(10,"Colombo")
+
+# Gampaha District----
+for (i in 11:17) 
+        {
+        Election2010[[i]]<-Extract_twotable2010(i,"Gampaha")
+        }
+Election2010[[18]]<-Extract_onetable2010(18,"Gampaha")
+
+# Kalutara District----
+for (i in 19:23) 
+        {
+        Election2010[[i]]<-Extract_twotable2010(i,"Kalutara")
+        }
+
+# Kandy District----
+for (i in 24:30) 
+        {
+        Election2010[[i]]<-Extract_twotable2010(i,"Kandy")
+        }
+Election2010[[31]]<-Extract_onetable2010(31,"Kandy")
+
+# Matale District----
+for (i in 32:34) 
+        {
+        Election2010[[i]]<-Extract_twotable2010(i,"Matale")
+        }
+
+# Nuwara-Eliya District----
+for (i in 35:37) 
+        {
+        Election2010[[i]]<-Extract_twotable2010(i,"Nuwara Eliya")
+        }
+
+# Galle District----
+for (i in 38:43) 
+        {
+        Election2010[[i]]<-Extract_twotable2010(i,"Galle")
+        }
+
+# Matara District----
+for (i in 44:47) 
+        {
+        Election2010[[i]]<-Extract_twotable2010(i,"Matara")
+        }
+Election2010[[48]]<-Extract_onetable2010(48,"Matara")
+
+# Hambantota District----
+for (i in 49:51) 
+        {
+        Election2010[[i]]<-Extract_twotable2010(i,"Hambantota")
+        }
+
+# Jaffna----
+for (i in 52:58) 
+        {
+        Election2010[[i]]<-Extract_twotable2010(i,"Jaffna")
+        }
+
+# Vanni----
+for (i in 59:61) 
+        {
+        Election2010[[i]]<-Extract_twotable2010(i,"Vanni")
+        }
+
+# Batticaloa----
+for (i in 62:64) 
+        {
+        Election2010[[i]]<-Extract_twotable2010(i,"Batticaloa")
+        }
+
+# Ampara----
+for (i in 65:67) 
+        {
+        Election2010[[i]]<-Extract_twotable2010(i,"Ampara")
+        }
+Election2010[[68]]<-Extract_onetable2010(68,"Ampara")
+
+# Trincomalee----
+for (i in 69:71) 
+        {
+        Election2010[[i]]<-Extract_twotable2010(i,"Trincomalee")
+        }
+
+# Kurunegala----
+for (i in 72:79) 
+        {
+        Election2010[[i]]<-Extract_twotable2010(i,"Kurunegala")
+        }
+
+# Puttalam----
+for (i in 80:82) 
+        {
+        Election2010[[i]]<-Extract_twotable2010(i,"Puttalam")
+        }
+Election2010[[83]]<-Extract_onetable2010(83,"Puttalam")
+
+# Anuradhapura----
+for (i in 84:87) 
+        {
+        Election2010[[i]]<-Extract_twotable2010(i,"Anuradhapura")
+        }
+Election2010[[88]]<-Extract_onetable2010(88,"Anuradhapura")
+
+# Polonnaruwa----
+for (i in 89:90) 
+        {
+        Election2010[[i]]<-Extract_twotable2010(i,"Polonnaruwa")
+        }
+Election2010[[91]]<-Extract_onetable2010(91,"Polonnaruwa")
+
+# Badulla----
+for (i in 92:96) 
+        {
+        Election2010[[i]]<-Extract_twotable2010(i,"Badulla")
+        }
+Election2010[[97]]<-Extract_onetable2010(97,"Badulla")
+
+# Monaragala----
+for (i in 98:99) 
+        {
+        Election2010[[i]]<-Extract_twotable2010(i,"Monaragala")
+        }
+Election2010[[100]]<-Extract_onetable2010(100,"Monaragala")
+
+# Ratnapura----
+for (i in 101:105) 
+        {
+        Election2010[[i]]<-Extract_twotable2010(i,"Ratnapura")
+        }
+
+# Kegalle----
+for (i in 106:110) 
+        {
+        Election2010[[i]]<-Extract_twotable2010(i,"Kegalle")
+        }
+Election2010[[111]]<-Extract_onetable2010(111,"Kegalle")
+
+# The Final of all tables----
+Election2010<-do.call("rbind",Election2010)
+
+Election2010[Election2010=="Snath Pinnaduwa"]<-"Sanath Pinnaduwa"
+Election2010[Election2010==""]<-"Regis Electors"
+
+ElecFinal2010<-subset(Election2010,Electorate=="Final District Result" & ColNames=="Mahinda Rajapaksha")
+ElecFinal2010[,sum(Votes),by="ColNames"]
+
+ElecFinal2010<-subset(Election2010,Electorate=="Final District Result" & ColNames=="Sarath Fonseka")
+ElecFinal2010[,sum(Votes),by="ColNames"]
+
+unique(Election2010$ColNames)
+```
+

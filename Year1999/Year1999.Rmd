@@ -1,0 +1,100 @@
+---
+title: "Year 1999"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,warning = FALSE)
+library(data.table)
+library(stringr)
+library(splitstackshape)
+library(pdftools)
+```
+
+
+```{r}
+SL_PE_1999<-pdf_text("PresidentialElections1999.pdf")
+
+source("Extract1999.R")
+
+Election1999<-NULL
+
+# Colombo
+Election1999[[1]]<-Extract_table1999(5,17)
+
+# Gamapaha
+Election1999[[2]]<-Extract_table1999(6,15,GA=TRUE)
+
+# Kalutara
+Election1999[[3]]<-Extract_table1999(7,10)
+
+# Mahanuwara
+Election1999[[4]]<-Extract_table1999(8,15)
+
+# Matale
+Election1999[[5]]<-Extract_table1999(9,6)
+
+# Nuwara-Eliya
+Election1999[[6]]<-Extract_table1999(10,6)
+
+# Galle
+Election1999[[7]]<-Extract_table1999(11,12)
+
+# Matara
+Election1999[[8]]<-Extract_table1999(12,9)
+
+# Hambantota
+Election1999[[9]]<-Extract_table1999(13,6)
+
+# Jaffna
+Election1999[[10]]<-Extract_table1999(14,13)
+
+# Vanni
+Election1999[[11]]<-Extract_table1999(15,5)
+
+# Batticaloa
+Election1999[[12]]<-Extract_table1999(16,5)
+
+# Trincomalee
+Election1999[[13]]<-Extract_table1999(17,5)
+
+# Digamadulla
+Election1999[[14]]<-Extract_table1999(18,6)
+
+# Kurunegala
+Election1999[[15]]<-Extract_table1999(19,16)
+
+# puttalam
+Election1999[[16]]<-Extract_table1999(20,7)
+
+# Anuradhapura
+Election1999[[17]]<-Extract_table1999(21,9)
+
+# Polonnaruwa
+Election1999[[18]]<-Extract_table1999(22,5)
+
+# Badulla
+Election1999[[19]]<-Extract_table1999(23,11)
+
+# Moneragala
+Election1999[[20]]<-Extract_table1999(24,5)
+
+# Ratnapura
+Election1999[[21]]<-Extract_table1999(25,10)
+
+# Kegalle
+Election1999[[22]]<-Extract_table1999(26,11)
+
+Election1999<-do.call("rbind",Election1999)
+
+ElecFinal1999<-subset(Election1999,Electorate=="FINAL DISTRICT RESULTS" & 
+                      ColNames=="PA")
+ElecFinal1999[,sum(Votes),by="ColNames"]
+
+ElecFinal1999<-subset(Election1999,Electorate=="FINAL DISTRICT RESULTS" & 
+                      ColNames=="UNP")
+ElecFinal1999[,sum(Votes),by="ColNames"]
+
+unique(Election1999$ColNames)
+```
+
