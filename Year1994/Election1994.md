@@ -19,9 +19,6 @@ Total No of votes polled and finally No of Registered Electors.
 
 ![](Fig1.JPG)
 
-# Issues in the table
-
-  - 
 # Process of Extraction
 
 Each table has been extracted seprately without any issues.

@@ -16,26 +16,23 @@ library(pdftools)
 # Structure of Document
 
 Data extraction begins from page 4 of the document. Each page from here has a 
-table representing  each disttrict. All tables follow the similar format. 
+table representing  each district. All tables follow the similar format. 
 
 If we consider the columns, first column is for candidate names with other counts,
 second column and its consecutive columns are for electorates. Final two columns
 are Postal Votes and Final District Results. 
 
 Each cell has two numeric values which are number of votes and percentages, this is 
-true except for the last row. First 6 rows are for candidates names, follwed by 
+true except for the last row. First 6 rows are for candidates names, followed by 
 No of Valid Votes, No of Rejected Votes, Total No of votes polled and finally
 No of Registered Electors.
 
 ![](Fig1.JPG)
 
-# Issues in the table
-
-* 
-
 # Process of Extraction
 
-Each table has been extracted seprately without any issues.
+Each table has been extracted separately without any issues. Two inputs are 
+used, one is page number other is for special cases for several districts.
 
 ```{r Election 1994}
 # load the pdf file

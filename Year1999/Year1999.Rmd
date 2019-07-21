@@ -11,90 +11,175 @@ library(splitstackshape)
 library(pdftools)
 ```
 
+# Structure of Document
 
-```{r}
+Data extraction begins from page 4 of the document. Each page from here has a 
+table representing  each disttrict. All tables follow the similar format. 
+
+Each cell has two numeric values which are number of votes and percentages, this is 
+true except for the first column. First column is for electorates, next is for registered
+electors. After that we have 14 columns which are for candidates names, follwed by 
+Valid Votes, Rejected Votes and finally Total polled.
+
+![](Fig1.JPG)
+
+# Process of Extraction
+
+Each table has been extracted separately without any issues. Three inputs
+are used the first is page number, second is number of rows rows in the table
+(except heading). There is one special case which is for Gampaha district.
+
+```{r Election 1999}
+# load the pdf file
 SL_PE_1999<-pdf_text("PresidentialElections1999.pdf")
 
+# source the function
 source("Extract1999.R")
 
+# creating initial dataset Election1999
 Election1999<-NULL
 
-# Colombo
+# extracting Colombo district table
 Election1999[[1]]<-Extract_table1999(5,17)
 
-# Gamapaha
+# extracting Gamapaha district table
 Election1999[[2]]<-Extract_table1999(6,15,GA=TRUE)
 
-# Kalutara
+# extracting Kalutara district table
 Election1999[[3]]<-Extract_table1999(7,10)
 
-# Mahanuwara
+# extracting Mahanuwara district table
 Election1999[[4]]<-Extract_table1999(8,15)
 
-# Matale
+# extracting Matale district table
 Election1999[[5]]<-Extract_table1999(9,6)
 
-# Nuwara-Eliya
+# extracting Nuwara-Eliya district table
 Election1999[[6]]<-Extract_table1999(10,6)
 
-# Galle
+# extracting Galle district table
 Election1999[[7]]<-Extract_table1999(11,12)
 
-# Matara
+# extracting Matara district table
 Election1999[[8]]<-Extract_table1999(12,9)
 
-# Hambantota
+# extracting Hambantota district table
 Election1999[[9]]<-Extract_table1999(13,6)
 
-# Jaffna
+# extracting Jaffna district table
 Election1999[[10]]<-Extract_table1999(14,13)
 
-# Vanni
+# extracting Vanni district table
 Election1999[[11]]<-Extract_table1999(15,5)
 
-# Batticaloa
+# extracting Batticaloa district table
 Election1999[[12]]<-Extract_table1999(16,5)
 
-# Trincomalee
+# extracting Trincomalee district table
 Election1999[[13]]<-Extract_table1999(17,5)
 
-# Digamadulla
+# extracting Digamadulla district table
 Election1999[[14]]<-Extract_table1999(18,6)
 
-# Kurunegala
+# extracting Kurunegala district table
 Election1999[[15]]<-Extract_table1999(19,16)
 
-# puttalam
+# extracting puttalam district table
 Election1999[[16]]<-Extract_table1999(20,7)
 
-# Anuradhapura
+# extracting Anuradhapura district table
 Election1999[[17]]<-Extract_table1999(21,9)
 
-# Polonnaruwa
+# extracting Polonnaruwa district table
 Election1999[[18]]<-Extract_table1999(22,5)
 
-# Badulla
+# extracting Badulla district table
 Election1999[[19]]<-Extract_table1999(23,11)
 
-# Moneragala
+# extracting Moneragala district table
 Election1999[[20]]<-Extract_table1999(24,5)
 
-# Ratnapura
+# extracting Ratnapura district table
 Election1999[[21]]<-Extract_table1999(25,10)
 
-# Kegalle
+# extracting Kegalle district table
 Election1999[[22]]<-Extract_table1999(26,11)
 
+# final data set
 Election1999<-do.call("rbind",Election1999)
-
-ElecFinal1999<-subset(Election1999,Electorate=="FINAL DISTRICT RESULTS" & 
-                      ColNames=="PA")
-ElecFinal1999[,sum(Votes),by="ColNames"]
-
-ElecFinal1999<-subset(Election1999,Electorate=="FINAL DISTRICT RESULTS" & 
-                      ColNames=="UNP")
-ElecFinal1999[,sum(Votes),by="ColNames"]
-
-unique(Election1999$ColNames)
 ```
 
+# Validating Data extracted
+
+Checking for Number of Registered Electors.
+
+```{r Validating the data}
+# Extracting only Final District District Results of 
+# Number of Registered Electors
+# and then adding all the votes 
+ElecFinal1999<-subset(Election1999,Electorate=="FINAL DISTRICT RESULTS" 
+                      & ColNames=="Registered Electors")
+# added votes will be cross checked with the pdf document
+ElecFinal1999[,sum(Votes),by="ColNames"]
+
+# Extracting except Final District District Results of 
+# Number of Registered Electors
+# and then adding all the votes 
+ElecFinal1999<-subset(Election1999,Electorate!="FINAL DISTRICT RESULTS" 
+                      & Electorate!="POSTAL VOTES"
+                      & ColNames=="Registered Electors")
+# added votes will be cross checked with the pdf document
+ElecFinal1999[,sum(Votes),by="ColNames"]
+```
+
+Comparing final tally votes of Mrs. Chandrika Bandaranaike Kumarathunga or
+the candidate from PA from the pdf file to the data extracted as below. 
+
+![](Fig2.JPG)
+
+```{r Validating the data 1}
+# Extracting only Final District District Results of 
+# Mrs. Chandrika Bandaranaike Kumarathunga
+# and then adding all the votes 
+ElecFinal1999<-subset(Election1999,Electorate=="FINAL DISTRICT RESULTS" 
+                      & ColNames=="PA")
+# added votes will be cross checked with the pdf document
+ElecFinal1999[,sum(Votes),by="ColNames"]
+
+# Extracting except Final District District Results of 
+# Mrs. Chandrika Bandaranaike Kumarathunga
+# and then adding all the votes 
+ElecFinal1999<-subset(Election1999,Electorate!="FINAL DISTRICT RESULTS" 
+                      & ColNames=="PA")
+# added votes will be cross checked with the pdf document
+ElecFinal1999[,sum(Votes),by="ColNames"]
+```
+
+It seems data extraction is successful. 
+
+Similarly comparing final tally votes of  Mr. Ranil Wickremasinghe  
+from the pdf file to the data extracted as below. 
+
+![](Fig2.JPG)
+
+```{r Vaildating the data 2}
+# Extracting only Final District District Results of 
+#  Mr. Ranil Wickremasinghe 
+# and then adding all the votes 
+ElecFinal1999<-subset(Election1999,Electorate=="FINAL DISTRICT RESULTS" 
+                      & ColNames=="UNP")
+# added votes will be cross checked with the pdf document
+ElecFinal1999[,sum(Votes),by="ColNames"]
+
+# Extracting except Final District District Results of 
+#  Mr. Ranil Wickremasinghe 
+# and then adding all the votes 
+ElecFinal1999<-subset(Election1999,Electorate!="FINAL DISTRICT RESULTS" 
+                      & ColNames=="UNP")
+# added votes will be cross checked with the pdf document
+ElecFinal1999[,sum(Votes),by="ColNames"]
+```
+
+It seems data extraction is successful. 
+
+*THANK YOU*
