@@ -11,151 +11,171 @@ library(splitstackshape)
 library(pdftools)
 ```
 
-```{r}
+# Structure of Document
+
+Data extraction begins from page 2 of the document. There are two situations, 
+one is where there are two tables in a page and other is where one table in a page.
+Each cell has one value,which is votes or percentages depending on the column.
+
+First Column is for Candidates names followed by Valid votes, Rejected votes and 
+Total polled. Each district begins in a new page. It should be noted that the district
+for respective electorates are not mentioned above any table.
+
+![](Fig1.JPG)
+![](Fig11.JPG)
+
+# Process of Extraction
+
+Based on number of tables in a page data is extracted. Inputs are page number and
+District name. Each district data has been extracted.
+
+```{r Election 2010}
+# load the pdf file
 SL_PE_2010<-pdf_text("PresidentialElections2010.pdf")
 
+# source the function
 source("Extract2010.R")
 
-# creating the Null Election2010 data frame----
+# creating the Null Election2010 data frame
 Election2010<-NULL
 
-# Colombo District----
+# extracting Colombo District tables
 for (i in 2:9) 
         {
         Election2010[[i]]<-Extract_twotable2010(i,"Colombo")
         }
 Election2010[[10]]<-Extract_onetable2010(10,"Colombo")
 
-# Gampaha District----
+# extracting Gampaha District tables
 for (i in 11:17) 
         {
         Election2010[[i]]<-Extract_twotable2010(i,"Gampaha")
         }
 Election2010[[18]]<-Extract_onetable2010(18,"Gampaha")
 
-# Kalutara District----
+# extracting Kalutara District tables
 for (i in 19:23) 
         {
         Election2010[[i]]<-Extract_twotable2010(i,"Kalutara")
         }
 
-# Kandy District----
+# extracting Kandy District tables
 for (i in 24:30) 
         {
         Election2010[[i]]<-Extract_twotable2010(i,"Kandy")
         }
 Election2010[[31]]<-Extract_onetable2010(31,"Kandy")
 
-# Matale District----
+# extracting Matale District tables
 for (i in 32:34) 
         {
         Election2010[[i]]<-Extract_twotable2010(i,"Matale")
         }
 
-# Nuwara-Eliya District----
+# extracting Nuwara-Eliya District tables
 for (i in 35:37) 
         {
         Election2010[[i]]<-Extract_twotable2010(i,"Nuwara Eliya")
         }
 
-# Galle District----
+# extracting Galle District tables
 for (i in 38:43) 
         {
         Election2010[[i]]<-Extract_twotable2010(i,"Galle")
         }
 
-# Matara District----
+# extracting Matara District tables
 for (i in 44:47) 
         {
         Election2010[[i]]<-Extract_twotable2010(i,"Matara")
         }
 Election2010[[48]]<-Extract_onetable2010(48,"Matara")
 
-# Hambantota District----
+# Extracting Hambantota District tables
 for (i in 49:51) 
         {
         Election2010[[i]]<-Extract_twotable2010(i,"Hambantota")
         }
 
-# Jaffna----
+# extracting Jaffna District tables
 for (i in 52:58) 
         {
         Election2010[[i]]<-Extract_twotable2010(i,"Jaffna")
         }
 
-# Vanni----
+# extracting Vanni District tables
 for (i in 59:61) 
         {
         Election2010[[i]]<-Extract_twotable2010(i,"Vanni")
         }
 
-# Batticaloa----
+# extracting Batticaloa District tables
 for (i in 62:64) 
         {
         Election2010[[i]]<-Extract_twotable2010(i,"Batticaloa")
         }
 
-# Ampara----
+# extracting Digamadulla District tables
 for (i in 65:67) 
         {
-        Election2010[[i]]<-Extract_twotable2010(i,"Ampara")
+        Election2010[[i]]<-Extract_twotable2010(i,"Digamadulla")
         }
-Election2010[[68]]<-Extract_onetable2010(68,"Ampara")
+Election2010[[68]]<-Extract_onetable2010(68,"Digamadulla")
 
-# Trincomalee----
+# extracting Trincomalee District tables
 for (i in 69:71) 
         {
         Election2010[[i]]<-Extract_twotable2010(i,"Trincomalee")
         }
 
-# Kurunegala----
+# extracting Kurunegala District tables
 for (i in 72:79) 
         {
         Election2010[[i]]<-Extract_twotable2010(i,"Kurunegala")
         }
 
-# Puttalam----
+# extracting Puttalam District tables
 for (i in 80:82) 
         {
         Election2010[[i]]<-Extract_twotable2010(i,"Puttalam")
         }
 Election2010[[83]]<-Extract_onetable2010(83,"Puttalam")
 
-# Anuradhapura----
+# extracting Anuradhapura District Tables
 for (i in 84:87) 
         {
         Election2010[[i]]<-Extract_twotable2010(i,"Anuradhapura")
         }
 Election2010[[88]]<-Extract_onetable2010(88,"Anuradhapura")
 
-# Polonnaruwa----
+# extracting Polonnaruwa District Tables
 for (i in 89:90) 
         {
         Election2010[[i]]<-Extract_twotable2010(i,"Polonnaruwa")
         }
 Election2010[[91]]<-Extract_onetable2010(91,"Polonnaruwa")
 
-# Badulla----
+# extracting Badulla District Tables
 for (i in 92:96) 
         {
         Election2010[[i]]<-Extract_twotable2010(i,"Badulla")
         }
 Election2010[[97]]<-Extract_onetable2010(97,"Badulla")
 
-# Monaragala----
+# extracting Monaragala District Tables
 for (i in 98:99) 
         {
         Election2010[[i]]<-Extract_twotable2010(i,"Monaragala")
         }
 Election2010[[100]]<-Extract_onetable2010(100,"Monaragala")
 
-# Ratnapura----
+# extracting Ratnapura District Tables
 for (i in 101:105) 
         {
         Election2010[[i]]<-Extract_twotable2010(i,"Ratnapura")
         }
 
-# Kegalle----
+# extracting Kegalle District Tables
 for (i in 106:110) 
         {
         Election2010[[i]]<-Extract_twotable2010(i,"Kegalle")
@@ -165,15 +185,58 @@ Election2010[[111]]<-Extract_onetable2010(111,"Kegalle")
 # The Final of all tables----
 Election2010<-do.call("rbind",Election2010)
 
-Election2010[Election2010=="Snath Pinnaduwa"]<-"Sanath Pinnaduwa"
-Election2010[Election2010==""]<-"Regis Electors"
-
-ElecFinal2010<-subset(Election2010,Electorate=="Final District Result" & ColNames=="Mahinda Rajapaksha")
-ElecFinal2010[,sum(Votes),by="ColNames"]
-
-ElecFinal2010<-subset(Election2010,Electorate=="Final District Result" & ColNames=="Sarath Fonseka")
-ElecFinal2010[,sum(Votes),by="ColNames"]
-
-unique(Election2010$ColNames)
+# Snath Pinnaduwa is not the correct spelling therefore replacement is done
+Election2010$ColNames[Election2010$ColNames=="Snath Pinnaduwa"]<-"Sanath Pinnaduwa"
+Election2010$ColNames[Election2010$ColNames==""]<-"Regis Electors"
 ```
 
+# Validating Data extracted 
+
+There is no summary for election results therefore only both way tallying
+is compared between the extracted data.
+
+Comparing final tally votes of Mahinda Rajapaksa from the pdf file 
+to the data extracted as below. 
+
+```{r Validating the data 1}
+# Extracting only Final District District Results of 
+# Mr. Mahinda Rajapaksa
+# and then adding all the votes 
+ElecFinal2010<-subset(Election2010,Electorate=="Final District Result" 
+                      & ColNames=="Mahinda Rajapaksha")
+# added votes will be cross checked with the pdf document
+ElecFinal2010[,sum(Votes),by="ColNames"]
+# Extracting only Final District District Results of 
+# Mr. Mahinda Rajapaksa
+# and then adding all the votes
+ElecFinal2010<-subset(Election2010,Electorate!="Final District Result" 
+                      & ColNames=="Mahinda Rajapaksha")
+# added votes will be cross checked with the pdf document
+ElecFinal2010[,sum(Votes),by="ColNames"]
+```
+
+It seems data extraction is successful.
+
+Similarly comparing final tally votes of  Sarath Fonseka  
+from the pdf file to the data extracted as below. 
+
+```{r Validating the data 2}
+# Extracting only Final District District Results of 
+# Sarath Fonseka
+# and then adding all the votes 
+ElecFinal2010<-subset(Election2010,Electorate=="Final District Result" 
+                      & ColNames=="Sarath Fonseka")
+# added votes will be cross checked with the pdf document
+ElecFinal2010[,sum(Votes),by="ColNames"]
+# Extracting only Final District District Results of 
+# Sarath Fonseka
+# and then adding all the votes 
+ElecFinal2010<-subset(Election2010,Electorate!="Final District Result" 
+                      & ColNames=="Sarath Fonseka")
+# added votes will be cross checked with the pdf document
+ElecFinal2010[,sum(Votes),by="ColNames"]
+```
+
+It seems data extraction is successful.
+
+*THANK YOU*

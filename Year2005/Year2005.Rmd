@@ -30,7 +30,11 @@ two functions. Also number of columns in tables change is considered as well.
 ![](Fig1.JPG)
 ![](Fig11.JPG)
 ![](Fig12.JPG)
+
 # Process of Extraction
+
+Each table has been separated based on if it has District name, number of columns and 
+does it has Postal votes, Total votes and Displaced votes.
 
 ```{r Election 2005}
 # load the pdf file
@@ -130,7 +134,7 @@ Election2005<-do.call("rbind",Election2005)
 
 # Validating Data extracted
 
-Checking for Number of Registered Electors
+Checking for Number of Registered Electors.
 
 ```{r Validating the data}
 # Extracting only Final District District Results of 

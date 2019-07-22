@@ -2,7 +2,7 @@ Extract_Inittable2005<-function(page,nc,other=FALSE,dis=FALSE,colo=FALSE,anu=FAL
 {
   if(amp==FALSE)        
   {
-    # both column names look the same except Aruna de Soyza
+    # both column names look the same except Aruna de Soyza----
     Names<-c("Wimal Geeganage","Chamil Jayaneththi","Ajith Kumara Jayaweera Arachchige",
              "Siritunga Jayasuriya","P. Nelson Perera","Wije Dias","Anura De Silva",
              "Aruna de Soyza","Mahinda Rajapaksha","Ranil Wickramasinghe",
@@ -21,7 +21,7 @@ Extract_Inittable2005<-function(page,nc,other=FALSE,dis=FALSE,colo=FALSE,anu=FAL
              "Total Rejected","Total Polled")        
   }        
   
-  # extract the district name
+  # extract the district name----
   District<-str_squish(
             str_remove(
             str_remove(
@@ -40,7 +40,7 @@ Extract_Inittable2005<-function(page,nc,other=FALSE,dis=FALSE,colo=FALSE,anu=FAL
   
   if(jaff==FALSE && NE==FALSE)
   {
-    # extracting table values but except for jaffna and Nuwara Eliya districts
+    # extracting table values but except for jaffna and Nuwara Eliya districts----
     Table1<-str_split(str_squish(
                       str_remove(
                       str_remove(
@@ -54,7 +54,7 @@ Extract_Inittable2005<-function(page,nc,other=FALSE,dis=FALSE,colo=FALSE,anu=FAL
   
   if(NE==TRUE)
   {
-    # Special case of extracting values from Nuwara eliya district
+    # Special case of extracting values from Nuwara eliya district----
     Table1<-str_split(str_squish(
                       str_remove(
                       str_remove(
@@ -64,13 +64,13 @@ Extract_Inittable2005<-function(page,nc,other=FALSE,dis=FALSE,colo=FALSE,anu=FAL
                       ," ")
     
     Table1<-do.call("rbind",Table1)    
-    # electorate name for Nuwara Eliya
+    # electorate name for Nuwara Eliya----
     Name<-c("Maskelliya","Kotmale","Hanguranketa","Walapane","Postal","Total")
   }        
   
   if(jaff==TRUE)
   {
-    # Special case of extracting values from Jaffna district
+    # Special case of extracting values from Jaffna district----
     Table1<-str_split(str_squish(
                       str_remove(
                       str_remove(
@@ -84,7 +84,7 @@ Extract_Inittable2005<-function(page,nc,other=FALSE,dis=FALSE,colo=FALSE,anu=FAL
   
   if(colo ==TRUE)
   {   
-    # extracting electorate names for colombo because of special case
+    # extracting electorate names for colombo because of special case----
     Name<-str_split(
           str_replace_all(
           str_remove(
@@ -96,7 +96,7 @@ Extract_Inittable2005<-function(page,nc,other=FALSE,dis=FALSE,colo=FALSE,anu=FAL
   
   if(anu ==TRUE)
   {        
-    # extracting electorate names for anuradhapura because of special case
+    # extracting electorate names for anuradhapura because of special case----
     Name<-str_split(
           str_replace_all(
           str_remove(
@@ -108,7 +108,7 @@ Extract_Inittable2005<-function(page,nc,other=FALSE,dis=FALSE,colo=FALSE,anu=FAL
   
   if(anu ==FALSE && colo==FALSE && NE==FALSE)
   {        
-    # extracting electorate names for districts except special cases
+    # extracting electorate names for districts except special cases----
     Name<-str_split(
           str_remove(
           str_squish(str_split(SL_PE_2005[[page]],"\n")[[1]][3])
@@ -118,7 +118,7 @@ Extract_Inittable2005<-function(page,nc,other=FALSE,dis=FALSE,colo=FALSE,anu=FAL
   
   if(other==FALSE && dis==FALSE)
   {        
-    # extracting votes and percentage only from table when there is no 
+    # extracting votes and percentage only from table when there is no ----
     # Postal Votes, Final district votes and displace votes
     Votes<-NULL
     for (i in seq(1,dim(Table1)[2]-1,2)) 
@@ -132,7 +132,7 @@ Extract_Inittable2005<-function(page,nc,other=FALSE,dis=FALSE,colo=FALSE,anu=FAL
   
   if(other==TRUE && dis==FALSE)
   {
-    # extracting votes and percentage for special cases when table has 
+    # extracting votes and percentage for special cases when table has ----
     # Postal votes and Final district votes
     Votes<-NULL
     for (i in seq(1,dim(Table1)[2]-3,2)) 
@@ -148,7 +148,7 @@ Extract_Inittable2005<-function(page,nc,other=FALSE,dis=FALSE,colo=FALSE,anu=FAL
   
   if(other==TRUE && dis==TRUE)
   {
-    # extracting votes and percentage for special cases when table has 
+    # extracting votes and percentage for special cases when table has ----
     # Postal votes, Final district votes and displaced votes
     Votes<-NULL
     for (i in seq(1,dim(Table1)[2]-4,2)) 
@@ -163,11 +163,11 @@ Extract_Inittable2005<-function(page,nc,other=FALSE,dis=FALSE,colo=FALSE,anu=FAL
     names(Values)<-c("Votes","Percentage")                
   }
   
-  # converting votes and percentages from factors to numeric
+  # converting votes and percentages from factors to numeric----
   Values[,c("Votes")]<-lapply(Values[,c(1)], function(x) as.numeric(as.character(x)))
   Values[,c("Percentage")]<-lapply(Values[,c(2)], function(x) as.numeric(as.character(x)))
   
-  # intermediate table
+  # intermediate table----
   DistrictT<-data.table("Year"=2005,"District"=factor(District),
                         "Electorate"=factor(rep(Name,each=16)),
                         "ColNames"=rep(Names,nc),"Votes"=Values$Votes,
@@ -175,7 +175,7 @@ Extract_Inittable2005<-function(page,nc,other=FALSE,dis=FALSE,colo=FALSE,anu=FAL
   
   if(jaff==FALSE && NE==FALSE)
   {
-    # extracting Total Polled votes except jaffna and nuwara eliya
+    # extracting Total Polled votes except jaffna and nuwara eliya----
     Table1<-str_split(str_squish(
                       str_remove(
                       str_remove(
@@ -187,7 +187,7 @@ Extract_Inittable2005<-function(page,nc,other=FALSE,dis=FALSE,colo=FALSE,anu=FAL
   
   if(jaff==TRUE)
   {
-    # extracting Total polled votes for jaffna district
+    # extracting Total polled votes for jaffna district----
     Table1<-str_split(str_squish(
                       str_remove(
                       str_remove(
@@ -199,7 +199,7 @@ Extract_Inittable2005<-function(page,nc,other=FALSE,dis=FALSE,colo=FALSE,anu=FAL
   
   if(NE==TRUE)
   {
-    # extracting Total polled votes for Nuwara Eliya district
+    # extracting Total polled votes for Nuwara Eliya district----
     Table1<-str_split(str_squish(
                       str_remove(
                       str_remove(
@@ -208,13 +208,13 @@ Extract_Inittable2005<-function(page,nc,other=FALSE,dis=FALSE,colo=FALSE,anu=FAL
                                 ,","))
                       ," ")[[1]]
   }  
-   # Table for Total registered votes
+   # Table for Total registered votes----
   DistrictTadd<-data.table("Year"=2005,"District"=District,
                            "Electorate"=factor(Name),
                            "ColNames"="Total Registered",
                            "Votes"=as.numeric(Table1),
                            "Percentage"=NA)
-  # Final Table
+  # Final Table----
   FinalDistrict<-rbind(DistrictT,DistrictTadd)
   return(FinalDistrict)
 }
@@ -222,7 +222,7 @@ Extract_Inittable2005<-function(page,nc,other=FALSE,dis=FALSE,colo=FALSE,anu=FAL
 
 Extract_othertable2005<-function(page,District,nc,other=TRUE,dis=FALSE,jaff=FALSE,NE=FALSE)
 {
-  # names on the column
+  # names on the column----
   Names<-c("Wimal Geeganage","Chamil Jayaneththi","Ajith Kumara Jayaweera Arachchige",
            "Siritunga Jayasuriya","P. Nelson Perera","Wije Dias","Anura De Silva",
            "Aruna de Soyza","Mahinda Rajapaksha","Ranil Wickramasinghe","Achala Ashoka Suraweera",
@@ -231,7 +231,7 @@ Extract_othertable2005<-function(page,District,nc,other=TRUE,dis=FALSE,jaff=FALS
   
   if(jaff==TRUE)
   {
-    # special case of extracting table values for jaffna district
+    # special case of extracting table values for jaffna district----
     Table1<-str_split(str_squish(
                       str_remove(
                       str_remove(
@@ -242,7 +242,7 @@ Extract_othertable2005<-function(page,District,nc,other=TRUE,dis=FALSE,jaff=FALS
     
     Table1<-do.call("rbind",Table1)   
     
-    # Extracting electorate names for jaffna district
+    # Extracting electorate names for jaffna district----
     Name<-str_split(
           str_replace(
           str_remove(
@@ -255,7 +255,7 @@ Extract_othertable2005<-function(page,District,nc,other=TRUE,dis=FALSE,jaff=FALS
   
   if(jaff==FALSE)
   {
-    # extracting table values except for jaffna district
+    # extracting table values except for jaffna district----
     Table1<-str_split(str_squish(
                       str_remove(
                       str_remove(
@@ -266,7 +266,7 @@ Extract_othertable2005<-function(page,District,nc,other=TRUE,dis=FALSE,jaff=FALS
     
     Table1<-do.call("rbind",Table1)
     
-    # Extracting electorate names except for jaffna district
+    # Extracting electorate names except for jaffna district----
     Name<-str_split(
           str_remove(
           str_squish(str_split(SL_PE_2005[[page]],"\n")[[1]][1])
@@ -274,7 +274,7 @@ Extract_othertable2005<-function(page,District,nc,other=TRUE,dis=FALSE,jaff=FALS
                    ," ")[[1]]
   }
   
-  # extracting votes and percentages except when postal, displaced 
+  # extracting votes and percentages except when postal, displaced ----
   # and final votes are not in the table 
   if(other==FALSE && dis==FALSE)
   {        
@@ -290,7 +290,7 @@ Extract_othertable2005<-function(page,District,nc,other=TRUE,dis=FALSE,jaff=FALS
   
   if(other==TRUE && dis==FALSE)
   {
-    # extracting votes and percentages except when postal 
+    # extracting votes and percentages except when postal ----
     # and final votes are in the table 
     Votes<-NULL
     for (i in seq(1,dim(Table1)[2]-3,2)) 
@@ -306,7 +306,7 @@ Extract_othertable2005<-function(page,District,nc,other=TRUE,dis=FALSE,jaff=FALS
   
   if(other==TRUE && dis==TRUE)
   {
-    # extracting votes and percentages except when postal, displaced 
+    # extracting votes and percentages except when postal, displaced ----
     # and final votes are in the table 
     Votes<-NULL
     for (i in seq(1,dim(Table1)[2]-4,2)) 
@@ -321,17 +321,17 @@ Extract_othertable2005<-function(page,District,nc,other=TRUE,dis=FALSE,jaff=FALS
     names(Values)<-c("Votes","Percentage")                
   }
   
-  # converting factors to numeric 
+  # converting factors to numeric ----
   Values[,c("Votes")]<-lapply(Values[,c(1)], function(x) as.numeric(as.character(x)))
   Values[,c("Percentage")]<-lapply(Values[,c(2)], function(x) as.numeric(as.character(x)))
   
-  # creating intermeidate table
+  # creating intermeidate table----
   DistrictT<-data.table("Year"=2005,"District"=District,
                         "Electorate"=factor(rep(Name,each=16)),
                         "ColNames"=rep(Names,nc),"Votes"=Values$Votes,
                         "Percentage"=Values$Percentage)
   
-  # extracting Total votes except jaffna district
+  # extracting Total votes except jaffna district----
   Table1<-str_split(
           str_squish(
           str_remove(
@@ -342,7 +342,7 @@ Extract_othertable2005<-function(page,District,nc,other=TRUE,dis=FALSE,jaff=FALS
   
   if(jaff==TRUE)
   {
-    # extracting Total votes special case of jaffna district
+    # extracting Total votes special case of jaffna district----
     Table1<-str_split(
             str_squish(
             str_remove(
@@ -351,14 +351,14 @@ Extract_othertable2005<-function(page,District,nc,other=TRUE,dis=FALSE,jaff=FALS
                       ,","))
                      ," ")[[1]]
   }
-  # intermediate data set for total registered 
+  # intermediate data set for total registered ----
   DistrictTadd<-data.table("Year"=2005,"District"=District,
                            "Electorate"=factor(Name),
                            "ColNames"="Total Registered",
                            "Votes"=as.numeric(Table1),
                            "Percentage"=NA)
   
-  # Final data set
+  # Final data set----
   FinalDistrict<-rbind(DistrictT,DistrictTadd)
   return(FinalDistrict)
 }
