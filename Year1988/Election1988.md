@@ -1,42 +1,33 @@
----
-title: "Election1994"
-output: github_document
----
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE,warning = FALSE)
-
-# Load the packages
-library(data.table)
-library(stringr)
-library(splitstackshape)
-library(pdftools)
-```
+Election1994
+================
 
 # Structure of Document
 
-Data extraction begins from page 4 of the document. Each page from here has a 
-table representing  each district. All tables follow the similar format. 
+Data extraction begins from page 4 of the document. Each page from here
+has a table representing each district. All tables follow the similar
+format.
 
-If we consider the columns, first column is for candidate names with other counts,
-second column and its consecutive columns are for electorates. Final two columns
-are Postal Votes and Final District Results. 
+If we consider the columns, first column is for candidate names with
+other counts, second column and its consecutive columns are for
+electorates. Final two columns are Postal Votes and Final District
+Results.
 
-Each cell has two numeric values which are number of votes and percentages, this is 
-true except for the last row. First 3 rows are for candidates names, followed by 
-Total No of Valid Votes, Total No of Rejected Votes, Total No of votes polled and 
-finally Total No of Registered Electors.
+Each cell has two numeric values which are number of votes and
+percentages, this is true except for the last row. First 3 rows are for
+candidates names, followed by Total No of Valid Votes, Total No of
+Rejected Votes, Total No of votes polled and finally Total No of
+Registered Electors.
 
 ![](Fig1.JPG)
 
 # Process of Extraction
 
-Each table has been extracted separately without any issues. Two inputs are 
-used, one is page number other is for special cases for several districts. 
-Two functions were created to extract two types of tables, yet both of them
-look similar except a few anomalies
+Each table has been extracted separately without any issues. Two inputs
+are used, one is page number other is for special cases for several
+districts. Two functions were created to extract two types of tables,
+yet both of them look similar except a few anomalies
 
-```{r Election 1988}
+``` r
 # load the pdf file
 SL_PE_1988<-pdf_text("PresidentialElections1988.pdf")
 
@@ -94,7 +85,7 @@ Election1988<-do.call("rbind",Election1988)
 
 Checking for Number of Registered Electors.
 
-```{r Validating the data}
+``` r
 # Extracting only Final District District Results of 
 # Number of Registered Electors
 # and then adding all the votes 
@@ -102,7 +93,12 @@ ElecFinal1988<-subset(Election1988,Electorate=="Total"
                       & ColNames=="No of Registered Electors")
 # added votes will be cross checked with the pdf document
 ElecFinal1988[,sum(Votes,na.rm = TRUE),by="ColNames"]
+```
 
+    ##                     ColNames      V1
+    ## 1: No of Registered Electors 9375292
+
+``` r
 # Extracting except Final District District Results of 
 # Number of Registered Electors
 # and then adding all the votes 
@@ -112,12 +108,15 @@ ElecFinal1988<-subset(Election1988,Electorate!="Total"
 ElecFinal1988[,sum(Votes,na.rm = TRUE),by="ColNames"]
 ```
 
-Comparing final tally votes of Mr. Ranasinghe Premadasa 
-from the pdf file to the data extracted as below. 
+    ##                     ColNames      V1
+    ## 1: No of Registered Electors 9375742
+
+Comparing final tally votes of Mr. Ranasinghe Premadasa from the pdf
+file to the data extracted as below.
 
 ![](Fig2.JPG)
 
-```{r Validating the data 1}
+``` r
 # Extracting only Final District District Results of 
 # Mr. Ranasinghe Premadasa
 # and then adding all the votes 
@@ -125,7 +124,12 @@ ElecFinal1988<-subset(Election1988,Electorate=="Total"
                       & ColNames=="Mr.Ranasinghe Premadasa")
 # added votes will be cross checked with the pdf document
 ElecFinal1988[,sum(Votes),by="ColNames"]
+```
 
+    ##                   ColNames      V1
+    ## 1: Mr.Ranasinghe Premadasa 2569199
+
+``` r
 # Extracting except Final District District Results of 
 # Mr. Ranasinghe Premadasa
 # and then adding all the votes 
@@ -135,14 +139,17 @@ ElecFinal1988<-subset(Election1988,Electorate!="Total"
 ElecFinal1988[,sum(Votes,na.rm = TRUE),by="ColNames"]
 ```
 
-It seems data extraction is successful. 
+    ##                   ColNames      V1
+    ## 1: Mr.Ranasinghe Premadasa 2569199
 
-Similarly comparing final tally votes of Mrs. Sirimavo Ratwatte Dias Bandaranaike 
-from the pdf file to the data extracted as below. 
+It seems data extraction is successful.
+
+Similarly comparing final tally votes of Mrs. Sirimavo Ratwatte Dias
+Bandaranaike from the pdf file to the data extracted as below.
 
 ![](Fig2.JPG)
 
-```{r Vaildating the data 2}
+``` r
 # Extracting only Final District District Results of 
 # Mrs. Sirimavo Ratwatte Dias Bandaranaike
 # and then adding all the votes 
@@ -150,7 +157,12 @@ ElecFinal1988<-subset(Election1988,Electorate=="Total"
                       & ColNames=="Mrs.Sirimavo Ratwatte Dias Bandaranaike")
 # added votes will be cross checked with the pdf document
 ElecFinal1988[,sum(Votes),by="ColNames"]
+```
 
+    ##                                   ColNames      V1
+    ## 1: Mrs.Sirimavo Ratwatte Dias Bandaranaike 2289857
+
+``` r
 # Extracting except Final District District Results of 
 # Mrs. Sirimavo Ratwatte Dias Bandaranaike
 # and then adding all the votes 
@@ -160,8 +172,11 @@ ElecFinal1988<-subset(Election1988,Electorate!="Total"
 ElecFinal1988[,sum(Votes,na.rm = TRUE),by="ColNames"]
 ```
 
-According to the above summation the tally is 2715283 
-which is different from the pdf file. The difference 
-is 2 votes. Does that mean their tally is ......! . 
+    ##                                   ColNames      V1
+    ## 1: Mrs.Sirimavo Ratwatte Dias Bandaranaike 2289857
+
+According to the above summation the tally is 2715283 which is different
+from the pdf file. The difference is 2 votes. Does that mean their tally
+is ……\! .
 
 *THANK YOU*
