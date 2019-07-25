@@ -155,7 +155,7 @@ Extract_Type1_1988<-function(page,Colo=FALSE,Ga=FALSE,NE=FALSE,Ba=FALSE,Ke=FALSE
   # Vanni district special table manipulation----
   if(Van==TRUE)
   {
-    Table[dim(Table)[1],dim(Table)[2]]<-142273
+    Table[dim(Table)[1],dim(Table)[2]]<-142723
     Table[seq(2,10,2),5]<-Table[seq(2,10,2),4]
     Table[seq(2,10,2),4]<-NA
   }

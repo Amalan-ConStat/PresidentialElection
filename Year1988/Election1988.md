@@ -1,4 +1,4 @@
-Election1994
+Election1988
 ================
 
 # Structure of Document
@@ -37,9 +37,8 @@ source("Extract1988.R")
 # creating initial dataset Election1994
 Election1988<-NULL
 
+# special pages which has the same format 
 pages<-c(6,16,17,24)
-
-Election1988<-NULL
 
 for (i in pages) 
     {
@@ -83,7 +82,11 @@ Election1988<-do.call("rbind",Election1988)
 
 # Validating Data Extracted
 
-Checking for Number of Registered Electors.
+## Checking for Number of Registered Electors.
+
+No issues here.
+
+![](Fig2.JPG)
 
 ``` r
 # Extracting only Final District District Results of 
@@ -96,7 +99,7 @@ ElecFinal1988[,sum(Votes,na.rm = TRUE),by="ColNames"]
 ```
 
     ##                     ColNames      V1
-    ## 1: No of Registered Electors 9375292
+    ## 1: No of Registered Electors 9375742
 
 ``` r
 # Extracting except Final District District Results of 
@@ -111,10 +114,138 @@ ElecFinal1988[,sum(Votes,na.rm = TRUE),by="ColNames"]
     ##                     ColNames      V1
     ## 1: No of Registered Electors 9375742
 
-Comparing final tally votes of Mr. Ranasinghe Premadasa from the pdf
-file to the data extracted as below.
+## Total Polled
+
+54 votes are missing.
 
 ![](Fig2.JPG)
+
+``` r
+# Extracting only Final District District Results of 
+# Total Polled
+# and then adding all the votes 
+ElecFinal1988<-subset(Election1988,Electorate=="Total" 
+                      & ColNames=="Total No of Votes Polled")
+# added votes will be cross checked with the pdf document
+ElecFinal1988[,sum(Votes,na.rm = TRUE),by="ColNames"]
+```
+
+    ##                    ColNames      V1
+    ## 1: Total No of Votes Polled 5186277
+
+``` r
+# Extracting except Final District District Results of 
+# Total Polled
+# and then adding all the votes 
+ElecFinal1988<-subset(Election1988,Electorate!="Total" 
+                      & ColNames=="Total No of Votes Polled")
+# added votes will be cross checked with the pdf document
+ElecFinal1988[,sum(Votes,na.rm = TRUE),by="ColNames"]
+```
+
+    ##                    ColNames      V1
+    ## 1: Total No of Votes Polled 5186277
+
+54 votes have been missed in the Gampaha district tallying. So if we
+added those votes the final count will be as above. Total No of Votes
+polled are 5186277.
+
+``` r
+ElecFinal1988<-subset(Election1988,Electorate!="Total" & District=="Gampaha" 
+                      & ColNames=="Total No of Votes Polled")
+ElecFinal1988[,sum(Votes,na.rm = TRUE),by="ColNames"]
+```
+
+    ##                    ColNames     V1
+    ## 1: Total No of Votes Polled 738220
+
+## Total Rejected
+
+No issues here.
+
+![](Fig3.JPG)
+
+``` r
+# Extracting only Final District District Results of 
+# No of Rejected Votes
+# and then adding all the votes 
+ElecFinal1988<-subset(Election1988,Electorate=="Total" 
+                      & ColNames=="No of Rejected Votes")
+# added votes will be cross checked with the pdf document
+ElecFinal1988[,sum(Votes,na.rm = TRUE),by="ColNames"]
+```
+
+    ##                ColNames    V1
+    ## 1: No of Rejected Votes 91445
+
+``` r
+# Extracting except Final District District Results of 
+# No of Rejected Votes
+# and then adding all the votes 
+ElecFinal1988<-subset(Election1988,Electorate!="Total" 
+                      & ColNames=="No of Rejected Votes")
+# added votes will be cross checked with the pdf document
+ElecFinal1988[,sum(Votes,na.rm = TRUE),by="ColNames"]
+```
+
+    ##                ColNames    V1
+    ## 1: No of Rejected Votes 91445
+
+## Total Valid
+
+Extra 3 votes added. Also it should be valid not valied.
+
+![](Fig3.JPG)
+
+``` r
+# Extracting only Final District District Results of 
+# Total No of Valied Votes
+# and then adding all the votes 
+ElecFinal1988<-subset(Election1988,Electorate=="Total" 
+                      & ColNames=="Total No of Valied Votes")
+# added votes will be cross checked with the pdf document
+ElecFinal1988[,sum(Votes,na.rm = TRUE),by="ColNames"]
+```
+
+    ##                    ColNames      V1
+    ## 1: Total No of Valied Votes 5094775
+
+``` r
+# Extracting except Final District District Results of 
+# Total No of Valied Votes
+# and then adding all the votes 
+ElecFinal1988<-subset(Election1988,Electorate!="Total" 
+                      & ColNames=="Total No of Valied Votes")
+# added votes will be cross checked with the pdf document
+ElecFinal1988[,sum(Votes,na.rm = TRUE),by="ColNames"]
+```
+
+    ##                    ColNames      V1
+    ## 1: Total No of Valied Votes 5094775
+
+Three votes are added extra in the district tally table. This is from
+the Trincomalee district.
+
+### Trincomalee District
+
+![](Fig31.JPG)
+
+``` r
+ElecFinal1988<-subset(Election1988,Electorate!="Total" & District=="Trincomalee" 
+                      & ColNames=="Total No of Valied Votes")
+ElecFinal1988[,sum(Votes,na.rm = TRUE),by="ColNames"]
+```
+
+    ##                    ColNames    V1
+    ## 1: Total No of Valied Votes 80620
+
+So the final count for Total No of Valied Votes is 5094775.
+
+## Comparing final tally votes of Mr. Ranasinghe Premadasa
+
+No issues here.
+
+![](Fig4.JPG)
 
 ``` r
 # Extracting only Final District District Results of 
@@ -142,12 +273,12 @@ ElecFinal1988[,sum(Votes,na.rm = TRUE),by="ColNames"]
     ##                   ColNames      V1
     ## 1: Mr.Ranasinghe Premadasa 2569199
 
-It seems data extraction is successful.
+## Comparing final tally votes of Mrs. Sirimavo Ratwatte Dias Bandaranaike
 
-Similarly comparing final tally votes of Mrs. Sirimavo Ratwatte Dias
-Bandaranaike from the pdf file to the data extracted as below.
+Extra 3 votes added and the below figure indicates the value 2289960 but
+this not correct it should be 2289860(still mis calculated).
 
-![](Fig2.JPG)
+![](Fig4.JPG)
 
 ``` r
 # Extracting only Final District District Results of 
@@ -175,8 +306,69 @@ ElecFinal1988[,sum(Votes,na.rm = TRUE),by="ColNames"]
     ##                                   ColNames      V1
     ## 1: Mrs.Sirimavo Ratwatte Dias Bandaranaike 2289857
 
-According to the above summation the tally is 2715283 which is different
-from the pdf file. The difference is 2 votes. Does that mean their tally
-is ……\! .
+3 extra votes added in the district tally table. So the final count for
+Mrs. Sirimavo Ratwatte Dias Bandaranaike is 2289857.
+
+![](Fig41.JPG)
+
+### Kurunegala District
+
+``` r
+ElecFinal1988<-subset(Election1988,Electorate!="Total" & District=="Kurunegala" 
+                      & ColNames=="Mrs.Sirimavo Ratwatte Dias Bandaranaike")
+ElecFinal1988[,sum(Votes,na.rm = TRUE),by="ColNames"]
+```
+
+    ##                                   ColNames     V1
+    ## 1: Mrs.Sirimavo Ratwatte Dias Bandaranaike 182220
+
+## Comparing final tally votes of Mr. Oswin Abeygunasekara
+
+18 extra votes added.
+
+![](Fig4.JPG)
+
+``` r
+# Extracting only Final District District Results of 
+# Mr. Oswin Abeygunasekara
+# and then adding all the votes 
+ElecFinal1988<-subset(Election1988,Electorate=="Total" 
+                      & ColNames=="Mr.Ahangama Vithanage Oswin Nandimitra Abhayagunasekara")
+# added votes will be cross checked with the pdf document
+ElecFinal1988[,sum(Votes),by="ColNames"]
+```
+
+    ##                                                   ColNames     V1
+    ## 1: Mr.Ahangama Vithanage Oswin Nandimitra Abhayagunasekara 235701
+
+``` r
+# Extracting except Final District District Results of 
+# Mr. Oswin Abeygunasekara
+# and then adding all the votes 
+ElecFinal1988<-subset(Election1988,Electorate!="Total" 
+                      & ColNames=="Mr.Ahangama Vithanage Oswin Nandimitra Abhayagunasekara")
+# added votes will be cross checked with the pdf document
+ElecFinal1988[,sum(Votes,na.rm = TRUE),by="ColNames"]
+```
+
+    ##                                                   ColNames     V1
+    ## 1: Mr.Ahangama Vithanage Oswin Nandimitra Abhayagunasekara 235701
+
+18 extra votes added in the district tally table. So the final count for
+Mr. Oswin Abhayagunasekara is 235701.
+
+![](Fig42.JPG)
+
+### Badulla District
+
+``` r
+ElecFinal1988<-subset(Election1988,Electorate!="Total" & District=="Badulla" 
+                      & ColNames=="Mr.Ahangama Vithanage Oswin Nandimitra Abhayagunasekara")
+
+ElecFinal1988[,sum(Votes,na.rm = TRUE),by="ColNames"]
+```
+
+    ##                                                   ColNames   V1
+    ## 1: Mr.Ahangama Vithanage Oswin Nandimitra Abhayagunasekara 3422
 
 *THANK YOU*
