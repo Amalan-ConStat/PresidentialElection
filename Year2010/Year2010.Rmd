@@ -195,8 +195,97 @@ Election2010$ColNames[Election2010$ColNames==""]<-"Regis Electors"
 There is no summary for election results therefore only both way tallying
 is compared between the extracted data.
 
-Comparing final tally votes of Mahinda Rajapaksa from the pdf file 
-to the data extracted as below. 
+## Checking for Registered Electors
+
+Could not figure it out.
+
+```{r Reg Electors}
+# Extracting only Final District District Results of 
+# Registered Electors
+# and then adding all the votes 
+ElecFinal2010<-subset(Election2010,Electorate=="Final District Result" 
+                      & ColNames=="Regis Electors")
+# added votes will be cross checked with the pdf document
+ElecFinal2010[,sum(Votes),by="ColNames"]
+# Extracting only Final District District Results of 
+# Registered Electors
+# and then adding all the votes
+ElecFinal2010<-subset(Election2010,Electorate!="Final District Result" 
+                      & Electorate!="Postal District Votes"
+                      & ColNames=="Regis Electors")
+# added votes will be cross checked with the pdf document
+ElecFinal2010[,sum(Votes),by="ColNames"]
+```
+
+## Checking for Total Polled
+
+Could not figure it out.
+
+```{r Total Polled}
+# Extracting only Final District District Results of 
+# Total Polled
+# and then adding all the votes 
+ElecFinal2010<-subset(Election2010,Electorate=="Final District Result" 
+                      & ColNames=="Total Polled")
+# added votes will be cross checked with the pdf document
+ElecFinal2010[,sum(Votes),by="ColNames"]
+
+# Extracting except Final District District Results of 
+# Total Polled
+# and then adding all the votes 
+ElecFinal2010<-subset(Election2010,Electorate!="Final District Result" 
+                      & ColNames=="Total Polled")
+# added votes will be cross checked with the pdf document
+ElecFinal2010[,sum(Votes),by="ColNames"]
+```
+
+## Checking for Rejected Votes
+
+No issues here.
+
+```{r Total Rejected}
+# Extracting only Final District District Results of 
+# Total Rejected
+# and then adding all the votes 
+ElecFinal2010<-subset(Election2010,Electorate=="Final District Result" 
+                      & ColNames=="Rejected Votes")
+# added votes will be cross checked with the pdf document
+ElecFinal2010[,sum(Votes),by="ColNames"]
+
+# Extracting except Final District District Results of 
+# Total Rejected
+# and then adding all the votes 
+ElecFinal2010<-subset(Election2010,Electorate!="Final District Result" 
+                      & ColNames=="Rejected Votes")
+# added votes will be cross checked with the pdf document
+ElecFinal2010[,sum(Votes),by="ColNames"]
+```
+
+## Checking for Valid Votes
+
+No issues here.
+
+```{r Total Valid}
+# Extracting only Final District District Results of 
+# Total Valid
+# and then adding all the votes 
+ElecFinal2010<-subset(Election2010,Electorate=="Final District Result" 
+                      & ColNames=="Valid Votes")
+# added votes will be cross checked with the pdf document
+ElecFinal2010[,sum(Votes),by="ColNames"]
+
+# Extracting except Final District District Results of 
+# Total Valid
+# and then adding all the votes 
+ElecFinal2010<-subset(Election2010,Electorate!="Final District Result" 
+                      & ColNames=="Valid Votes")
+# added votes will be cross checked with the pdf document
+ElecFinal2010[,sum(Votes),by="ColNames"]
+```
+
+## Comparing final tally votes of Mahinda Rajapaksa
+
+No issues here.
 
 ```{r Validating the data 1}
 # Extracting only Final District District Results of 
@@ -215,10 +304,9 @@ ElecFinal2010<-subset(Election2010,Electorate!="Final District Result"
 ElecFinal2010[,sum(Votes),by="ColNames"]
 ```
 
-It seems data extraction is successful.
+## Comparing final tally votes of  Sarath Fonseka  
 
-Similarly comparing final tally votes of  Sarath Fonseka  
-from the pdf file to the data extracted as below. 
+No issues here.
 
 ```{r Validating the data 2}
 # Extracting only Final District District Results of 
@@ -237,6 +325,424 @@ ElecFinal2010<-subset(Election2010,Electorate!="Final District Result"
 ElecFinal2010[,sum(Votes),by="ColNames"]
 ```
 
-It seems data extraction is successful.
+## Comparing final tally votes of  Channa Janaka Sugathsiri Gamage  
+
+No issues here.
+
+```{r Validating the data 3}
+# Extracting only Final District District Results of 
+# Channa Janaka Sugathsiri Gamage
+# and then adding all the votes 
+ElecFinal2010<-subset(Election2010,Electorate=="Final District Result" 
+                      & ColNames=="Channa Janaka Sugathsiri Gamage")
+# added votes will be cross checked with the pdf document
+ElecFinal2010[,sum(Votes),by="ColNames"]
+# Extracting only Final District District Results of 
+# Channa Janaka Sugathsiri Gamage
+# and then adding all the votes 
+ElecFinal2010<-subset(Election2010,Electorate!="Final District Result" 
+                      & ColNames=="Channa Janaka Sugathsiri Gamage")
+# added votes will be cross checked with the pdf document
+ElecFinal2010[,sum(Votes),by="ColNames"]
+```
+
+## Comparing final tally votes of Mohomad Cassim Mohomad Ismail 
+
+No issues here.
+
+```{r Validating the data 4}
+# Extracting only Final District District Results of 
+# Mohomad Cassim Mohomad Ismail
+# and then adding all the votes 
+ElecFinal2010<-subset(Election2010,Electorate=="Final District Result" 
+                      & ColNames=="Mohomad Cassim Mohomad Ismail")
+# added votes will be cross checked with the pdf document
+ElecFinal2010[,sum(Votes),by="ColNames"]
+# Extracting only Final District District Results of 
+# Mohomad Cassim Mohomad Ismail
+# and then adding all the votes 
+ElecFinal2010<-subset(Election2010,Electorate!="Final District Result" 
+                      & ColNames=="Mohomad Cassim Mohomad Ismail")
+# added votes will be cross checked with the pdf document
+ElecFinal2010[,sum(Votes),by="ColNames"]
+```
+
+## Comparing final tally votes of Vickramabahu Karunaratna  
+
+No issues here.
+
+```{r Validating the data 5}
+# Extracting only Final District District Results of 
+# Vickramabahu Karunaratna 
+# and then adding all the votes 
+ElecFinal2010<-subset(Election2010,Electorate=="Final District Result" 
+                      & ColNames=="Vickramabahu Karunaratna")
+# added votes will be cross checked with the pdf document
+ElecFinal2010[,sum(Votes),by="ColNames"]
+# Extracting only Final District District Results of 
+# Vickramabahu Karunaratna 
+# and then adding all the votes 
+ElecFinal2010<-subset(Election2010,Electorate!="Final District Result" 
+                      & ColNames=="Vickramabahu Karunaratna")
+# added votes will be cross checked with the pdf document
+ElecFinal2010[,sum(Votes),by="ColNames"]
+```
+
+## Comparing final tally votes of Panagoda Don Prince Soloman Anura Liyanage   
+
+No issues here.
+
+```{r Validating the data 6}
+# Extracting only Final District District Results of 
+# Panagoda Don Prince Soloman Anura Liyanage  
+# and then adding all the votes 
+ElecFinal2010<-subset(Election2010,Electorate=="Final District Result" 
+                      & ColNames=="Panagoda Don Prince Soloman Anura Liyanage")
+# added votes will be cross checked with the pdf document
+ElecFinal2010[,sum(Votes),by="ColNames"]
+# Extracting only Final District District Results of 
+# Panagoda Don Prince Soloman Anura Liyanage  
+# and then adding all the votes 
+ElecFinal2010<-subset(Election2010,Electorate!="Final District Result" 
+                      & ColNames=="Panagoda Don Prince Soloman Anura Liyanage")
+# added votes will be cross checked with the pdf document
+ElecFinal2010[,sum(Votes),by="ColNames"]
+```
+
+## Comparing final tally votes of Sarath Manamendra    
+
+No issues here.
+
+```{r Validating the data 7}
+# Extracting only Final District District Results of 
+# Sarath Manamendra   
+# and then adding all the votes 
+ElecFinal2010<-subset(Election2010,Electorate=="Final District Result" 
+                      & ColNames=="Sarath Manamendra")
+# added votes will be cross checked with the pdf document
+ElecFinal2010[,sum(Votes),by="ColNames"]
+# Extracting only Final District District Results of 
+# Sarath Manamendra  
+# and then adding all the votes 
+ElecFinal2010<-subset(Election2010,Electorate!="Final District Result" 
+                      & ColNames=="Sarath Manamendra")
+# added votes will be cross checked with the pdf document
+ElecFinal2010[,sum(Votes),by="ColNames"]
+```
+
+## Comparing final tally votes of M.K. Sivajilingam    
+
+No issues here.
+
+```{r Validating the data 8}
+# Extracting only Final District District Results of 
+# M.K. Sivajilingam   
+# and then adding all the votes 
+ElecFinal2010<-subset(Election2010,Electorate=="Final District Result" 
+                      & ColNames=="M K Sivajilingam")
+# added votes will be cross checked with the pdf document
+ElecFinal2010[,sum(Votes),by="ColNames"]
+# Extracting only Final District District Results of 
+# M.K. Sivajilingam 
+# and then adding all the votes 
+ElecFinal2010<-subset(Election2010,Electorate!="Final District Result" 
+                      & ColNames=="M K Sivajilingam")
+# added votes will be cross checked with the pdf document
+ElecFinal2010[,sum(Votes),by="ColNames"]
+```
+
+## Comparing final tally votes of Lal Perera    
+
+No issues here.
+
+```{r Validating the data 9}
+# Extracting only Final District District Results of 
+# Lal Perera   
+# and then adding all the votes 
+ElecFinal2010<-subset(Election2010,Electorate=="Final District Result" 
+                      & ColNames=="Lal Perera")
+# added votes will be cross checked with the pdf document
+ElecFinal2010[,sum(Votes),by="ColNames"]
+# Extracting only Final District District Results of 
+# Lal Perera 
+# and then adding all the votes 
+ElecFinal2010<-subset(Election2010,Electorate!="Final District Result" 
+                      & ColNames=="Lal Perera")
+# added votes will be cross checked with the pdf document
+ElecFinal2010[,sum(Votes),by="ColNames"]
+```
+
+## Comparing final tally votes of Achala Ashoka Suraweera    
+
+No issues here.
+
+```{r Validating the data 10}
+# Extracting only Final District District Results of 
+# Achala Ashoka Suraweera  
+# and then adding all the votes 
+ElecFinal2010<-subset(Election2010,Electorate=="Final District Result" 
+                      & ColNames=="Achala Ashoka Suraweera")
+# added votes will be cross checked with the pdf document
+ElecFinal2010[,sum(Votes),by="ColNames"]
+# Extracting only Final District District Results of 
+# Achala Ashoka Suraweera 
+# and then adding all the votes 
+ElecFinal2010<-subset(Election2010,Electorate!="Final District Result" 
+                      & ColNames=="Achala Ashoka Suraweera")
+# added votes will be cross checked with the pdf document
+ElecFinal2010[,sum(Votes),by="ColNames"]
+```
+
+## Comparing final tally votes of W.V. Mahiman Ranjith     
+
+No issues here.
+
+```{r Validating the data 11}
+# Extracting only Final District District Results of 
+# W.V. Mahiman Ranjith   
+# and then adding all the votes 
+ElecFinal2010<-subset(Election2010,Electorate=="Final District Result" 
+                      & ColNames=="W V Mahiman Ranjith")
+# added votes will be cross checked with the pdf document
+ElecFinal2010[,sum(Votes),by="ColNames"]
+# Extracting only Final District District Results of 
+# W.V. Mahiman Ranjith  
+# and then adding all the votes 
+ElecFinal2010<-subset(Election2010,Electorate!="Final District Result" 
+                      & ColNames=="W V Mahiman Ranjith")
+# added votes will be cross checked with the pdf document
+ElecFinal2010[,sum(Votes),by="ColNames"]
+```
+
+## Comparing final tally votes of Sirithunga Jayasuriya     
+
+No issues here.
+
+```{r Validating the data 12}
+# Extracting only Final District District Results of 
+# Sirithunga Jayasuriya   
+# and then adding all the votes 
+ElecFinal2010<-subset(Election2010,Electorate=="Final District Result" 
+                      & ColNames=="Sirithunga Jayasuriya")
+# added votes will be cross checked with the pdf document
+ElecFinal2010[,sum(Votes),by="ColNames"]
+# Extracting only Final District District Results of 
+# Sirithunga Jayasuriya  
+# and then adding all the votes 
+ElecFinal2010<-subset(Election2010,Electorate!="Final District Result" 
+                      & ColNames=="Sirithunga Jayasuriya")
+# added votes will be cross checked with the pdf document
+ElecFinal2010[,sum(Votes),by="ColNames"]
+```
+
+## Comparing final tally votes of Wije Dias     
+
+No issues here.
+
+```{r Validating the data 13}
+# Extracting only Final District District Results of 
+# Wije Dias   
+# and then adding all the votes 
+ElecFinal2010<-subset(Election2010,Electorate=="Final District Result" 
+                      & ColNames=="Wije Dias")
+# added votes will be cross checked with the pdf document
+ElecFinal2010[,sum(Votes),by="ColNames"]
+# Extracting only Final District District Results of 
+# Wije Dias  
+# and then adding all the votes 
+ElecFinal2010<-subset(Election2010,Electorate!="Final District Result" 
+                      & ColNames=="Wije Dias")
+# added votes will be cross checked with the pdf document
+ElecFinal2010[,sum(Votes),by="ColNames"]
+```
+
+## Comparing final tally votes of Idroos Mohomad Ilyas     
+
+No issues here.
+
+```{r Validating the data 14}
+# Extracting only Final District District Results of 
+# Idroos Mohomad Ilyas   
+# and then adding all the votes 
+ElecFinal2010<-subset(Election2010,Electorate=="Final District Result" 
+                      & ColNames=="Idroos Mohomad Ilyas")
+# added votes will be cross checked with the pdf document
+ElecFinal2010[,sum(Votes),by="ColNames"]
+# Extracting only Final District District Results of 
+# Idroos Mohomad Ilyas 
+# and then adding all the votes 
+ElecFinal2010<-subset(Election2010,Electorate!="Final District Result" 
+                      & ColNames=="Idroos Mohomad Ilyas")
+# added votes will be cross checked with the pdf document
+ElecFinal2010[,sum(Votes),by="ColNames"]
+```
+
+## Comparing final tally votes of Ukkubanda Wijekoon     
+
+No issues here.
+
+```{r Validating the data 15}
+# Extracting only Final District District Results of 
+# Ukkubanda Wijekoon   
+# and then adding all the votes 
+ElecFinal2010<-subset(Election2010,Electorate=="Final District Result" 
+                      & ColNames=="Ukkubanda Wijekoon")
+# added votes will be cross checked with the pdf document
+ElecFinal2010[,sum(Votes),by="ColNames"]
+# Extracting only Final District District Results of 
+# Ukkubanda Wijekoon 
+# and then adding all the votes 
+ElecFinal2010<-subset(Election2010,Electorate!="Final District Result" 
+                      & ColNames=="Ukkubanda Wijekoon")
+# added votes will be cross checked with the pdf document
+ElecFinal2010[,sum(Votes),by="ColNames"]
+```
+
+## Comparing final tally votes of Muthu Bandara Theminimulla     
+
+No issues here.
+
+```{r Validating the data 16}
+# Extracting only Final District District Results of 
+# Muthu Bandara Theminimulla   
+# and then adding all the votes 
+ElecFinal2010<-subset(Election2010,Electorate=="Final District Result" 
+                      & ColNames=="Muthu Bandara Theminimulla")
+# added votes will be cross checked with the pdf document
+ElecFinal2010[,sum(Votes),by="ColNames"]
+# Extracting only Final District District Results of 
+# Muthu Bandara Theminimulla 
+# and then adding all the votes 
+ElecFinal2010<-subset(Election2010,Electorate!="Final District Result" 
+                      & ColNames=="Muthu Bandara Theminimulla")
+# added votes will be cross checked with the pdf document
+ElecFinal2010[,sum(Votes),by="ColNames"]
+```
+
+## Comparing final tally votes of Sanath Pinnaduwa     
+
+No issues here.
+
+```{r Validating the data 17}
+# Extracting only Final District District Results of 
+# Sanath Pinnaduwa   
+# and then adding all the votes 
+ElecFinal2010<-subset(Election2010,Electorate=="Final District Result" 
+                      & ColNames=="Sanath Pinnaduwa")
+# added votes will be cross checked with the pdf document
+ElecFinal2010[,sum(Votes),by="ColNames"]
+# Extracting only Final District District Results of 
+# Sanath Pinnaduwa 
+# and then adding all the votes 
+ElecFinal2010<-subset(Election2010,Electorate!="Final District Result" 
+                      & ColNames=="Sanath Pinnaduwa")
+# added votes will be cross checked with the pdf document
+ElecFinal2010[,sum(Votes),by="ColNames"]
+```
+
+## Comparing final tally votes of Upali Sarath Kongahage     
+
+No issues here.
+
+```{r Validating the data 18}
+# Extracting only Final District District Results of 
+# Upali Sarath Kongahage   
+# and then adding all the votes 
+ElecFinal2010<-subset(Election2010,Electorate=="Final District Result" 
+                      & ColNames=="Upali Sarath Kongahage")
+# added votes will be cross checked with the pdf document
+ElecFinal2010[,sum(Votes),by="ColNames"]
+# Extracting only Final District District Results of 
+# Upali Sarath Kongahage 
+# and then adding all the votes 
+ElecFinal2010<-subset(Election2010,Electorate!="Final District Result" 
+                      & ColNames=="Upali Sarath Kongahage")
+# added votes will be cross checked with the pdf document
+ElecFinal2010[,sum(Votes),by="ColNames"]
+```
+
+## Comparing final tally votes of Mohamed Musthaffa     
+
+No issues here.
+
+```{r Validating the data 19}
+# Extracting only Final District District Results of 
+# Mohamed Musthaffa   
+# and then adding all the votes 
+ElecFinal2010<-subset(Election2010,Electorate=="Final District Result" 
+                      & ColNames=="Mohamed Musthaffa")
+# added votes will be cross checked with the pdf document
+ElecFinal2010[,sum(Votes),by="ColNames"]
+# Extracting only Final District District Results of 
+# Mohamed Musthaffa 
+# and then adding all the votes 
+ElecFinal2010<-subset(Election2010,Electorate!="Final District Result" 
+                      & ColNames=="Mohamed Musthaffa")
+# added votes will be cross checked with the pdf document
+ElecFinal2010[,sum(Votes),by="ColNames"]
+```
+
+## Comparing final tally votes of Battaramulle Seelarathana Thero    
+
+No issues here.
+
+```{r Validating the data 20}
+# Extracting only Final District District Results of 
+# Battaramulle Seelarathana Thero   
+# and then adding all the votes 
+ElecFinal2010<-subset(Election2010,Electorate=="Final District Result" 
+                      & ColNames=="Battaramulle Seelarathana Thero")
+# added votes will be cross checked with the pdf document
+ElecFinal2010[,sum(Votes),by="ColNames"]
+# Extracting only Final District District Results of 
+# Battaramulle Seelarathana Thero 
+# and then adding all the votes 
+ElecFinal2010<-subset(Election2010,Electorate!="Final District Result" 
+                      & ColNames=="Battaramulle Seelarathana Thero")
+# added votes will be cross checked with the pdf document
+ElecFinal2010[,sum(Votes),by="ColNames"]
+```
+
+## Comparing final tally votes of Senaratna de Silva    
+
+No issues here.
+
+```{r Validating the data 21}
+# Extracting only Final District District Results of 
+# Senaratna de Silva   
+# and then adding all the votes 
+ElecFinal2010<-subset(Election2010,Electorate=="Final District Result" 
+                      & ColNames=="Senaratna de Silva")
+# added votes will be cross checked with the pdf document
+ElecFinal2010[,sum(Votes),by="ColNames"]
+# Extracting only Final District District Results of 
+# Senaratna de Silva 
+# and then adding all the votes 
+ElecFinal2010<-subset(Election2010,Electorate!="Final District Result" 
+                      & ColNames=="Senaratna de Silva")
+# added votes will be cross checked with the pdf document
+ElecFinal2010[,sum(Votes),by="ColNames"]
+```
+
+## Comparing final tally votes of Aruna de Zoysa    
+
+No issues here.
+
+```{r Validating the data 22}
+# Extracting only Final District District Results of 
+# Aruna de Zoysa   
+# and then adding all the votes 
+ElecFinal2010<-subset(Election2010,Electorate=="Final District Result" 
+                      & ColNames=="Aruna de Zoysa")
+# added votes will be cross checked with the pdf document
+ElecFinal2010[,sum(Votes),by="ColNames"]
+# Extracting only Final District District Results of 
+# Aruna de Zoysa 
+# and then adding all the votes 
+ElecFinal2010<-subset(Election2010,Electorate!="Final District Result" 
+                      & ColNames=="Aruna de Zoysa")
+# added votes will be cross checked with the pdf document
+ElecFinal2010[,sum(Votes),by="ColNames"]
+```
 
 *THANK YOU*

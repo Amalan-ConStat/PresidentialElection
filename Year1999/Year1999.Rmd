@@ -111,9 +111,13 @@ Election1999<-do.call("rbind",Election1999)
 
 # Validating Data extracted
 
-Checking for Number of Registered Electors.
+## Checking for Number of Registered Electors.
 
-```{r Validating the data}
+No issues here.
+
+![](Fig2.JPG)
+
+```{r Reg electors}
 # Extracting only Final District District Results of 
 # Number of Registered Electors
 # and then adding all the votes 
@@ -132,10 +136,83 @@ ElecFinal1999<-subset(Election1999,Electorate!="FINAL DISTRICT RESULTS"
 ElecFinal1999[,sum(Votes),by="ColNames"]
 ```
 
-Comparing final tally votes of Mrs. Chandrika Bandaranaike Kumarathunga or
-the candidate from PA from the pdf file to the data extracted as below. 
+## Checking for Total Polled
+
+No issues here.
 
 ![](Fig2.JPG)
+
+```{r Total Polled}
+# Extracting only Final District District Results of 
+# Total Polled
+# and then adding all the votes 
+ElecFinal1999<-subset(Election1999,Electorate=="FINAL DISTRICT RESULTS" 
+                      & ColNames=="Total Polled")
+# added votes will be cross checked with the pdf document
+ElecFinal1999[,sum(Votes),by="ColNames"]
+
+# Extracting except Final District District Results of 
+# Total Poolled
+# and then adding all the votes 
+ElecFinal1999<-subset(Election1999,Electorate!="FINAL DISTRICT RESULTS" 
+                      & ColNames=="Total Polled")
+# added votes will be cross checked with the pdf document
+ElecFinal1999[,sum(Votes),by="ColNames"]
+```
+
+## Checking for Total Rejected Votes
+
+Could not figure it out.
+
+![](Fig3.JPG)
+
+```{r Rejected Votes}
+# Extracting only Final District District Results of 
+# Total Polled
+# and then adding all the votes 
+ElecFinal1999<-subset(Election1999,Electorate=="FINAL DISTRICT RESULTS" 
+                      & ColNames=="Rejected Votes")
+# added votes will be cross checked with the pdf document
+ElecFinal1999[,sum(Votes),by="ColNames"]
+
+# Extracting except Final District District Results of 
+# Total Polled
+# and then adding all the votes 
+ElecFinal1999<-subset(Election1999,Electorate!="FINAL DISTRICT RESULTS" 
+                      & ColNames=="Rejected Votes")
+# added votes will be cross checked with the pdf document
+ElecFinal1999[,sum(Votes),by="ColNames"]
+```
+
+## Checking for Valid Votes
+
+Could not figure it out.
+
+![](Fig3.JPG)
+
+```{r Valid Votes}
+# Extracting only Final District District Results of 
+# Valid Votes
+# and then adding all the votes 
+ElecFinal1999<-subset(Election1999,Electorate=="FINAL DISTRICT RESULTS" 
+                      & ColNames=="Valid Votes")
+# added votes will be cross checked with the pdf document
+ElecFinal1999[,sum(Votes),by="ColNames"]
+
+# Extracting except Final District District Results of 
+# Valid Votes
+# and then adding all the votes 
+ElecFinal1999<-subset(Election1999,Electorate!="FINAL DISTRICT RESULTS" 
+                      & ColNames=="Valid Votes")
+# added votes will be cross checked with the pdf document
+ElecFinal1999[,sum(Votes),by="ColNames"]
+```
+
+## Comparing final tally votes of Mrs. Chandrika Bandaranaike Kumarathunga 
+
+No issues here.
+
+![](Fig4.JPG)
 
 ```{r Validating the data 1}
 # Extracting only Final District District Results of 
@@ -155,12 +232,12 @@ ElecFinal1999<-subset(Election1999,Electorate!="FINAL DISTRICT RESULTS"
 ElecFinal1999[,sum(Votes),by="ColNames"]
 ```
 
-It seems data extraction is successful. 
 
-Similarly comparing final tally votes of  Mr. Ranil Wickremasinghe  
-from the pdf file to the data extracted as below. 
+## Comparing final tally votes of  Mr. Ranil Wickremasinghe  
 
-![](Fig2.JPG)
+No issues here.
+
+![](Fig4.JPG)
 
 ```{r Vaildating the data 2}
 # Extracting only Final District District Results of 
@@ -180,6 +257,268 @@ ElecFinal1999<-subset(Election1999,Electorate!="FINAL DISTRICT RESULTS"
 ElecFinal1999[,sum(Votes),by="ColNames"]
 ```
 
-It seems data extraction is successful. 
+## Comparing final tally votes of  Mr.  M. D. Nandana Gunathilaka  
+
+No issues here.
+
+![](Fig4.JPG)
+
+```{r Vaildating the data 3}
+# Extracting only Final District District Results of 
+#  Mr.  M. D. Nandana Gunathilaka 
+# and then adding all the votes 
+ElecFinal1999<-subset(Election1999,Electorate=="FINAL DISTRICT RESULTS" 
+                      & ColNames=="JVP")
+# added votes will be cross checked with the pdf document
+ElecFinal1999[,sum(Votes),by="ColNames"]
+
+# Extracting except Final District District Results of 
+#  Mr.  M. D. Nandana Gunathilaka 
+# and then adding all the votes 
+ElecFinal1999<-subset(Election1999,Electorate!="FINAL DISTRICT RESULTS" 
+                      & ColNames=="JVP")
+# added votes will be cross checked with the pdf document
+ElecFinal1999[,sum(Votes),by="ColNames"]
+```
+
+## Comparing final tally votes of  Mr.  Harischandra Wijayatunga   
+
+No issues here.
+
+![](Fig4.JPG)
+
+```{r Vaildating the data 4}
+# Extracting only Final District District Results of 
+# Mr.  Harischandra Wijayatunga  
+# and then adding all the votes 
+ElecFinal1999<-subset(Election1999,Electorate=="FINAL DISTRICT RESULTS" 
+                      & ColNames=="SMBP")
+# added votes will be cross checked with the pdf document
+ElecFinal1999[,sum(Votes),by="ColNames"]
+
+# Extracting except Final District District Results of 
+# Mr.  Harischandra Wijayatunga 
+# and then adding all the votes 
+ElecFinal1999<-subset(Election1999,Electorate!="FINAL DISTRICT RESULTS" 
+                      & ColNames=="SMBP")
+# added votes will be cross checked with the pdf document
+ElecFinal1999[,sum(Votes),by="ColNames"]
+```
+
+## Comparing final tally votes of Mr.  Tennyson Edirisuriya     
+
+No issues here.
+
+![](Fig4.JPG)
+
+```{r Vaildating the data 5}
+# Extracting only Final District District Results of 
+# Mr.  Tennyson Edirisuriya    
+# and then adding all the votes 
+ElecFinal1999<-subset(Election1999,Electorate=="FINAL DISTRICT RESULTS" 
+                      & ColNames=="IND1")
+# added votes will be cross checked with the pdf document
+ElecFinal1999[,sum(Votes),by="ColNames"]
+
+# Extracting except Final District District Results of 
+# Mr.  Tennyson Edirisuriya   
+# and then adding all the votes 
+ElecFinal1999<-subset(Election1999,Electorate!="FINAL DISTRICT RESULTS" 
+                      & ColNames=="IND1")
+# added votes will be cross checked with the pdf document
+ElecFinal1999[,sum(Votes),by="ColNames"]
+```
+
+## Comparing final tally votes of Mr. W. V. M. Ranjith      
+
+No issues here.
+
+![](Fig4.JPG)
+
+```{r Vaildating the data 6}
+# Extracting only Final District District Results of 
+# Mr. W. V. M. Ranjith     
+# and then adding all the votes 
+ElecFinal1999<-subset(Election1999,Electorate=="FINAL DISTRICT RESULTS" 
+                      & ColNames=="IND2")
+# added votes will be cross checked with the pdf document
+ElecFinal1999[,sum(Votes),by="ColNames"]
+
+# Extracting except Final District District Results of 
+# Mr. W. V. M. Ranjith    
+# and then adding all the votes 
+ElecFinal1999<-subset(Election1999,Electorate!="FINAL DISTRICT RESULTS" 
+                      & ColNames=="IND2")
+# added votes will be cross checked with the pdf document
+ElecFinal1999[,sum(Votes),by="ColNames"]
+```
+
+## Comparing final tally votes of Mr.  Rajiva Wijesinha      
+
+No issues here.
+
+![](Fig4.JPG)
+
+```{r Vaildating the data 7}
+# Extracting only Final District District Results of 
+# Mr.  Rajiva Wijesinha     
+# and then adding all the votes 
+ElecFinal1999<-subset(Election1999,Electorate=="FINAL DISTRICT RESULTS" 
+                      & ColNames=="LP")
+# added votes will be cross checked with the pdf document
+ElecFinal1999[,sum(Votes),by="ColNames"]
+
+# Extracting except Final District District Results of 
+# Mr.  Rajiva Wijesinha     
+# and then adding all the votes 
+ElecFinal1999<-subset(Election1999,Electorate!="FINAL DISTRICT RESULTS" 
+                      & ColNames=="LP")
+# added votes will be cross checked with the pdf document
+ElecFinal1999[,sum(Votes),by="ColNames"]
+```
+
+## Comparing final tally votes of Mr.  Vasudeva Nanyakkara       
+
+No issues here.
+
+![](Fig4.JPG)
+
+```{r Vaildating the data 8}
+# Extracting only Final District District Results of 
+# Mr.  Vasudeva Nanyakkara      
+# and then adding all the votes 
+ElecFinal1999<-subset(Election1999,Electorate=="FINAL DISTRICT RESULTS" 
+                      & ColNames=="LDA")
+# added votes will be cross checked with the pdf document
+ElecFinal1999[,sum(Votes),by="ColNames"]
+
+# Extracting except Final District District Results of 
+# Mr.  Vasudeva Nanyakkara      
+# and then adding all the votes 
+ElecFinal1999<-subset(Election1999,Electorate!="FINAL DISTRICT RESULTS" 
+                      & ColNames=="LDA")
+# added votes will be cross checked with the pdf document
+ElecFinal1999[,sum(Votes),by="ColNames"]
+```
+
+## Comparing final tally votes of Mr.  Abdul Rasool        
+
+No issues here.
+
+![](Fig4.JPG)
+
+```{r Vaildating the data 9}
+# Extracting only Final District District Results of 
+# Mr.  Abdul Rasool       
+# and then adding all the votes 
+ElecFinal1999<-subset(Election1999,Electorate=="FINAL DISTRICT RESULTS" 
+                      & ColNames=="SLMK")
+# added votes will be cross checked with the pdf document
+ElecFinal1999[,sum(Votes),by="ColNames"]
+
+# Extracting except Final District District Results of 
+# Mr.  Abdul Rasool       
+# and then adding all the votes 
+ElecFinal1999<-subset(Election1999,Electorate!="FINAL DISTRICT RESULTS" 
+                      & ColNames=="SLMK")
+# added votes will be cross checked with the pdf document
+ElecFinal1999[,sum(Votes),by="ColNames"]
+```
+
+## Comparing final tally votes of Mr.  Kamal Karunadasa         
+
+No issues here.
+
+![](Fig4.JPG)
+
+```{r Vaildating the data 10}
+# Extracting only Final District District Results of 
+# Mr.  Kamal Karunadasa        
+# and then adding all the votes 
+ElecFinal1999<-subset(Election1999,Electorate=="FINAL DISTRICT RESULTS" 
+                      & ColNames=="PLSF")
+# added votes will be cross checked with the pdf document
+ElecFinal1999[,sum(Votes),by="ColNames"]
+
+# Extracting except Final District District Results of 
+# Mr.  Kamal Karunadasa        
+# and then adding all the votes 
+ElecFinal1999<-subset(Election1999,Electorate!="FINAL DISTRICT RESULTS" 
+                      & ColNames=="PLSF")
+# added votes will be cross checked with the pdf document
+ElecFinal1999[,sum(Votes),by="ColNames"]
+```
+
+## Comparing final tally votes of Mr.  Alwis Weerakkody Permawardhana          
+
+No issues here.
+
+![](Fig4.JPG)
+
+```{r Vaildating the data 11}
+# Extracting only Final District District Results of 
+# Mr.  Alwis Weerakkody Permawardhana         
+# and then adding all the votes 
+ElecFinal1999<-subset(Election1999,Electorate=="FINAL DISTRICT RESULTS" 
+                      & ColNames=="PFF")
+# added votes will be cross checked with the pdf document
+ElecFinal1999[,sum(Votes),by="ColNames"]
+
+# Extracting except Final District District Results of 
+# Mr.  Alwis Weerakkody Permawardhana          
+# and then adding all the votes 
+ElecFinal1999<-subset(Election1999,Electorate!="FINAL DISTRICT RESULTS" 
+                      & ColNames=="PFF")
+# added votes will be cross checked with the pdf document
+ElecFinal1999[,sum(Votes),by="ColNames"]
+```
+
+## Comparing final tally votes of Mr.  Hudson Samarasinghe           
+
+No issues here.
+
+![](Fig4.JPG)
+
+```{r Vaildating the data 12}
+# Extracting only Final District District Results of 
+# Mr.  Hudson Samarasinghe         
+# and then adding all the votes 
+ElecFinal1999<-subset(Election1999,Electorate=="FINAL DISTRICT RESULTS" 
+                      & ColNames=="IND3")
+# added votes will be cross checked with the pdf document
+ElecFinal1999[,sum(Votes),by="ColNames"]
+
+# Extracting except Final District District Results of 
+# Mr.  Hudson Samarasinghe           
+# and then adding all the votes 
+ElecFinal1999<-subset(Election1999,Electorate!="FINAL DISTRICT RESULTS" 
+                      & ColNames=="IND3")
+# added votes will be cross checked with the pdf document
+ElecFinal1999[,sum(Votes),by="ColNames"]
+```
+
+## Comparing final tally votes of Mr.  Ariyawansa Dissanayaka           
+
+No issues here.
+
+![](Fig4.JPG)
+
+```{r Vaildating the data 13}
+# Extracting only Final District District Results of 
+# Mr.  Ariyawansa Dissanayaka         
+# and then adding all the votes 
+ElecFinal1999<-subset(Election1999,Electorate=="FINAL DISTRICT RESULTS" 
+                      & ColNames=="DUNF")
+# added votes will be cross checked with the pdf document
+ElecFinal1999[,sum(Votes),by="ColNames"]
+
+# Extracting except Final District District Results of 
+# Mr.  Ariyawansa Dissanayaka           
+# and then adding all the votes 
+ElecFinal1999<-subset(Election1999,Electorate!="FINAL DISTRICT RESULTS" 
+                      & ColNames=="DUNF")
+# added votes will be cross checked with the pdf document
+ElecFinal1999[,sum(Votes),by="ColNames"]
+```
 
 *THANK YOU*
