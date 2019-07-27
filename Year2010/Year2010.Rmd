@@ -197,7 +197,9 @@ is compared between the extracted data.
 
 ## Checking for Registered Electors
 
-Could not figure it out.
+So there is a printing error in the Kurunegala district Kuliyapitiya electorate table.
+The final two rows should be Total polled followed by Regis Electors, but they have printed
+Total Polled twice. Therefore the correct Total Registered Electors is 14088500.  
 
 ```{r Reg Electors}
 # Extracting only Final District District Results of 
@@ -210,16 +212,30 @@ ElecFinal2010[,sum(Votes),by="ColNames"]
 # Extracting only Final District District Results of 
 # Registered Electors
 # and then adding all the votes
-ElecFinal2010<-subset(Election2010,Electorate!="Final District Result" 
-                      & Electorate!="Postal District Votes"
+ElecFinal2010<-subset(Election2010,Electorate!="Final District Result"
+                      & Electorate!="Postal District Votes" 
+                      & Electorate!="Displace Votes"
                       & ColNames=="Regis Electors")
 # added votes will be cross checked with the pdf document
 ElecFinal2010[,sum(Votes),by="ColNames"]
 ```
 
+![](Fig21.JPG)
+
+So if we rename the second "Total Polled" as "Regis Electors" our problems 
+will be resolved.
+
+```{r Kurunegala Kuliyapitiya 1}
+subset(Election2010,Electorate=="Kuliyapitiya" 
+                    & District=="Kurunegala"
+                    & ColNames=="Total Polled")
+```
+
 ## Checking for Total Polled
 
-Could not figure it out.
+So there is a printing error in the Kurunegala district Kuliyapitiya electorate table.
+The final two rows should be Total polled followed by Regis Electors, but they have printed
+Total Polled twice. Therefore the correct Total Polled value is 10596280.  
 
 ```{r Total Polled}
 # Extracting only Final District District Results of 
@@ -238,6 +254,18 @@ ElecFinal2010<-subset(Election2010,Electorate!="Final District Result"
 # added votes will be cross checked with the pdf document
 ElecFinal2010[,sum(Votes),by="ColNames"]
 ```
+
+![](Fig21.JPG)
+
+So if we rename the second "Total Polled" as "Regis Electors" our problems 
+will be resolved.
+
+```{r Kurunegala Kuliyapitiya 2}
+subset(Election2010,Electorate=="Kuliyapitiya" 
+                    & District=="Kurunegala"
+                    & ColNames=="Total Polled")
+```
+
 
 ## Checking for Rejected Votes
 

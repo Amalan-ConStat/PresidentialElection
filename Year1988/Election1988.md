@@ -146,6 +146,10 @@ ElecFinal1988[,sum(Votes,na.rm = TRUE),by="ColNames"]
     ##                    ColNames      V1
     ## 1: Total No of Votes Polled 5186277
 
+![](Fig21.JPG)
+
+### Gampaha District
+
 54 votes have been missed in the Gampaha district tallying. So if we
 added those votes the final count will be as above. Total No of Votes
 polled are 5186277.

@@ -139,6 +139,10 @@ ElecFinal1988<-subset(Election1988,Electorate!="Total"
 ElecFinal1988[,sum(Votes,na.rm = TRUE),by="ColNames"]
 ```
 
+![](Fig21.JPG)
+
+### Gampaha District
+
 54 votes have been missed in the Gampaha district tallying. 
 So if we added those votes the final count will be as above.
 Total No of Votes polled are 5186277.

@@ -350,7 +350,9 @@ ElecFinal1994[,sum(Votes,na.rm = TRUE),by="ColNames"]
 
 ## Comparing final tally votes of Mr. Hudson Samarasinghe
 
-Could not figure it out.
+According to Electorates tally it should be 58888, but mistakenly
+calculated as 58886. This occurs because of the Batticaloa District
+Tally.
 
 ![](Fig4.JPG)
 
@@ -379,5 +381,22 @@ ElecFinal1994[,sum(Votes,na.rm = TRUE),by="ColNames"]
 
     ##                   ColNames    V1
     ## 1: Mr. Hudson Samarasinghe 58888
+
+The real tally for Batticaloa district is 5030 but mis calculated as
+5028. So the Final Count for Mr. Hudson Samarasinghe is 58888.
+
+![](Fig41.JPG)
+
+### Batticaloa district
+
+``` r
+ElecFinal1994<-subset(Election1994,Electorate!="Final District Results"
+                      & District=="Batticaloa"
+                      & ColNames=="Mr. Hudson Samarasinghe")
+ElecFinal1994[,sum(Votes,na.rm = TRUE),by="ColNames"]
+```
+
+    ##                   ColNames   V1
+    ## 1: Mr. Hudson Samarasinghe 5030
 
 *THANK YOU*

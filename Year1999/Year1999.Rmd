@@ -162,7 +162,9 @@ ElecFinal1999[,sum(Votes),by="ColNames"]
 
 ## Checking for Total Rejected Votes
 
-Could not figure it out.
+The final count from electorates is 199536 but mistakenly the value
+199537 is printed here for Total rejected votes. This occurs because
+of the Jaffna district votes. 
 
 ![](Fig3.JPG)
 
@@ -184,9 +186,27 @@ ElecFinal1999<-subset(Election1999,Electorate!="FINAL DISTRICT RESULTS"
 ElecFinal1999[,sum(Votes),by="ColNames"]
 ```
 
+### Jaffna District
+
+The tallied rejected votes of Jaffna district is 5981 but here it 
+is misprinted as 5982, which has lead to that one vote increase.
+So the final total rejected vote count is 199536.
+
+![](Fig31.JPG)
+
+```{r Jaffna District}
+ElecFinal1999<-subset(Election1999,Electorate!="FINAL DISTRICT RESULTS" 
+                      & District=="JAFFNA"
+                      & ColNames=="Rejected Votes")
+
+ElecFinal1999[,sum(Votes),by="ColNames"]
+```
+
+
 ## Checking for Valid Votes
 
-Could not figure it out.
+8 votes difference occurs because of the Anuradhapura district. 
+The correct value for Total valid votes is 843754. 
 
 ![](Fig3.JPG)
 
@@ -207,6 +227,22 @@ ElecFinal1999<-subset(Election1999,Electorate!="FINAL DISTRICT RESULTS"
 # added votes will be cross checked with the pdf document
 ElecFinal1999[,sum(Votes),by="ColNames"]
 ```
+
+### Anuradhapura District
+
+Total valid votes for Anuradhapura district is 349201 but in the 
+tally section they have mistakenly printed as 349209. 
+
+![](Fig32.JPG)
+
+```{r Anuradhapura District}
+ElecFinal1999<-subset(Election1999,Electorate!="FINAL DISTRICT RESULTS" 
+                      & District=="ANURADHAPURA"
+                      & ColNames=="Valid Votes")
+# added votes will be cross checked with the pdf document
+ElecFinal1999[,sum(Votes),by="ColNames"]
+```
+
 
 ## Comparing final tally votes of Mrs. Chandrika Bandaranaike Kumarathunga 
 

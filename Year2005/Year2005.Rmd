@@ -161,6 +161,9 @@ ElecFinal2005[,sum(Votes),by="ColNames"]
 
 ## Checking for Total Polled.
 
+The right count for Total polled is 9826908 but it seems they
+have mis printed it as 9826778.
+
 ![](Fig2.JPG)
 
 ```{r Total Polled}
@@ -182,6 +185,9 @@ ElecFinal2005[,sum(Votes),by="ColNames"]
 ```
 
 ## Checking for Total Rejected.
+
+The right count for Total rejected is 109869 but it seems they
+have mis printed it as  109,739.
 
 ![](Fig2.JPG)
 

@@ -279,7 +279,9 @@ So the Final Vote count for No of Rejected Votes is 80500.
 
 ![](Fig3.JPG)
 
-Could not figure it out.
+The district tally indicates the Total Valid count is 6522147, but the
+electorate tally indicates the Total Valid count as 6522153. There is a
+six vote difference.
 
 ``` r
 # Extracting only Final District District Results of 
@@ -307,11 +309,31 @@ ElecFinal1982[,sum(Votes),by="ColNames"]
     ##             ColNames      V1
     ## 1: No of Valid Votes 6522153
 
+### Gampaha District
+
+This six vote difference occurs because of the Gampaha district count.
+The actual count should be 696844 but the printed value is 696838. If we
+rectify this the problem will be solved.
+
+![](Fig32.JPG)
+
+``` r
+ElecFinal1982<-subset(Election1982,Electorate!="Total" 
+                      & District=="Gampaha"
+                      & ColNames=="No of Valid Votes")
+
+ElecFinal1982[,sum(Votes),by="ColNames"]
+```
+
+    ##             ColNames     V1
+    ## 1: No of Valid Votes 696844
+
 ## Comparing final tally votes of Mr.J.R. Jayawardene
 
 ![](Fig4.JPG)
 
-Could not figure it out.
+Second votes value of 3450815 is accurate, because it is directly from
+the electorates. There is a 4 vote difference.
 
 ``` r
 # Extracting only Final District District Results of 
@@ -339,8 +361,45 @@ ElecFinal1982[,sum(Votes,na.rm = TRUE),by="ColNames"]
     ##               ColNames      V1
     ## 1: Mr.J.R. Jayawardene 3450815
 
-Second value is more accurate because it is directly from the
-electorates.
+### Gampaha District
+
+In the Gampaha district the real vote count should be 365847 but it
+printed as 365838. Which is a 9 vote defecit.
+
+![](Fig41.JPG)
+
+``` r
+ElecFinal1982<-subset(Election1982,Electorate!="Total" 
+                      & District=="Gampaha"
+                      & ColNames=="Mr.J.R. Jayawardene")
+
+ElecFinal1982[,sum(Votes,na.rm = TRUE),by="ColNames"]
+```
+
+    ##               ColNames     V1
+    ## 1: Mr.J.R. Jayawardene 365847
+
+### Jaffna District
+
+In the Jaffna district the real vote count should be 44775, but it is
+misprinted as 44780.
+
+![](Fig411.JPG)
+
+``` r
+ElecFinal1982<-subset(Election1982,Electorate!="Total" 
+                      & District=="Jaffna"
+                      & ColNames=="Mr.J.R. Jayawardene")
+
+ElecFinal1982[,sum(Votes,na.rm = TRUE),by="ColNames"]
+```
+
+    ##               ColNames    V1
+    ## 1: Mr.J.R. Jayawardene 44775
+
+If we consider the 9 vote defecit and 5 votes extra clearly there is a 4
+vote defecit. This matches our final conclusion that the Total vote
+count for J.R Jayawardane is 3450815.
 
 ## Comparing final tally votes of Mr.H.S.R.B.K. Kobbekaduwa
 
@@ -441,7 +500,8 @@ ElecFinal1982[,sum(Votes,na.rm = TRUE),by="ColNames"]
 
 ## Comparing final tally votes of Dr. Colvin R. De Silva
 
-Could not figure it out.
+436 votes extra, which occurs because of the Colombo district tallying.
+The correct Total Votes count for Dr. Colvin R. De Silva is 58095.
 
 ![](Fig4.JPG)
 
@@ -471,12 +531,29 @@ ElecFinal1982[,sum(Votes,na.rm = TRUE),by="ColNames"]
     ##                  ColNames    V1
     ## 1: Dr. Colvin R. De Silva 58095
 
-Second value is more accurate because it is directly from the
-electorates.
+### Colombo District
+
+![](Fig42.JPG)
+
+Total Votes count for Dr Colvin R. De Silva from Colombo district should
+be 9219 but mistakenly printed has 9655. If we rectify this the problem
+will be resolved.
+
+``` r
+ElecFinal1982<-subset(Election1982,Electorate!="Total" 
+                      & District=="Colombo"
+                      & ColNames=="Dr. Colvin R. De Silva")
+
+ElecFinal1982[,sum(Votes,na.rm = TRUE),by="ColNames"]
+```
+
+    ##                  ColNames   V1
+    ## 1: Dr. Colvin R. De Silva 9219
 
 ## Comparing final tally votes of Mr. Vasudeva Nanayakakra
 
-Could not figure it out.
+10 votes extra, this is happening because of the Jaffna district. The
+correct Total votes count is 16995.
 
 ![](Fig4.JPG)
 
@@ -505,6 +582,24 @@ ElecFinal1982[,sum(Votes,na.rm = TRUE),by="ColNames"]
 
     ##                    ColNames    V1
     ## 1: Mr. Vasudeva Nanayakkara 16995
+
+### Jaffna District
+
+![](Fig43.JPG)
+
+The total vote count Mr Vasudeva Nanayakkara in Jaffna district is 2176
+but in the table it is misprinted as 2186.
+
+``` r
+ElecFinal1982<-subset(Election1982,Electorate!="Total" 
+                      & District== "Jaffna"
+                      & ColNames=="Mr. Vasudeva Nanayakkara")
+
+ElecFinal1982[,sum(Votes,na.rm = TRUE),by="ColNames"]
+```
+
+    ##                    ColNames   V1
+    ## 1: Mr. Vasudeva Nanayakkara 2176
 
 Second value is more accurate because it is directly from the
 electorates.
