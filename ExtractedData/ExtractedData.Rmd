@@ -52,19 +52,21 @@ Issues can be resolved in these data-sets without any trouble and below is the p
 If you need to take a thorough look at the issues please refer the respective folders, which includes a markdown 
 page pin pointing exact issues and their respective places.  
 
+First ensure out of the first four columns the last three are character variables
+and the rest three columns are numeric variables. This needs to be done for all
+seven data-frames.
+
 ## Resolving Year 1982 Data
 
-First ensure the first four columns of the data-set are factor variables
-and final two columns are numeric variables. The rectifying 
-process is to change the misprinted values in the data-frame and 
+The rectifying process is to change the misprinted values in the data-frame and 
 in this case there are 10 values.
 
 ```{r Year 1982 Rectify}
-# changing variable type
-Election1982$Year<-factor(Election1982$Year) ; class(Election1982$Year)
-Election1982$District<-factor(Election1982$District) ; class(Election1982$District)
-Election1982$Electorate<-factor(Election1982$Electorate) ; class(Election1982$Electorate)
-Election1982$ColNames<-factor(Election1982$ColNames) ; class(Election1982$ColNames)
+# checking variable type
+class(Election1982$Year)
+class(Election1982$District)
+class(Election1982$Electorate)
+class(Election1982$ColNames)
 class(Election1982$Votes)
 class(Election1982$Percentage)
 
@@ -254,11 +256,11 @@ Year 1988 presidential election file has no misprints that
 needs to be considered.
 
 ```{r Year 1988 Rectify}
-# changing variable type
-Election1988$Year<-factor(Election1988$Year) ; class(Election1988$Year)
-Election1988$District<-factor(Election1988$District) ; class(Election1988$District)
-Election1988$Electorate<-factor(Election1988$Electorate) ; class(Election1988$Electorate)
-Election1988$ColNames<-factor(Election1988$ColNames) ; class(Election1988$ColNames)
+# checking variable type
+class(Election1988$Year)
+class(Election1988$District)
+class(Election1988$Electorate)
+class(Election1988$ColNames)
 class(Election1988$Votes)
 class(Election1988$Percentage)
 ```
@@ -272,11 +274,11 @@ Rectifying the district tally value issues for Battiacaloa
 district in related to Mr. Hudson Samarasinghe.
 
 ```{r Year 1994 Rectify}
-# changing variable type
-Election1994$Year<-factor(Election1994$Year) ; class(Election1994$Year)
-Election1994$District<-factor(Election1994$District) ; class(Election1994$District)
-Election1994$Electorate<-factor(Election1994$Electorate) ; class(Election1994$Electorate)
-Election1994$ColNames<-factor(Election1994$ColNames) ; class(Election1994$ColNames)
+# checking variable type
+class(Election1994$Year)
+class(Election1994$District)
+class(Election1994$Electorate)
+class(Election1994$ColNames)
 class(Election1994$Votes)
 class(Election1994$Percentage)
 
@@ -314,11 +316,11 @@ is for rejected votes of Jaffna district and other is for
 Valid votes from Anuradhapura district. 
 
 ```{r Year 1999 Rectify}
-# changing variable type
-Election1999$Year<-factor(Election1999$Year) ; class(Election1999$Year)
-Election1999$District<-factor(Election1999$District) ; class(Election1999$District)
-Election1999$Electorate<-factor(Election1999$Electorate) ; class(Election1999$Electorate)
-Election1999$ColNames<-factor(Election1999$ColNames) ; class(Election1999$ColNames)
+# checking variable type
+class(Election1999$Year)
+class(Election1999$District)
+class(Election1999$Electorate)
+class(Election1999$ColNames)
 class(Election1999$Votes)
 class(Election1999$Percentage)
 
@@ -376,11 +378,11 @@ Year 2005 has only one issue to be rectified and it is not related to
 votes. The rectification needs to be done in a name replacing of "De" with "de".
 
 ```{r Year 2005 Rectify}
-# changing variable type
-Election2005$Year<-factor(Election2005$Year) ; class(Election2005$Year)
-Election2005$District<-factor(Election2005$District) ; class(Election2005$District)
-Election2005$Electorate<-factor(Election2005$Electorate) ; class(Election2005$Electorate)
-Election2005$ColNames<-factor(Election2005$ColNames) ; class(Election2005$ColNames)
+# checking variable type
+class(Election2005$Year)
+Election2005$District<-as.character(Election2005$District) ;class(Election2005$District)
+Election2005$Electorate<-as.character(Election2005$Electorate) ; class(Election2005$Electorate)
+class(Election2005$ColNames)
 class(Election2005$Votes)
 class(Election2005$Percentage)
 
@@ -420,11 +422,11 @@ the last vote value should be labelled as "Regis Electors"
 not "Total Polled".
 
 ```{r Year 2010 Rectify}
-# changing variable type
-Election2010$Year<-factor(Election2010$Year) ; class(Election2010$Year)
-Election2010$District<-factor(Election2010$District) ; class(Election2010$District)
-Election2010$Electorate<-factor(Election2010$Electorate) ; class(Election2010$Electorate)
-Election2010$ColNames<-factor(Election2010$ColNames) ; class(Election2010$ColNames)
+# checking variable type
+class(Election2010$Year)
+class(Election2010$District)
+class(Election2010$Electorate)
+class(Election2010$ColNames)
 class(Election2010$Votes)
 class(Election2010$Percentage)
 
@@ -479,11 +481,11 @@ There are no issues which needs to be resolved in the year 2015 and
 all looks good.
 
 ```{r Year 2015 Rectify}
-# changing variable type
-Election2015$Year<-factor(Election2015$Year) ; class(Election2015$Year)
-Election2015$District<-factor(Election2015$District) ; class(Election2015$District)
-Election2015$Electorate<-factor(Election2015$Electorate) ; class(Election2015$Electorate)
-Election2015$ColNames<-factor(Election2015$ColNames) ; class(Election2015$ColNames)
+# checking variable type
+class(Election2015$Year)
+class(Election2015$District)
+class(Election2015$Electorate)
+class(Election2015$ColNames)
 class(Election2015$Votes)
 class(Election2015$Percentage)
 ```
@@ -514,17 +516,14 @@ to one useful data-frame. Below is the code for completing that task.
 6. Kalutara - 1982,1988,1994,1999,2005,2010 but Kaluthara - 2015.
 
 ```{r District Name}
-Election2005$District<-as.character(Election2005$District)
-Election2010$District<-as.character(Election2010$District)
-
-data.table(sort(unique(Election1982$District)),
-           sort(unique(Election1988$District)),
-           sort(unique(Election1994$District)),
-           sort(unique(Election1999$District)),
-           sort(unique(Election2005$District)),
-           sort(unique(Election2010$District)),
-           sort(unique(Election2015$District))
-           )
+#data.table(sort(unique(Election1982$District)),
+#           sort(unique(Election1988$District)),
+#           sort(unique(Election1994$District)),
+#           sort(unique(Election1999$District)),
+#           sort(unique(Election2005$District)),
+#           sort(unique(Election2010$District)),
+#           sort(unique(Election2015$District))
+#           )
 
 # 1. Case sensitive
 Election1999$District<-tools::toTitleCase(tolower(Election1999$District))
@@ -563,9 +562,6 @@ Election2015$District[Election2015$District=="Kaluthara"]<-"Kalutara"
 8. Electorate spelling check for year 2015.
 
 ```{r Electorate Name}
-Election2005$Electorate<-as.character(Election2005$Electorate)
-Election2010$Electorate<-as.character(Election2010$Electorate)
-
 #sort(unique(c(sort(unique(Election1982$Electorate)),
 #           sort(unique(Election1988$Electorate)),
 #           sort(unique(Election1994$Electorate)),
@@ -769,16 +765,14 @@ Election2015$Electorate[Election2015$Electorate=="Sammanturai"]<-"Sammanthurai"
 7. Lable changing in Year 2015.
 
 ```{r Column Names}
-Election2010$ColNames<-as.character(Election2010$ColNames)
-
-data.table(unique(Election1982$ColNames),
-           unique(Election1988$ColNames),
-           unique(Election1994$ColNames),
-           unique(Election1999$ColNames),
-           unique(Election2005$ColNames),
-           unique(Election2010$ColNames),
-           unique(Election2015$ColNames)
-           )
+#data.table(unique(Election1982$ColNames),
+#           unique(Election1988$ColNames),
+#           unique(Election1994$ColNames),
+#           unique(Election1999$ColNames),
+#           unique(Election2005$ColNames),
+#           unique(Election2010$ColNames),
+#           unique(Election2015$ColNames)
+#           )
 
 # 1. Lable changing in Year 1982
 Election1982$ColNames[Election1982$ColNames=="No of Valid Votes"]<-"Total No of Valid Votes"
@@ -830,42 +824,13 @@ Election2015$ColNames[Election2015$ColNames=="Regis.Electors"]<-"No of Registere
 Election2015$ColNames[Election2015$ColNames=="Mahinda Rajapaksa"]<-"Mahinda Rajapaksha"
 ```
 
-# Useful Data-frame
+After the above tasks are done all seven data-frames have columns with similar format and labels.
+Yet this is not enough and now the focus is shifted towards the individual cell values, which 
+means Votes and Percentages. Not all years share the same format. 
 
-## Format of Data-frame for 1982,1988 and 1999
-
-|          ColNames         | Electorate 1 | Electorate 1 | Electorate ... | Electorate ... | Postal District  Votes | Postal District  Votes | Final District  Results | Final District  Results |
-|:-------------------------:|:------------:|:------------:|:--------------:|:--------------:|:----------------------:|:----------------------:|:-----------------------:|:-----------------------:|
-|                           |     Votes    |  Percentage  |      Votes     |   Percentage   |          Votes         |       Percentage       |          Votes          |        Percentage       |
-|      Candidate Name 1     |       Yes    |     Yes      |     Yes        |     Yes        |       Yes              |         Yes            |           Yes           |         Yes             |
-|     Candidate Name ...    |       Yes    |     Yes      |     Yes        |     Yes        |       Yes              |         Yes            |           Yes           |         Yes             |
-|  Total No of Valid Votes  |       Yes    |     Yes      |     Yes        |     Yes        |       Yes              |         Yes            |           Yes           |         Yes             |
-|   No of  Rejected Votes   |       Yes    |     Yes      |     Yes        |     Yes        |       Yes              |         Yes            |           Yes           |         Yes             |
-|  Total No of Votes Polled |       Yes    |     Yes      |     Yes        |     Yes        |       Yes              |         No             |           Yes           |         Yes             |
-| No of Registered Electors |       Yes    |     No       |     Yes        |     No         |       No               |         No             |           Yes           |         No              |
-
-## Format of Data-frame for 1994, 2010 and 2015
-
-|          ColNames         | Electorate 1 | Electorate 1 | Electorate ... | Electorate ... | Postal District  Votes | Postal District  Votes | Final District  Results | Final District  Results |
-|:-------------------------:|:------------:|:------------:|:--------------:|:--------------:|:----------------------:|:----------------------:|:-----------------------:|:-----------------------:|
-|                           |     Votes    |  Percentage  |      Votes     |   Percentage   |          Votes         |       Percentage       |          Votes          |        Percentage       |
-|      Candidate Name 1     |       Yes    |     Yes      |     Yes        |     Yes        |       Yes              |         Yes            |           Yes           |         Yes             |
-|     Candidate Name ...    |       Yes    |     Yes      |     Yes        |     Yes        |       Yes              |         Yes            |           Yes           |         Yes             |
-|  Total No of Valid Votes  |       Yes    |     Yes      |     Yes        |     Yes        |       Yes              |         Yes            |           Yes           |         Yes             |
-|   No of  Rejected Votes   |       Yes    |     Yes      |     Yes        |     Yes        |       Yes              |         Yes            |           Yes           |         Yes             |
-|  Total No of Votes Polled |       Yes    |     Yes      |     Yes        |     Yes        |       Yes              |         Yes            |           Yes           |         Yes             |
-| No of Registered Electors |       Yes    |     No       |     Yes        |     No         |       Yes              |         No             |           Yes           |         No              |
-
-## Format of Data-frame for 2005
-
-|          ColNames         | Electorate 1 | Electorate 1 | Electorate ... | Electorate ... | Postal District  Votes | Postal District  Votes | Final District  Results | Final District  Results |
-|:-------------------------:|:------------:|:------------:|:--------------:|:--------------:|:----------------------:|:----------------------:|:-----------------------:|:-----------------------:|
-|                           |     Votes    |  Percentage  |      Votes     |   Percentage   |          Votes         |       Percentage       |          Votes          |        Percentage       |
-|      Candidate Name 1     |       Yes    |     Yes      |     Yes        |     Yes        |       Yes              |         No             |           Yes           |         No              |
-|     Candidate Name ...    |       Yes    |     Yes      |     Yes        |     Yes        |       Yes              |         No             |           Yes           |         No              |
-|  Total No of Valid Votes  |       Yes    |     Yes      |     Yes        |     Yes        |       Yes              |         No             |           Yes           |         No              |
-|   No of  Rejected Votes   |       Yes    |     Yes      |     Yes        |     Yes        |       Yes              |         No             |           Yes           |         No              |
-|  Total No of Votes Polled |       Yes    |     Yes      |     Yes        |     Yes        |       Yes              |         No             |           Yes           |         No              |
-| No of Registered Electors |       Yes    |     No       |     Yes        |     No         |       No               |         No             |           Yes           |         No              |
+In order to resolve the issues the markdown document OneusefulDataframe.Rmd is used to explain
+the process thoroughly with multiple steps. Which will lead to producing a final one data-frame
+with less missing values. To be more clear there are some percentage values not calculated in 
+year 2005. 
 
 *THANK YOU*

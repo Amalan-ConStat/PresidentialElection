@@ -1,4 +1,4 @@
-Extracted Data
+Extracted Data Part 1
 ================
 
 7 Presidential elections happened until now(2019 July). The results of
@@ -830,42 +830,15 @@ Election2015$ColNames[Election2015$ColNames=="Regis.Electors"]<-"No of Registere
 Election2015$ColNames[Election2015$ColNames=="Mahinda Rajapaksa"]<-"Mahinda Rajapaksha"
 ```
 
-# Useful Data-frame
+After the above tasks are done all seven data-frames have columns with
+similar format and labels. Yet this is not enough and now the focus is
+shifted towards the individual cell values, which means Votes and
+Percentages. Not all years share the same format.
 
-## Format of Data-frame for 1982,1988 and 1999
-
-|         ColNames          | Electorate 1 | Electorate 1 | Electorate … | Electorate … | Postal District Votes | Postal District Votes | Final District Results | Final District Results |
-| :-----------------------: | :----------: | :----------: | :----------: | :----------: | :-------------------: | :-------------------: | :--------------------: | :--------------------: |
-|                           |    Votes     |  Percentage  |    Votes     |  Percentage  |         Votes         |      Percentage       |         Votes          |       Percentage       |
-|     Candidate Name 1      |     Yes      |     Yes      |     Yes      |     Yes      |          Yes          |          Yes          |          Yes           |          Yes           |
-|     Candidate Name …      |     Yes      |     Yes      |     Yes      |     Yes      |          Yes          |          Yes          |          Yes           |          Yes           |
-|  Total No of Valid Votes  |     Yes      |     Yes      |     Yes      |     Yes      |          Yes          |          Yes          |          Yes           |          Yes           |
-|   No of Rejected Votes    |     Yes      |     Yes      |     Yes      |     Yes      |          Yes          |          Yes          |          Yes           |          Yes           |
-| Total No of Votes Polled  |     Yes      |     Yes      |     Yes      |     Yes      |          Yes          |          No           |          Yes           |          Yes           |
-| No of Registered Electors |     Yes      |      No      |     Yes      |      No      |          No           |          No           |          Yes           |           No           |
-
-## Format of Data-frame for 1994, 2010 and 2015
-
-|         ColNames          | Electorate 1 | Electorate 1 | Electorate … | Electorate … | Postal District Votes | Postal District Votes | Final District Results | Final District Results |
-| :-----------------------: | :----------: | :----------: | :----------: | :----------: | :-------------------: | :-------------------: | :--------------------: | :--------------------: |
-|                           |    Votes     |  Percentage  |    Votes     |  Percentage  |         Votes         |      Percentage       |         Votes          |       Percentage       |
-|     Candidate Name 1      |     Yes      |     Yes      |     Yes      |     Yes      |          Yes          |          Yes          |          Yes           |          Yes           |
-|     Candidate Name …      |     Yes      |     Yes      |     Yes      |     Yes      |          Yes          |          Yes          |          Yes           |          Yes           |
-|  Total No of Valid Votes  |     Yes      |     Yes      |     Yes      |     Yes      |          Yes          |          Yes          |          Yes           |          Yes           |
-|   No of Rejected Votes    |     Yes      |     Yes      |     Yes      |     Yes      |          Yes          |          Yes          |          Yes           |          Yes           |
-| Total No of Votes Polled  |     Yes      |     Yes      |     Yes      |     Yes      |          Yes          |          Yes          |          Yes           |          Yes           |
-| No of Registered Electors |     Yes      |      No      |     Yes      |      No      |          Yes          |          No           |          Yes           |           No           |
-
-## Format of Data-frame for 2005
-
-|         ColNames          | Electorate 1 | Electorate 1 | Electorate … | Electorate … | Postal District Votes | Postal District Votes | Final District Results | Final District Results |
-| :-----------------------: | :----------: | :----------: | :----------: | :----------: | :-------------------: | :-------------------: | :--------------------: | :--------------------: |
-|                           |    Votes     |  Percentage  |    Votes     |  Percentage  |         Votes         |      Percentage       |         Votes          |       Percentage       |
-|     Candidate Name 1      |     Yes      |     Yes      |     Yes      |     Yes      |          Yes          |          No           |          Yes           |           No           |
-|     Candidate Name …      |     Yes      |     Yes      |     Yes      |     Yes      |          Yes          |          No           |          Yes           |           No           |
-|  Total No of Valid Votes  |     Yes      |     Yes      |     Yes      |     Yes      |          Yes          |          No           |          Yes           |           No           |
-|   No of Rejected Votes    |     Yes      |     Yes      |     Yes      |     Yes      |          Yes          |          No           |          Yes           |           No           |
-| Total No of Votes Polled  |     Yes      |     Yes      |     Yes      |     Yes      |          Yes          |          No           |          Yes           |           No           |
-| No of Registered Electors |     Yes      |      No      |     Yes      |      No      |          No           |          No           |          Yes           |           No           |
+In order to resolve the issues the markdown document
+OneusefulDataframe.Rmd is used to explain the process thoroughly with
+multiple steps. Which will lead to producing a final one data-frame with
+less missing values. To be more clear there are some percentage values
+not calculated in year 2005.
 
 *THANK YOU*
