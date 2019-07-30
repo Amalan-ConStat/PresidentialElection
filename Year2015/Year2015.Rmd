@@ -1,5 +1,5 @@
 ---
-title: "Year2015"
+title: "Presidential Election 2015"
 output: github_document
 ---
 
@@ -14,20 +14,20 @@ library(pdftools)
 # Structure of Document
 
 Data extraction begins from page 2 of the document. There are two situations,
-one is where there are two tables in a page and other is wehre one table in a page.
+one is where there are two tables in a page and other is where one table in a page.
 Each cell has one value, which is votes or percentages depending on the column.
 
-First Column is for Candidates names followed by Valid votes, Rejected votes and
-Total polled. Each district begins in a new page. It should be noted that the 
-district for respective electorates are mentioned at the top of the page.
+First Column is for Candidates names followed by Valid votes, Rejected votes 
+Total polled and Registered Electors. Each district begins in a new page. It should 
+be noted that the district for respective electorates are mentioned at the top of each page.
 
 ![](Fig1.JPG)
 ![](Fig11.JPG)
 
 # Process of Extraction
 
-Based on number of tables in a page data is extracted. The only input is page number. 
-Each district data has been extracted.
+Based on the number of tables in a page data is extracted. The only input is page number. 
+Each district data has been extracted below.
 
 ```{r Election 2015}
 # load the pdf file
@@ -70,14 +70,15 @@ Election2015$Electorate[Election2015$Electorate=="Final District Votes"]<-"Final
 # Validating Data extracted 
 
 There is no summary for election results therefore only both way tallying
-is compared between the extracted data.
+is compared between the extracted data. Both Way Tallying means summation of 
+all district final results is equal to summation of all electorates final results.
 
 ## Checking for Registered Electors
 
 No issues here.
 
 ```{r Reg Electors}
-# Extracting only Final District District Results of 
+# Extracting only Final District Results of 
 # Number of Registered Electors
 # and then adding all the votes 
 ElecFinal2015<-subset(Election2015,Electorate=="Final District Result" 
@@ -85,7 +86,7 @@ ElecFinal2015<-subset(Election2015,Electorate=="Final District Result"
 # added votes will be cross checked with the pdf document
 ElecFinal2015[,sum(Votes),by="ColNames"]
 
-# Extracting except Final District District Results of 
+# Extracting except Final District Results of 
 # Number of Registered Electors
 # and then adding all the votes 
 ElecFinal2015<-subset(Election2015,Electorate!="Final District Result" 
@@ -100,7 +101,7 @@ ElecFinal2015[,sum(Votes),by="ColNames"]
 No issues here.
 
 ```{r Total Polled}
-# Extracting only Final District District Results of 
+# Extracting only Final District Results of 
 # Total Polled
 # and then adding all the votes 
 ElecFinal2015<-subset(Election2015,Electorate=="Final District Result" 
@@ -108,7 +109,7 @@ ElecFinal2015<-subset(Election2015,Electorate=="Final District Result"
 # added votes will be cross checked with the pdf document
 ElecFinal2015[,sum(Votes),by="ColNames"]
 
-# Extracting except Final District District Results of 
+# Extracting except Final District Results of 
 # Total Polled
 # and then adding all the votes 
 ElecFinal2015<-subset(Election2015,Electorate!="Final District Result"
@@ -122,7 +123,7 @@ ElecFinal2015[,sum(Votes),by="ColNames"]
 No issues here.
 
 ```{r Rejected Votes}
-# Extracting only Final District District Results of 
+# Extracting only Final District Results of 
 # Rejected Votes
 # and then adding all the votes 
 ElecFinal2015<-subset(Election2015,Electorate=="Final District Result" 
@@ -130,7 +131,7 @@ ElecFinal2015<-subset(Election2015,Electorate=="Final District Result"
 # added votes will be cross checked with the pdf document
 ElecFinal2015[,sum(Votes),by="ColNames"]
 
-# Extracting except Final District District Results of 
+# Extracting except Final District Results of 
 # Rejected Votes
 # and then adding all the votes 
 ElecFinal2015<-subset(Election2015,Electorate!="Final District Result"
@@ -144,7 +145,7 @@ ElecFinal2015[,sum(Votes),by="ColNames"]
 No issues here.
 
 ```{r Valid Votes}
-# Extracting only Final District District Results of 
+# Extracting only Final District Results of 
 # Valid Votes
 # and then adding all the votes 
 ElecFinal2015<-subset(Election2015,Electorate=="Final District Result" 
@@ -152,7 +153,7 @@ ElecFinal2015<-subset(Election2015,Electorate=="Final District Result"
 # added votes will be cross checked with the pdf document
 ElecFinal2015[,sum(Votes),by="ColNames"]
 
-# Extracting except Final District District Results of 
+# Extracting except Final District Results of 
 # Valid Votes
 # and then adding all the votes 
 ElecFinal2015<-subset(Election2015,Electorate!="Final District Result"
@@ -166,14 +167,14 @@ ElecFinal2015[,sum(Votes),by="ColNames"]
 No issues here.
 
 ```{r Validating Data 1}
-# Extracting only Final District District Results of 
+# Extracting only Final District Results of 
 # Maithripala Sirisena
 # and then adding all the votes 
 ElecFinal2015<-subset(Election2015,Electorate=="Final District Result" 
                       & ColNames=="Maithripala Sirisena")
 # added votes will be cross checked with the pdf document
 ElecFinal2015[,sum(Votes),by="ColNames"]
-# Extracting only Final District District Results of 
+# Extracting only Final District Results of 
 # Maithripala Sirisena
 # and then adding all the votes 
 ElecFinal2015<-subset(Election2015,Electorate!="Final District Result" 
@@ -187,14 +188,14 @@ ElecFinal2015[,sum(Votes),by="ColNames"]
 No issues here.
 
 ```{r Validating Data 2}
-# Extracting only Final District District Results of 
+# Extracting only Final District Results of 
 # Mahinda Rajapaksa
 # and then adding all the votes 
 ElecFinal2015<-subset(Election2015,Electorate=="Final District Result" 
                       & ColNames=="Mahinda Rajapaksa")
 # added votes will be cross checked with the pdf document
 ElecFinal2015[,sum(Votes),by="ColNames"]
-# Extracting only Final District District Results of 
+# Extracting only Final District Results of 
 # Mahinda Rajapaksa
 # and then adding all the votes 
 ElecFinal2015<-subset(Election2015,Electorate!="Final District Result" 
@@ -208,14 +209,14 @@ ElecFinal2015[,sum(Votes),by="ColNames"]
 No issues here.
 
 ```{r Validating Data 3}
-# Extracting only Final District District Results of 
+# Extracting only Final District Results of 
 # Aithurus Mohamed Illias 
 # and then adding all the votes 
 ElecFinal2015<-subset(Election2015,Electorate=="Final District Result" 
                       & ColNames=="Aithurus Mohamed Illias")
 # added votes will be cross checked with the pdf document
 ElecFinal2015[,sum(Votes),by="ColNames"]
-# Extracting only Final District District Results of 
+# Extracting only Final District Results of 
 # Aithurus Mohamed Illias 
 # and then adding all the votes 
 ElecFinal2015<-subset(Election2015,Electorate!="Final District Result" 
@@ -229,14 +230,14 @@ ElecFinal2015[,sum(Votes),by="ColNames"]
 No issues here.
 
 ```{r Validating Data 4}
-# Extracting only Final District District Results of 
+# Extracting only Final District Results of 
 # Ibrahim Miflar 
 # and then adding all the votes 
 ElecFinal2015<-subset(Election2015,Electorate=="Final District Result" 
                       & ColNames=="Ibrahim Miflar")
 # added votes will be cross checked with the pdf document
 ElecFinal2015[,sum(Votes),by="ColNames"]
-# Extracting only Final District District Results of 
+# Extracting only Final District Results of 
 # Ibrahim Miflar 
 # and then adding all the votes 
 ElecFinal2015<-subset(Election2015,Electorate!="Final District Result" 
@@ -250,14 +251,14 @@ ElecFinal2015[,sum(Votes,na.rm = TRUE),by="ColNames"]
 No issues here.
 
 ```{r Validating Data 5}
-# Extracting only Final District District Results of 
+# Extracting only Final District Results of 
 # Prasanna Priyankara 
 # and then adding all the votes 
 ElecFinal2015<-subset(Election2015,Electorate=="Final District Result" 
                       & ColNames=="Prasanna Priyankara")
 # added votes will be cross checked with the pdf document
 ElecFinal2015[,sum(Votes),by="ColNames"]
-# Extracting only Final District District Results of 
+# Extracting only Final District Results of 
 # Prasanna Priyankara 
 # and then adding all the votes 
 ElecFinal2015<-subset(Election2015,Electorate!="Final District Result" 
@@ -271,14 +272,14 @@ ElecFinal2015[,sum(Votes,na.rm = TRUE),by="ColNames"]
 No issues here.
 
 ```{r Validating Data 6}
-# Extracting only Final District District Results of 
+# Extracting only Final District Results of 
 # Wimal Geeganage 
 # and then adding all the votes 
 ElecFinal2015<-subset(Election2015,Electorate=="Final District Result" 
                       & ColNames=="Wimal Geeganage")
 # added votes will be cross checked with the pdf document
 ElecFinal2015[,sum(Votes),by="ColNames"]
-# Extracting only Final District District Results of 
+# Extracting only Final District Results of 
 # Wimal Geeganage 
 # and then adding all the votes 
 ElecFinal2015<-subset(Election2015,Electorate!="Final District Result" 
@@ -292,14 +293,14 @@ ElecFinal2015[,sum(Votes,na.rm = TRUE),by="ColNames"]
 No issues here.
 
 ```{r Validating Data 7}
-# Extracting only Final District District Results of 
+# Extracting only Final District Results of 
 # Sirithunga Jayasuriya 
 # and then adding all the votes 
 ElecFinal2015<-subset(Election2015,Electorate=="Final District Result" 
                       & ColNames=="Sirithunga Jayasuriya")
 # added votes will be cross checked with the pdf document
 ElecFinal2015[,sum(Votes),by="ColNames"]
-# Extracting only Final District District Results of 
+# Extracting only Final District Results of 
 # Sirithunga Jayasuriya 
 # and then adding all the votes 
 ElecFinal2015<-subset(Election2015,Electorate!="Final District Result" 
@@ -313,14 +314,14 @@ ElecFinal2015[,sum(Votes,na.rm = TRUE),by="ColNames"]
 No issues here.
 
 ```{r Validating Data 8}
-# Extracting only Final District District Results of 
+# Extracting only Final District Results of 
 # M. B. Theminimulla 
 # and then adding all the votes 
 ElecFinal2015<-subset(Election2015,Electorate=="Final District Result" 
                       & ColNames=="M. B. Theminimulla")
 # added votes will be cross checked with the pdf document
 ElecFinal2015[,sum(Votes),by="ColNames"]
-# Extracting only Final District District Results of 
+# Extracting only Final District Results of 
 # M. B. Theminimulla 
 # and then adding all the votes 
 ElecFinal2015<-subset(Election2015,Electorate!="Final District Result" 
@@ -334,14 +335,14 @@ ElecFinal2015[,sum(Votes,na.rm = TRUE),by="ColNames"]
 No issues here.
 
 ```{r Validating Data 9}
-# Extracting only Final District District Results of 
+# Extracting only Final District Results of 
 # Pani Wijesiriwardane 
 # and then adding all the votes 
 ElecFinal2015<-subset(Election2015,Electorate=="Final District Result" 
                       & ColNames=="Pani Wijesiriwardane")
 # added votes will be cross checked with the pdf document
 ElecFinal2015[,sum(Votes),by="ColNames"]
-# Extracting only Final District District Results of 
+# Extracting only Final District Results of 
 # Pani Wijesiriwardane 
 # and then adding all the votes 
 ElecFinal2015<-subset(Election2015,Electorate!="Final District Result" 
@@ -355,14 +356,14 @@ ElecFinal2015[,sum(Votes,na.rm = TRUE),by="ColNames"]
 No issues here.
 
 ```{r Validating Data 10}
-# Extracting only Final District District Results of 
+# Extracting only Final District Results of 
 # Duminda Nagamuwa
 # and then adding all the votes 
 ElecFinal2015<-subset(Election2015,Electorate=="Final District Result" 
                       & ColNames=="Duminda Nagamuwa")
 # added votes will be cross checked with the pdf document
 ElecFinal2015[,sum(Votes),by="ColNames"]
-# Extracting only Final District District Results of 
+# Extracting only Final District Results of 
 # Duminda Nagamuwa 
 # and then adding all the votes 
 ElecFinal2015<-subset(Election2015,Electorate!="Final District Result" 
@@ -376,14 +377,14 @@ ElecFinal2015[,sum(Votes,na.rm = TRUE),by="ColNames"]
 No issues here.
 
 ```{r Validating Data 11}
-# Extracting only Final District District Results of 
+# Extracting only Final District Results of 
 # Panagoda Don Prince Soloman Anura Liyanage
 # and then adding all the votes 
 ElecFinal2015<-subset(Election2015,Electorate=="Final District Result" 
                       & ColNames=="Panagoda Don Prince Soloman Anura Liyanage")
 # added votes will be cross checked with the pdf document
 ElecFinal2015[,sum(Votes),by="ColNames"]
-# Extracting only Final District District Results of 
+# Extracting only Final District Results of 
 # Panagoda Don Prince Soloman Anura Liyanage 
 # and then adding all the votes 
 ElecFinal2015<-subset(Election2015,Electorate!="Final District Result" 
@@ -397,14 +398,14 @@ ElecFinal2015[,sum(Votes,na.rm = TRUE),by="ColNames"]
 No issues here.
 
 ```{r Validating Data 12}
-# Extracting only Final District District Results of 
+# Extracting only Final District Results of 
 # Ruwanthilaka Peduru Arachchi
 # and then adding all the votes 
 ElecFinal2015<-subset(Election2015,Electorate=="Final District Result" 
                       & ColNames=="Ruwanthilaka Peduru Arachchi")
 # added votes will be cross checked with the pdf document
 ElecFinal2015[,sum(Votes),by="ColNames"]
-# Extracting only Final District District Results of 
+# Extracting only Final District Results of 
 # Ruwanthilaka Peduru Arachchi 
 # and then adding all the votes 
 ElecFinal2015<-subset(Election2015,Electorate!="Final District Result" 
@@ -418,14 +419,14 @@ ElecFinal2015[,sum(Votes,na.rm = TRUE),by="ColNames"]
 No issues here.
 
 ```{r Validating Data 13}
-# Extracting only Final District District Results of 
+# Extracting only Final District Results of 
 # Anuruddha Polgampala
 # and then adding all the votes 
 ElecFinal2015<-subset(Election2015,Electorate=="Final District Result" 
                       & ColNames=="Anuruddha Polgampala")
 # added votes will be cross checked with the pdf document
 ElecFinal2015[,sum(Votes),by="ColNames"]
-# Extracting only Final District District Results of 
+# Extracting only Final District Results of 
 # Anuruddha Polgampala 
 # and then adding all the votes 
 ElecFinal2015<-subset(Election2015,Electorate!="Final District Result" 
@@ -439,14 +440,14 @@ ElecFinal2015[,sum(Votes,na.rm = TRUE),by="ColNames"]
 No issues here.
 
 ```{r Validating Data 14}
-# Extracting only Final District District Results of 
+# Extracting only Final District Results of 
 # Baththaramulle Seelarathana Thero
 # and then adding all the votes 
 ElecFinal2015<-subset(Election2015,Electorate=="Final District Result" 
                       & ColNames=="Baththaramulle Seelarathana Thero")
 # added votes will be cross checked with the pdf document
 ElecFinal2015[,sum(Votes),by="ColNames"]
-# Extracting only Final District District Results of 
+# Extracting only Final District Results of 
 # Baththaramulle Seelarathana Thero
 # and then adding all the votes 
 ElecFinal2015<-subset(Election2015,Electorate!="Final District Result" 
@@ -460,14 +461,14 @@ ElecFinal2015[,sum(Votes,na.rm = TRUE),by="ColNames"]
 No issues here.
 
 ```{r Validating Data 15}
-# Extracting only Final District District Results of 
+# Extracting only Final District Results of 
 # Sarath Manamendra
 # and then adding all the votes 
 ElecFinal2015<-subset(Election2015,Electorate=="Final District Result" 
                       & ColNames=="Sarath Manamendra")
 # added votes will be cross checked with the pdf document
 ElecFinal2015[,sum(Votes),by="ColNames"]
-# Extracting only Final District District Results of 
+# Extracting only Final District Results of 
 # Sarath Manamendra
 # and then adding all the votes 
 ElecFinal2015<-subset(Election2015,Electorate!="Final District Result" 
@@ -481,14 +482,14 @@ ElecFinal2015[,sum(Votes,na.rm = TRUE),by="ColNames"]
 No issues here.
 
 ```{r Validating Data 16}
-# Extracting only Final District District Results of 
+# Extracting only Final District Results of 
 # Arachchige Rathnayaka Sirisena
 # and then adding all the votes 
 ElecFinal2015<-subset(Election2015,Electorate=="Final District Result" 
                       & ColNames=="Arachchige Rathnayaka Sirisena")
 # added votes will be cross checked with the pdf document
 ElecFinal2015[,sum(Votes),by="ColNames"]
-# Extracting only Final District District Results of 
+# Extracting only Final District Results of 
 # Arachchige Rathnayaka Sirisena
 # and then adding all the votes 
 ElecFinal2015<-subset(Election2015,Electorate!="Final District Result" 
@@ -502,14 +503,14 @@ ElecFinal2015[,sum(Votes,na.rm = TRUE),by="ColNames"]
 No issues here.
 
 ```{r Validating Data 17}
-# Extracting only Final District District Results of 
+# Extracting only Final District Results of 
 # Namal Rajapaksa
 # and then adding all the votes 
 ElecFinal2015<-subset(Election2015,Electorate=="Final District Result" 
                       & ColNames=="Namal Rajapaksa")
 # added votes will be cross checked with the pdf document
 ElecFinal2015[,sum(Votes),by="ColNames"]
-# Extracting only Final District District Results of 
+# Extracting only Final District Results of 
 # Namal Rajapaksa
 # and then adding all the votes 
 ElecFinal2015<-subset(Election2015,Electorate!="Final District Result" 
@@ -523,14 +524,14 @@ ElecFinal2015[,sum(Votes,na.rm = TRUE),by="ColNames"]
 No issues here.
 
 ```{r Validating Data 18}
-# Extracting only Final District District Results of 
+# Extracting only Final District Results of 
 # Sundaram Mahendran
 # and then adding all the votes 
 ElecFinal2015<-subset(Election2015,Electorate=="Final District Result" 
                       & ColNames=="Sundaram Mahendran")
 # added votes will be cross checked with the pdf document
 ElecFinal2015[,sum(Votes),by="ColNames"]
-# Extracting only Final District District Results of 
+# Extracting only Final District Results of 
 # Sundaram Mahendran
 # and then adding all the votes 
 ElecFinal2015<-subset(Election2015,Electorate!="Final District Result" 
@@ -544,14 +545,14 @@ ElecFinal2015[,sum(Votes,na.rm = TRUE),by="ColNames"]
 No issues here.
 
 ```{r Validating Data 19}
-# Extracting only Final District District Results of 
+# Extracting only Final District Results of 
 # Jayantha Kulathunga
 # and then adding all the votes 
 ElecFinal2015<-subset(Election2015,Electorate=="Final District Result" 
                       & ColNames=="Jayantha Kulathunga")
 # added votes will be cross checked with the pdf document
 ElecFinal2015[,sum(Votes),by="ColNames"]
-# Extracting only Final District District Results of 
+# Extracting only Final District Results of 
 # Jayantha Kulathunga
 # and then adding all the votes 
 ElecFinal2015<-subset(Election2015,Electorate!="Final District Result" 

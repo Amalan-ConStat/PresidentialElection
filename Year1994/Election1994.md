@@ -1,11 +1,11 @@
-Election1994
+Presidential Election 1994
 ================
 
 # Structure of Document
 
-Data extraction begins from page 4 of the document. Each page from here
-has a table representing each district. All tables follow the similar
-format.
+Data extraction begins from page four of the document. Each page from
+here has a table representing each district. All tables follow the
+similar format.
 
 If we consider the columns, first column is for candidate names with
 other counts, second column and its consecutive columns are for
@@ -13,9 +13,9 @@ electorates. Final two columns are Postal Votes and Final District
 Results.
 
 Each cell has two numeric values which are number of votes and
-percentages, this is true except for the last row. First 6 rows are for
-candidates names, followed by No of Valid Votes, No of Rejected Votes,
-Total No of votes polled and finally No of Registered Electors.
+percentages, this is true except for the last row. First six rows are
+for candidates names, followed by No of Valid Votes, No of Rejected
+Votes, Total No of votes polled and finally No of Registered Electors.
 
 ![](Fig1.JPG)
 
@@ -44,13 +44,21 @@ for (i in c(6,9,11,12,14:19,21,23,24,25))
 
 # choosing specific pages which does have 
 # electorate name issues and scrapping them
+# Extraction for Nuwara-Eliya District
 Election1994[[1]]<-Extract_table1994(8,NE=TRUE)
+# Extraction for Colombo District
 Election1994[[2]]<-Extract_table1994(4,Col=TRUE)
+# Extraction for Gampaha District
 Election1994[[3]]<-Extract_table1994(5,Gam=TRUE)
+# Extraction for Mahanuwara District
 Election1994[[4]]<-Extract_table1994(7,Ma=TRUE)
+# Extraction for Jaffna District
 Election1994[[5]]<-Extract_table1994(13,Ja=TRUE)
+# Extraction for Anuradhapura District
 Election1994[[7]]<-Extract_table1994(20,An=TRUE)
+# Extraction for Batticaloa District
 Election1994[[8]]<-Extract_table1994(22,Ba=TRUE)
+# Extraction for Galle District
 Election1994[[10]]<-Extract_table1994(10,Ga=TRUE)
 
 # final data set
@@ -59,14 +67,20 @@ Election1994<-do.call("rbind",Election1994)
 
 # Validating Data Extracted
 
-## Checking for Number of Registered Electors.
+There is a summary for election results yet both way tallying is
+compared between the extracted data. Also both way tallying is used to
+clarify the summary as well. Both Way Tallying means summation of all
+district final results is equal to summation of all electorates final
+results.
+
+## Checking for Registered Electors.
 
 ![](Fig2.JPG)
 
 No issues here.
 
 ``` r
-# Extracting only Final District District Results of 
+# Extracting only Final District Results of 
 # Number of Registered Electors
 # and then adding all the votes 
 ElecFinal1994<-subset(Election1994,Electorate=="Final District Results" 
@@ -79,7 +93,7 @@ ElecFinal1994[,sum(Votes),by="ColNames"]
     ## 1: No of Registered Electors 10945065
 
 ``` r
-# Extracting except Final District District Results of 
+# Extracting except Final District Results of 
 # Number of Registered Electors
 # and then adding all the votes 
 ElecFinal1994<-subset(Election1994,Electorate!="Final District Results" 
@@ -92,14 +106,14 @@ ElecFinal1994[,sum(Votes),by="ColNames"]
     ##                     ColNames       V1
     ## 1: No of Registered Electors 10945065
 
-## Checking for Total polled
+## Checking for Total Polled
 
 ![](Fig2.JPG)
 
 No issues here.
 
 ``` r
-# Extracting only Final District District Results of 
+# Extracting only Final District Results of 
 # Total polled
 # and then adding all the votes 
 ElecFinal1994<-subset(Election1994,Electorate=="Final District Results" 
@@ -112,7 +126,7 @@ ElecFinal1994[,sum(Votes),by="ColNames"]
     ## 1: Total No. of votes polled 7713232
 
 ``` r
-# Extracting except Final District District Results of 
+# Extracting except Final District Results of 
 # Total polled
 # and then adding all the votes 
 ElecFinal1994<-subset(Election1994,Electorate!="Final District Results" 
@@ -131,7 +145,7 @@ ElecFinal1994[,sum(Votes),by="ColNames"]
 No issues here.
 
 ``` r
-# Extracting only Final District District Results of 
+# Extracting only Final District Results of 
 # No of Rejected votes
 # and then adding all the votes 
 ElecFinal1994<-subset(Election1994,Electorate=="Final District Results" 
@@ -144,7 +158,7 @@ ElecFinal1994[,sum(Votes),by="ColNames"]
     ## 1: No of Rejected votes 151706
 
 ``` r
-# Extracting except Final District District Results of 
+# Extracting except Final District Results of 
 # No of Rejected votes
 # and then adding all the votes 
 ElecFinal1994<-subset(Election1994,Electorate!="Final District Results" 
@@ -163,7 +177,7 @@ ElecFinal1994[,sum(Votes,na.rm = TRUE),by="ColNames"]
 No issues here.
 
 ``` r
-# Extracting only Final District District Results of 
+# Extracting only Final District Results of 
 # No of valid votes
 # and then adding all the votes 
 ElecFinal1994<-subset(Election1994,Electorate=="Final District Results" 
@@ -176,7 +190,7 @@ ElecFinal1994[,sum(Votes),by="ColNames"]
     ## 1: No of valid votes 7561526
 
 ``` r
-# Extracting except Final District District Results of 
+# Extracting except Final District Results of 
 # No of valid votes
 # and then adding all the votes 
 ElecFinal1994<-subset(Election1994,Electorate!="Final District Results" 
@@ -195,7 +209,7 @@ No issues here.
 ![](Fig4.JPG)
 
 ``` r
-# Extracting only Final District District Results of 
+# Extracting only Final District Results of 
 # Mrs. Chandrika Bandaranaike Kumarathunga
 # and then adding all the votes 
 ElecFinal1994<-subset(Election1994,Electorate=="Final District Results" 
@@ -208,7 +222,7 @@ ElecFinal1994[,sum(Votes),by="ColNames"]
     ## 1: Mrs. Chandrika Bandaranaike Kumarathunga 4709205
 
 ``` r
-# Extracting except Final District District Results of 
+# Extracting except Final District Results of 
 # Mrs. Chandrika Bandaranaike Kumarathunga
 # and then adding all the votes 
 ElecFinal1994<-subset(Election1994,Electorate!="Final District Results" 
@@ -227,7 +241,7 @@ No issues here. It should be 2715283 but mistakenly printed as 2715285.
 ![](Fig4.JPG)
 
 ``` r
-# Extracting only Final District District Results of 
+# Extracting only Final District Results of 
 # Mrs. Vajira Srimathi Dissanayake
 # and then adding all the votes 
 ElecFinal1994<-subset(Election1994,Electorate=="Final District Results" 
@@ -240,7 +254,7 @@ ElecFinal1994[,sum(Votes),by="ColNames"]
     ## 1: Mrs. Vajira Srimathi Dissanayake 2715283
 
 ``` r
-# Extracting except Final District District Results of 
+# Extracting except Final District Results of 
 # Mrs. Vajira Srimathi Dissanayake
 # and then adding all the votes 
 ElecFinal1994<-subset(Election1994,Electorate!="Final District Results" 
@@ -259,7 +273,7 @@ No issues here.
 ![](Fig4.JPG)
 
 ``` r
-# Extracting only Final District District Results of 
+# Extracting only Final District Results of 
 # Mr.Galappaththi Arachchige
 # and then adding all the votes 
 ElecFinal1994<-subset(Election1994,Electorate=="Final District Results" 
@@ -272,7 +286,7 @@ ElecFinal1994[,sum(Votes),by="ColNames"]
     ## 1: Mr. Galappaththi Arachchige Nihal 22749
 
 ``` r
-# Extracting except Final District District Results of 
+# Extracting except Final District Results of 
 # Mr.Galappaththi Arachchige
 # and then adding all the votes 
 ElecFinal1994<-subset(Election1994,Electorate!="Final District Results" 
@@ -291,7 +305,7 @@ No issues here.
 ![](Fig4.JPG)
 
 ``` r
-# Extracting only Final District District Results of 
+# Extracting only Final District Results of 
 #  Mr. A.J. Ranashinge
 # and then adding all the votes 
 ElecFinal1994<-subset(Election1994,Electorate=="Final District Results" 
@@ -304,7 +318,7 @@ ElecFinal1994[,sum(Votes),by="ColNames"]
     ## 1: Mr. A.J. Ranashinge 22752
 
 ``` r
-# Extracting except Final District District Results of 
+# Extracting except Final District Results of 
 #  Mr. A.J. Ranashinge
 # and then adding all the votes 
 ElecFinal1994<-subset(Election1994,Electorate!="Final District Results" 
@@ -323,7 +337,7 @@ No issues here.
 ![](Fig4.JPG)
 
 ``` r
-# Extracting only Final District District Results of 
+# Extracting only Final District Results of 
 #  Mr. A.J. Ranashinge
 # and then adding all the votes 
 ElecFinal1994<-subset(Election1994,Electorate=="Final District Results" 
@@ -336,7 +350,7 @@ ElecFinal1994[,sum(Votes),by="ColNames"]
     ## 1: Dr. Harischandra Wijayatunga 32651
 
 ``` r
-# Extracting except Final District District Results of 
+# Extracting except Final District Results of 
 #   Dr. Harischandra Wijayatunga
 # and then adding all the votes 
 ElecFinal1994<-subset(Election1994,Electorate!="Final District Results" 
@@ -357,7 +371,7 @@ Tally.
 ![](Fig4.JPG)
 
 ``` r
-# Extracting only Final District District Results of 
+# Extracting only Final District Results of 
 # Mr. Hudson Samarasinghe 
 # and then adding all the votes 
 ElecFinal1994<-subset(Election1994,Electorate=="Final District Results" 
@@ -370,7 +384,7 @@ ElecFinal1994[,sum(Votes),by="ColNames"]
     ## 1: Mr. Hudson Samarasinghe 58886
 
 ``` r
-# Extracting except Final District District Results of 
+# Extracting except Final District Results of 
 # Mr. Hudson Samarasinghe 
 # and then adding all the votes 
 ElecFinal1994<-subset(Election1994,Electorate!="Final District Results" 
@@ -382,12 +396,12 @@ ElecFinal1994[,sum(Votes,na.rm = TRUE),by="ColNames"]
     ##                   ColNames    V1
     ## 1: Mr. Hudson Samarasinghe 58888
 
-The real tally for Batticaloa district is 5030 but mis calculated as
+### Batticaloa district
+
+The real tally for Batticaloa district is 5030 but miscalculated as
 5028. So the Final Count for Mr. Hudson Samarasinghe is 58888.
 
 ![](Fig41.JPG)
-
-### Batticaloa district
 
 ``` r
 ElecFinal1994<-subset(Election1994,Electorate!="Final District Results"

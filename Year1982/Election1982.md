@@ -1,11 +1,11 @@
-Election1982
+Presidential Election 1982
 ================
 
 # Structure of Document
 
-Data extraction begins from page 4 of the document. Each page from here
-has a table representing each district. All tables follow the similar
-format.
+Data extraction begins from page four of the document. Each page from
+here has a table representing each district. All tables follow the
+similar format.
 
 If we consider the columns, first column is for candidate names with
 other counts, second column and its consecutive columns are for
@@ -44,28 +44,29 @@ for (i in pages)
 {
     Election1982[[i]]<-Extract_Table1982(i)    
 }
+# Extracting data for Colombo District
     Election1982[[4]]<-Extract_Table1982(4,Colo=TRUE)    
-
+# Extracting data for Mahanuwara District
     Election1982[[7]]<-Extract_Table1982(7,Maha=TRUE)
-    
+# Extracting data for Galle District   
     Election1982[[10]]<-Extract_Table1982(10,Ga=TRUE)
-    
+# Extracting data for Kurunegala District    
     Election1982[[18]]<-Extract_Table1982(18,Kur=TRUE)    
-    
+# Extracting data for Kegalle District    
     Election1982[[24]]<-Extract_Table1982(24,Keg = TRUE)        
-
+# Extracting data for Gampaha District
     Election1982[[5]]<-Extract_Table2_1982(5,Gam=TRUE)
-    
+# Extracting data for Kalutara District    
     Election1982[[6]]<-Extract_Table2_1982(6)
-
+# Extracting data for Hambantota District
     Election1982[[12]]<-Extract_Table2_1982(12,HP=TRUE)
-    
+# Extracting data for Polonnaruwa District    
     Election1982[[21]]<-Extract_Table2_1982(21,HP=TRUE)
-    
+# Extracting data for Jaffna District    
     Election1982[[13]]<-Extract_Table2_1982(13,Jaf=TRUE)    
-    
+# Extracting data for Anuradhapura District    
     Election1982[[20]]<-Extract_Table2_1982(20,Anu = TRUE)        
-    
+# Extracting data for Badulla District    
     Election1982[[22]]<-Extract_Table2_1982(22,Bad = TRUE)        
         
 # final data set
@@ -74,15 +75,21 @@ Election1982<-do.call("rbind",Election1982)
 
 # Validating Data Extracted
 
-## Checking for Number of Registered Electors.
+There is a summary for election results yet both way tallying is
+compared between the extracted data. Also both way tallying is used to
+clarify the summary as well. Both Way Tallying means summation of all
+district final results is equal to summation of all electorates final
+results.
 
-It should have been 8117015(still mis calculated) but mistakenly written
+## Checking for Registered Electors.
+
+It should have been 8117015(still miscalculated) but mistakenly written
 as 8145015.
 
 ![](Fig2.JPG)
 
 ``` r
-# Extracting only Final District District Results of 
+# Extracting only Final District Results of 
 # Number of Registered Electors
 # and then adding all the votes 
 ElecFinal1982<-subset(Election1982,Electorate=="Total" 
@@ -95,7 +102,7 @@ ElecFinal1982[,sum(Votes,na.rm = TRUE),by="ColNames"]
     ## 1: No of Registered Electors 8117025
 
 ``` r
-# Extracting except Final District District Results of 
+# Extracting except Final District Results of 
 # Number of Registered Electors
 # and then adding all the votes 
 ElecFinal1982<-subset(Election1982,Electorate!="Total" 
@@ -109,9 +116,11 @@ ElecFinal1982[,sum(Votes,na.rm = TRUE),by="ColNames"]
 
 8116992 is more accurate than 8117025. Because the values are directly
 from the electorates than the tallied district tables. Exactly 33 extra
-votes are added because of mis calculation.
+votes are added because of miscalculation.
 
 ### Colombo District
+
+The tallied table has 5 extra votes.
 
 ![](Fig21.JPG)
 
@@ -125,9 +134,9 @@ ElecFinal1982[,sum(Votes,na.rm = TRUE),by="ColNames"]
     ##                     ColNames     V1
     ## 1: No of Registered Electors 972191
 
-The tallied table has 5 extra votes.
-
 ### Matale District
+
+The tallied table has 10 extra votes.
 
 ![](Fig22.JPG)
 
@@ -141,9 +150,9 @@ ElecFinal1982[,sum(Votes,na.rm = TRUE),by="ColNames"]
     ##                     ColNames     V1
     ## 1: No of Registered Electors 187276
 
-The tallied table has 10 extra votes.
-
 ### Monaragala District
+
+The tallied table has 18 extra votes.
 
 ![](Fig23.JPG)
 
@@ -157,16 +166,18 @@ ElecFinal1982[,sum(Votes,na.rm = TRUE),by="ColNames"]
     ##                     ColNames     V1
     ## 1: No of Registered Electors 126540
 
-The tallied table has 18 extra votes. So there is 33 votes extra in the
-tallied vote count. Final Count for No of Registered Electors is
-8116992.
+So 33 votes extra in the tallied vote count. Final Count for No of
+Registered Electors is 8116992.
 
-## Total Polled
+## Checking for Total Polled
+
+Exactly 10000 votes extra in the tallied district table which leads to
+the misprint.
 
 ![](Fig2.JPG)
 
 ``` r
-# Extracting only Final District District Results of 
+# Extracting only Final District Results of 
 # Total Polled
 # and then adding all the votes 
 ElecFinal1982<-subset(Election1982,Electorate=="Total" 
@@ -179,7 +190,7 @@ ElecFinal1982[,sum(Votes,na.rm = TRUE),by="ColNames"]
     ## 1: Total No of Votes Polled 6602617
 
 ``` r
-# Extracting except Final District District Results of 
+# Extracting except Final District Results of 
 # Total Polled
 # and then adding all the votes 
 ElecFinal1982<-subset(Election1982,Electorate!="Total" 
@@ -191,9 +202,10 @@ ElecFinal1982[,sum(Votes,na.rm = TRUE),by="ColNames"]
     ##                    ColNames      V1
     ## 1: Total No of Votes Polled 6592617
 
-There is exactly 10000 votes extra in the tallied district tables.
-
 ### Nuwara-Eliya District
+
+Extra 10000 votes are from miscalculation of the Nuwara-Eliya district.
+So the final value for Total No of Votes Polled is 6592617.
 
 ![](Fig24.JPG)
 
@@ -207,10 +219,7 @@ ElecFinal1982[,sum(Votes,na.rm = TRUE),by="ColNames"]
     ##                    ColNames     V1
     ## 1: Total No of Votes Polled 164817
 
-Extra 10000 votes are from miscalculation of the Nuwara-Eliya district.
-So the final value for Total No of Votes Polled is 6592617.
-
-## Total Rejected
+## Checking for Rejected Votes
 
 ![](Fig3.JPG)
 
@@ -231,7 +240,7 @@ ElecFinal1982[,sum(Votes,na.rm = TRUE),by="ColNames"]
     ## 1: No of Rejected Votes 2078
 
 ``` r
-# Extracting only Final District District Results of 
+# Extracting only Final District Results of 
 # No of Rejected Votes
 # and then adding all the votes 
 ElecFinal1982<-subset(Election1982,Electorate=="Total" 
@@ -244,7 +253,7 @@ ElecFinal1982[,sum(Votes,na.rm = TRUE),by="ColNames"]
     ## 1: No of Rejected Votes 80490
 
 ``` r
-# Extracting except Final District District Results of 
+# Extracting except Final District Results of 
 # No of Rejected Votes
 # and then adding all the votes 
 ElecFinal1982<-subset(Election1982,Electorate!="Total" 
@@ -275,7 +284,7 @@ ElecFinal1982[,sum(Votes,na.rm = TRUE),by="ColNames"]
 
 So the Final Vote count for No of Rejected Votes is 80500.
 
-## Total Valid
+## Checking for Valid Votes
 
 ![](Fig3.JPG)
 
@@ -284,7 +293,7 @@ electorate tally indicates the Total Valid count as 6522153. There is a
 six vote difference.
 
 ``` r
-# Extracting only Final District District Results of 
+# Extracting only Final District Results of 
 # No of Valid Votes
 # and then adding all the votes 
 ElecFinal1982<-subset(Election1982,Electorate=="Total" 
@@ -297,7 +306,7 @@ ElecFinal1982[,sum(Votes),by="ColNames"]
     ## 1: No of Valid Votes 6522147
 
 ``` r
-# Extracting except Final District District Results of 
+# Extracting except Final District Results of 
 # No of Valid Votes
 # and then adding all the votes 
 ElecFinal1982<-subset(Election1982,Electorate!="Total" 
@@ -336,7 +345,7 @@ Second votes value of 3450815 is accurate, because it is directly from
 the electorates. There is a 4 vote difference.
 
 ``` r
-# Extracting only Final District District Results of 
+# Extracting only Final District Results of 
 # Mr.J.R. Jayawardene
 # and then adding all the votes 
 ElecFinal1982<-subset(Election1982,Electorate=="Total" 
@@ -349,7 +358,7 @@ ElecFinal1982[,sum(Votes),by="ColNames"]
     ## 1: Mr.J.R. Jayawardene 3450811
 
 ``` r
-# Extracting except Final District District Results of 
+# Extracting except Final District Results of 
 # Mr.J.R. Jayawardene
 # and then adding all the votes 
 ElecFinal1982<-subset(Election1982,Electorate!="Total" 
@@ -364,7 +373,7 @@ ElecFinal1982[,sum(Votes,na.rm = TRUE),by="ColNames"]
 ### Gampaha District
 
 In the Gampaha district the real vote count should be 365847 but it
-printed as 365838. Which is a 9 vote defecit.
+printed as 365838. Which is a 9 vote deficit.
 
 ![](Fig41.JPG)
 
@@ -397,8 +406,8 @@ ElecFinal1982[,sum(Votes,na.rm = TRUE),by="ColNames"]
     ##               ColNames    V1
     ## 1: Mr.J.R. Jayawardene 44775
 
-If we consider the 9 vote defecit and 5 votes extra clearly there is a 4
-vote defecit. This matches our final conclusion that the Total vote
+If we consider the 9 vote deficit and 5 votes extra clearly there is a 4
+vote deficit. This matches our final conclusion that the Total vote
 count for J.R Jayawardane is 3450815.
 
 ## Comparing final tally votes of Mr.H.S.R.B.K. Kobbekaduwa
@@ -406,10 +415,10 @@ count for J.R Jayawardane is 3450815.
 ![](Fig4.JPG)
 
 No issues here. It should be 2546438 but mistakenly added 2548438 is
-what i believe.
+what I believe.
 
 ``` r
-# Extracting only Final District District Results of 
+# Extracting only Final District Results of 
 # Mr.H.S.R.B.K. Kobbekaduwa
 # and then adding all the votes 
 ElecFinal1982<-subset(Election1982,Electorate=="Total" 
@@ -422,7 +431,7 @@ ElecFinal1982[,sum(Votes),by="ColNames"]
     ## 1: Mr.H.S.R.B.K. Kobbekaduwa 2546438
 
 ``` r
-# Extracting except Final District District Results of 
+# Extracting except Final District Results of 
 # Mr.H.S.R.B.K. Kobbekaduwa
 # and then adding all the votes 
 ElecFinal1982<-subset(Election1982,Electorate!="Total" 
@@ -441,7 +450,7 @@ No issues here.
 ![](Fig4.JPG)
 
 ``` r
-# Extracting only Final District District Results of 
+# Extracting only Final District Results of 
 #  Mr. Rohana Wijeweera 
 # and then adding all the votes 
 ElecFinal1982<-subset(Election1982,Electorate=="Total" 
@@ -454,7 +463,7 @@ ElecFinal1982[,sum(Votes),by="ColNames"]
     ## 1: Mr. Rohana Wijeweera 273428
 
 ``` r
-# Extracting except Final District District Results of 
+# Extracting except Final District Results of 
 # Mr. Rohana Wijeweera 
 # and then adding all the votes 
 ElecFinal1982<-subset(Election1982,Electorate!="Total" 
@@ -473,7 +482,7 @@ No issues here.
 ![](Fig4.JPG)
 
 ``` r
-# Extracting only Final District District Results of 
+# Extracting only Final District Results of 
 #  Mr. G.G. Ponnambalam 
 # and then adding all the votes 
 ElecFinal1982<-subset(Election1982,Electorate=="Total" 
@@ -486,7 +495,7 @@ ElecFinal1982[,sum(Votes),by="ColNames"]
     ## 1: Mr.G.G. Ponnambalam 173934
 
 ``` r
-# Extracting except Final District District Results of 
+# Extracting except Final District Results of 
 # Mr. G.G. Ponnambalam
 # and then adding all the votes 
 ElecFinal1982<-subset(Election1982,Electorate!="Total" 
@@ -501,12 +510,12 @@ ElecFinal1982[,sum(Votes,na.rm = TRUE),by="ColNames"]
 ## Comparing final tally votes of Dr. Colvin R. De Silva
 
 436 votes extra, which occurs because of the Colombo district tallying.
-The correct Total Votes count for Dr. Colvin R. De Silva is 58095.
+The correct Total Vote count for Dr. Colvin R. De Silva is 58095.
 
 ![](Fig4.JPG)
 
 ``` r
-# Extracting only Final District District Results of 
+# Extracting only Final District Results of 
 # Dr. Colvin R. De Silva 
 # and then adding all the votes 
 ElecFinal1982<-subset(Election1982,Electorate=="Total" 
@@ -519,7 +528,7 @@ ElecFinal1982[,sum(Votes),by="ColNames"]
     ## 1: Dr. Colvin R. De Silva 58531
 
 ``` r
-# Extracting except Final District District Results of 
+# Extracting except Final District Results of 
 # Dr. Colvin R. De Silva 
 # and then adding all the votes 
 ElecFinal1982<-subset(Election1982,Electorate!="Total" 
@@ -553,12 +562,12 @@ ElecFinal1982[,sum(Votes,na.rm = TRUE),by="ColNames"]
 ## Comparing final tally votes of Mr. Vasudeva Nanayakakra
 
 10 votes extra, this is happening because of the Jaffna district. The
-correct Total votes count is 16995.
+correct Total vote count is 16995.
 
 ![](Fig4.JPG)
 
 ``` r
-# Extracting only Final District District Results of 
+# Extracting only Final District Results of 
 # Mr. Vasudeva Nanayakakra 
 # and then adding all the votes 
 ElecFinal1982<-subset(Election1982,Electorate=="Total" 
@@ -571,7 +580,7 @@ ElecFinal1982[,sum(Votes),by="ColNames"]
     ## 1: Mr. Vasudeva Nanayakkara 17005
 
 ``` r
-# Extracting except Final District District Results of 
+# Extracting except Final District Results of 
 # Mr. Vasudeva Nanayakakra 
 # and then adding all the votes 
 ElecFinal1982<-subset(Election1982,Electorate!="Total" 
@@ -600,8 +609,5 @@ ElecFinal1982[,sum(Votes,na.rm = TRUE),by="ColNames"]
 
     ##                    ColNames   V1
     ## 1: Mr. Vasudeva Nanayakkara 2176
-
-Second value is more accurate because it is directly from the
-electorates.
 
 *THANK YOU*
