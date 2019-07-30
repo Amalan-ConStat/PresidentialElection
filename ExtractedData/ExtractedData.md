@@ -479,6 +479,393 @@ class(Election2015$Votes)
 class(Election2015$Percentage)
 ```
 
-# 
+# One Useful Data-frame
+
+After resolving issues related to data mislabeling and value misprinting
+all seven data-frames will look adequate individually. Yet this is not
+enough because combining these seven presidential elections and
+producing one data-frame will be more useful.
+
+In order to create this one data-frame we have to ensure that in all
+years the districts and electorates are not mispelled. Further ensure
+vote counts such as Rejected, Polled, Valid and Registered are labelled
+throughout these respective seven years under similar names. This naming
+variables should also be used for “Postal votes” and “Final District
+Results”.
+
+After completing these conditions it is possible to combine all seven
+data-frames to one useful data-frame. Below is the code for completing
+that task.
+
+## Comparing District Names
+
+1.  Change case sensitiveness for year 1999 and 2005.
+2.  Ampara - 2015 but Digamadulla - 1982,1988,1994,1994,1999,2005,2010.
+3.  Moneragala - 1988,1994,1999 but Monaragala - 1982,2005,2010,2015.
+4.  Kandy - 2015 but Mahanuwara - 1982,1988,1994,1999,2005,2010,2015.
+5.  Nuwara-Eliya - 1982,1988,2005 but Nuwara Eliya - 1999,2010,2015 and
+    Nuwara - Eliya - 1994.
+6.  Kalutara - 1982,1988,1994,1999,2005,2010 but Kaluthara - 2015.
+
+<!-- end list -->
+
+``` r
+Election2005$District<-as.character(Election2005$District)
+Election2010$District<-as.character(Election2010$District)
+
+data.table(sort(unique(Election1982$District)),
+           sort(unique(Election1988$District)),
+           sort(unique(Election1994$District)),
+           sort(unique(Election1999$District)),
+           sort(unique(Election2005$District)),
+           sort(unique(Election2010$District)),
+           sort(unique(Election2015$District))
+           )
+
+# 1. Case sensitive
+Election1999$District<-tools::toTitleCase(tolower(Election1999$District))
+Election2005$District<-tools::toTitleCase(tolower(Election2005$District))
+
+# 2. Ampara or Digamadulla to Digamadulla
+Election2015$District[Election2015$District=="Ampara"]<-"Digamadulla"
+
+# 3. Monaragala or Moneragala to Monaragala 
+Election1988$District[Election1988$District=="Moneragala"]<-"Monaragala"
+Election1994$District[Election1994$District=="Moneragala"]<-"Monaragala"
+Election1999$District[Election1999$District=="Moneragala"]<-"Monaragala"
+
+# 4. Kandy to Mahanuwara 
+Election2015$District[Election2015$District=="Kandy"]<-"Mahanuwara"
+
+# 5. Nuwara-Eliya or Nuwara Eliya or Nuwara - Eliya to Nuwara-Eliya
+Election1999$District[Election1999$District=="Nuwara Eliya"]<-"Nuwara-Eliya"
+Election2010$District[Election2010$District=="Nuwara Eliya"]<-"Nuwara-Eliya"
+Election2015$District[Election2015$District=="Nuwara Eliya"]<-"Nuwara-Eliya"
+Election1994$District[Election1994$District=="Nuwara - Eliya"]<-"Nuwara-Eliya"
+
+# 6. Kalutara or Kaluthara to Kalutara
+Election2015$District[Election2015$District=="Kaluthara"]<-"Kalutara"
+```
+
+## Comparing Electorate Names
+
+1.  Change case sensitiveness for year 1999.
+2.  Electorate spelling check for year 1982.
+3.  Electorate spelling check for year 1988.
+4.  Electorate spelling check for year 1994.
+5.  Electorate spelling check for year 1999.
+6.  Electorate spelling check for year 2005.
+7.  Electorate spelling check for year 2010.
+8.  Electorate spelling check for year 2015.
+
+<!-- end list -->
+
+``` r
+Election2005$Electorate<-as.character(Election2005$Electorate)
+Election2010$Electorate<-as.character(Election2010$Electorate)
+
+#sort(unique(c(sort(unique(Election1982$Electorate)),
+#           sort(unique(Election1988$Electorate)),
+#           sort(unique(Election1994$Electorate)),
+#           sort(unique(Election1999$Electorate)),
+#           sort(unique(Election2005$Electorate)),
+#           sort(unique(Election2010$Electorate)),
+#           sort(unique(Election2015$Electorate))
+#             )
+#           )
+#    )
+
+#data.table(sort(unique(Election1982$Electorate)),
+#           sort(unique(Election1988$Electorate)),
+#           sort(unique(Election1994$Electorate)),
+#           sort(unique(Election1999$Electorate)),
+#           sort(unique(Election2005$Electorate)),
+#           sort(unique(Election2010$Electorate)),
+#           sort(unique(Election2015$Electorate))
+#             )
+
+# 1. Case Sensitive for Year 1999
+Election1999$Electorate<-tools::toTitleCase(tolower(Election1999$Electorate))
+
+# 2. Spelling check for year 1982
+Election1982$Electorate[Election1982$Electorate=="Bddegama"]<-"Baddegama"
+Election1982$Electorate[Election1982$Electorate=="Bibila"]<-"Bibile"
+Election1982$Electorate[Election1982$Electorate=="Biyagma"]<-"Biyagama"
+Election1982$Electorate[Election1982$Electorate=="Copay"]<-"Kopay"
+Election1982$Electorate[Election1982$Electorate=="Ehaliyagoda"]<-"Eheliyagoda"
+Election1982$Electorate[Election1982$Electorate=="Galgamuva"]<-"Galgamuwa"
+Election1982$Electorate[Election1982$Electorate=="Habraduwa"]<-"Habaraduwa"
+Election1982$Electorate[Election1982$Electorate=="Haguranketa"]<-"Hanguranketha"
+Election1982$Electorate[Election1982$Electorate=="Harispttuwa"]<-"Harispattuwa"
+Election1982$Electorate[Election1982$Electorate=="Hewahata"]<-"Hewaheta"
+Election1982$Electorate[Election1982$Electorate=="Horowpatana"]<-"Horowapatana"
+Election1982$Electorate[Election1982$Electorate=="Kaburupitiya"]<-"Kamburupitiya"
+Election1982$Electorate[Election1982$Electorate=="Kalkudha"]<-"Kalkuda"
+Election1982$Electorate[Election1982$Electorate=="Kankesanturai"]<-"Kankesanthurai"
+Election1982$Electorate[Election1982$Electorate=="karandeniya"]<-"Karandeniya"
+Election1982$Electorate[Election1982$Electorate=="Kesbawa"]<-"Kesbewa"
+Election1982$Electorate[Election1982$Electorate=="Kothmale"]<-"Kotmale"
+Election1982$Electorate[Election1982$Electorate=="Madirigiriya"]<-"Medirigiriya"
+Election1982$Electorate[Election1982$Electorate=="Madawachchiya"]<-"Medawachchiya"
+Election1982$Electorate[Election1982$Electorate=="Mahiyanganaya"]<-"Mahiyangane"
+Election1982$Electorate[Election1982$Electorate=="Mawathgama"]<-"Mawathagama"
+Election1982$Electorate[Election1982$Electorate=="Mavanella"]<-"Mawanella"
+Election1982$Electorate[Election1982$Electorate=="Mulativu"]<-"Mullaitivu"
+Election1982$Electorate[Election1982$Electorate=="N.Eliya.-Maskeliya"]<-"Nuwara-Eliya-Maskeliya"
+Election1982$Electorate[Election1982$Electorate=="Nikavaratiya"]<-"Nikaweratiya"
+Election1982$Electorate[Election1982$Electorate=="Pallmadulla"]<-"Pelmadulla"
+Election1982$Electorate[Election1982$Electorate=="Patha-dumbara"]<-"Patha-Dumbara"
+Election1982$Electorate[Election1982$Electorate=="PointPedro"]<-"Point-Pedro"
+Election1982$Electorate[Election1982$Electorate=="Postal Votes"]<-"Postal District Votes"
+Election1982$Electorate[Election1982$Electorate=="Rathgama"]<-"Ratgama"
+Election1982$Electorate[Election1982$Electorate=="Rathtota"]<-"Rattota"
+Election1982$Electorate[Election1982$Electorate=="Samanthurai"]<-"Sammanthurai"
+Election1982$Electorate[Election1982$Electorate=="Tangalla"]<-"Tangalle"
+Election1982$Electorate[Election1982$Electorate=="Total"]<-"Final District Results"
+Election1982$Electorate[Election1982$Electorate=="UduNuwara"]<-"Udunuwara"
+Election1982$Electorate[Election1982$Electorate=="Vawniya"]<-"Vavuniya"
+Election1982$Electorate[Election1982$Electorate=="Wallawaya"]<-"Wellawaya"
+Election1982$Electorate[Election1982$Electorate=="YatiNuwara"]<-"Yatinuwara"
+
+# 3. Spelling Check for year 1988
+Election1988$Electorate[Election1988$Electorate=="Biyagma"]<-"Biyagama"
+Election1988$Electorate[Election1988$Electorate=="Chavakacheri"]<-"Chavakachcheri"
+Election1988$Electorate[Election1988$Electorate=="Galagamuwa"]<-"Galgamuwa"
+Election1988$Electorate[Election1988$Electorate=="Galagedera"]<-"Galagedara"
+Election1988$Electorate[Election1988$Electorate=="Horawupotana"]<-"Horowapatana"
+Election1988$Electorate[Election1988$Electorate=="Kaikudah"]<-"Kalkuda"
+Election1988$Electorate[Election1988$Electorate=="Kesbawa"]<-"Kesbewa"
+Election1988$Electorate[Election1988$Electorate=="Mahiyangana"]<-"Mahiyangane"
+Election1988$Electorate[Election1988$Electorate=="Moneragala"]<-"Monaragala"
+Election1988$Electorate[Election1988$Electorate=="Patha-dumbara"]<-"Patha-Dumbara"
+Election1988$Electorate[Election1988$Electorate=="Postal Votes"]<-"Postal District Votes"
+Election1988$Electorate[Election1988$Electorate=="Tangalla"]<-"Tangalle"
+Election1988$Electorate[Election1988$Electorate=="Total"]<-"Final District Results"
+Election1988$Electorate[Election1988$Electorate=="Tissamaharamaya"]<-"Tissamaharama"
+Election1988$Electorate[Election1988$Electorate=="Udu-dumbara"]<-"Udu-Dumbara"
+Election1988$Electorate[Election1988$Electorate=="Vaddukoddai"]<-"Vaddukkoddai"
+
+# 4. Spelling Check for year 1994
+Election1994$Electorate[Election1994$Electorate=="Colombo-Cental"]<-"Colombo-Central"
+Election1994$Electorate[Election1994$Electorate=="Colombo-west"]<-"Colombo-West"
+Election1994$Electorate[Election1994$Electorate=="Eheliyagada"]<-"Eheliyagoda"
+Election1994$Electorate[Election1994$Electorate=="Galagedera"]<-"Galagedara"
+Election1994$Electorate[Election1994$Electorate=="Hariapattuwa"]<-"Harispattuwa"
+Election1994$Electorate[Election1994$Electorate=="Horawupotana"]<-"Horowapatana"
+Election1994$Electorate[Election1994$Electorate=="Kalkudah"]<-"Kalkuda"
+Election1994$Electorate[Election1994$Electorate=="Kalmuni"]<-"Kalmunai"
+Election1994$Electorate[Election1994$Electorate=="Karndeniya"]<-"Karandeniya"
+Election1994$Electorate[Election1994$Electorate=="Mahiyanganaya"]<-"Mahiyangane"
+Election1994$Electorate[Election1994$Electorate=="Mihinthalaya"]<-"Mihintale"
+Election1994$Electorate[Election1994$Electorate=="Moneragala"]<-"Monaragala"
+Election1994$Electorate[Election1994$Electorate=="Postal Votes"]<-"Postal District Votes"
+Election1994$Electorate[Election1994$Electorate=="Ramukkana"]<-"Rambukkana"
+Election1994$Electorate[Election1994$Electorate=="Tangalla"]<-"Tangalle"
+Election1994$Electorate[Election1994$Electorate=="Tissamaharamaya"]<-"Tissamaharama"
+Election1994$Electorate[Election1994$Electorate=="Uva-paranagama"]<-"Uva-Paranagama"
+Election1994$Electorate[Election1994$Electorate=="Uda-Dumbara"]<-"Udu-Dumbara"
+Election1994$Electorate[Election1994$Electorate=="Vaddukoddai"]<-"Vaddukkoddai"
+
+# 5. Spelling Check for year 1999
+Election1999$Electorate[Election1999$Electorate=="Anuradhapura - East"]<-"Anuradhapura-East"
+Election1999$Electorate[Election1999$Electorate=="Anuradhapura - West"]<-"Anuradhapura-West"
+Election1999$Electorate[Election1999$Electorate=="Bentara - Elpitiya"]<-"Bentara-Elpitiya"
+Election1999$Electorate[Election1999$Electorate=="Colombo - Central"]<-"Colombo-Central"
+Election1999$Electorate[Election1999$Electorate=="Colombo - East"]<-"Colombo-East"
+Election1999$Electorate[Election1999$Electorate=="Colombo - North"]<-"Colombo-North"
+Election1999$Electorate[Election1999$Electorate=="Colombo - West"]<-"Colombo-West"
+Election1999$Electorate[Election1999$Electorate=="Hali - Ela"]<-"Hali-Ela"
+Election1999$Electorate[Election1999$Electorate=="Hanguranketa"]<-"Hanguranketha"
+Election1999$Electorate[Election1999$Electorate=="Horowupotana"]<-"Horowapatana"
+Election1999$Electorate[Election1999$Electorate=="Ja - Ela"]<-"Ja-Ela"
+Election1999$Electorate[Election1999$Electorate=="Kalkudah"]<-"Kalkuda"
+Election1999$Electorate[Election1999$Electorate=="Kankesanturai"]<-"Kankesanthurai"
+Election1999$Electorate[Election1999$Electorate=="Moneragala"]<-"Monaragala"
+Election1999$Electorate[Election1999$Electorate=="Nuwara -Eliya - Maskeliya"]<-"Nuwara-Eliya-Maskeliya"
+Election1999$Electorate[Election1999$Electorate=="Patha - Dumbara"]<-"Patha-Dumbara"
+Election1999$Electorate[Election1999$Electorate=="Padiruppu"]<-"Paddiruppu"
+Election1999$Electorate[Election1999$Electorate=="Point Pedro"]<-"Point-Pedro"
+Election1999$Electorate[Election1999$Electorate=="Postal Votes"]<-"Postal District Votes"
+Election1999$Electorate[Election1999$Electorate=="Potuvil"]<-"Pottuvil"
+Election1999$Electorate[Election1999$Electorate=="Sammnturai"]<-"Sammanthurai"
+Election1999$Electorate[Election1999$Electorate=="Uda - Dumbara"]<-"Udu-Dumbara"
+Election1999$Electorate[Election1999$Electorate=="Uva - Paranagama"]<-"Uva-Paranagama"
+
+# 6. Spelling Check for year 2005
+Election2005$Electorate[Election2005$Electorate=="Balapitya"]<-"Balapitiya"
+Election2005$Electorate[Election2005$Electorate=="Displaced"]<-"Displaced District Votes"
+Election2005$Electorate[Election2005$Electorate=="Hanguranketa"]<-"Hanguranketha"
+Election2005$Electorate[Election2005$Electorate=="Horowupotana"]<-"Horowapatana"
+Election2005$Electorate[Election2005$Electorate=="Kalkudah"]<-"Kalkuda"
+Election2005$Electorate[Election2005$Electorate=="Kankesanturai"]<-"Kankesanthurai"
+Election2005$Electorate[Election2005$Electorate=="Maskelliya"]<-"Nuwara-Eliya-Maskeliya"
+Election2005$Electorate[Election2005$Electorate=="Moneragala"]<-"Monaragala"
+Election2005$Electorate[Election2005$Electorate=="Mullativu"]<-"Mullaitivu"
+Election2005$Electorate[Election2005$Electorate=="Padiruppu"]<-"Paddiruppu"
+Election2005$Electorate[Election2005$Electorate=="Postal"]<-"Postal District Votes"
+Election2005$Electorate[Election2005$Electorate=="Potuvil"]<-"Pottuvil"
+Election2005$Electorate[Election2005$Electorate=="Sammanturai"]<-"Sammanthurai"
+Election2005$Electorate[Election2005$Electorate=="Total"]<-"Final District Results"
+Election2005$Electorate[Election2005$Electorate=="Uda-Dumbara"]<-"Udu-Dumbara"
+
+# 7. Spelling Check for year 2010 
+Election2010$Electorate[Election2010$Electorate=="Anuradapura-East"]<-"Anuradhapura-East"
+Election2010$Electorate[Election2010$Electorate=="Anuradapura-West"]<-"Anuradhapura-West"
+Election2010$Electorate[Election2010$Electorate=="Dabadeniya"]<-"Dambadeniya"
+Election2010$Electorate[Election2010$Electorate=="Displace Votes"]<-"Displaced District Votes"
+Election2010$Electorate[Election2010$Electorate=="Final District Result"]<-"Final District Results"
+Election2010$Electorate[Election2010$Electorate=="Hanguranketa"]<-"Hanguranketha"
+Election2010$Electorate[Election2010$Electorate=="Kankesanturai"]<-"Kankesanthurai"
+Election2010$Electorate[Election2010$Electorate=="Medwachchiya"]<-"Medawachchiya"
+Election2010$Electorate[Election2010$Electorate=="Medirigiya"]<-"Medirigiriya"
+Election2010$Electorate[Election2010$Electorate=="Moneragala"]<-"Monaragala"
+Election2010$Electorate[Election2010$Electorate=="Negambo"]<-"Negombo"
+Election2010$Electorate[Election2010$Electorate=="Nuwara-Eliya Maskeliya"]<-"Nuwara-Eliya-Maskeliya"
+Election2010$Electorate[Election2010$Electorate=="Padiruppu"]<-"Paddiruppu"
+Election2010$Electorate[Election2010$Electorate=="Paduwasnuwara"]<-"Panduwasnuwara"
+Election2010$Electorate[Election2010$Electorate=="Patha Dumbara"]<-"Patha-Dumbara"
+Election2010$Electorate[Election2010$Electorate=="Point Pedero"]<-"Point-Pedro"
+Election2010$Electorate[Election2010$Electorate=="Potuvil"]<-"Pottuvil"
+Election2010$Electorate[Election2010$Electorate=="Puttalama"]<-"Puttalam"
+Election2010$Electorate[Election2010$Electorate=="Rabukkana"]<-"Rambukkana"
+Election2010$Electorate[Election2010$Electorate=="Sammanturai"]<-"Sammanthurai"
+
+# 8. Spelling Check for year 2015
+Election2015$Electorate[Election2015$Electorate=="Anuradapura-East"]<-"Anuradhapura-East"
+Election2015$Electorate[Election2015$Electorate=="Anuradapura-West"]<-"Anuradhapura-West"
+Election2015$Electorate[Election2015$Electorate=="Belitta"]<-"Beliatta"
+Election2015$Electorate[Election2015$Electorate=="Biyagame"]<-"Biyagama"
+Election2015$Electorate[Election2015$Electorate=="Dabadeniya"]<-"Dambadeniya"
+Election2015$Electorate[Election2015$Electorate=="Dabulla"]<-"Dambulla"
+Election2015$Electorate[Election2015$Electorate=="Final District Result"]<-"Final District Results"
+Election2015$Electorate[Election2015$Electorate=="Hakmane"]<-"Hakmana"
+Election2015$Electorate[Election2015$Electorate=="Hanguranketa"]<-"Hanguranketha"
+Election2015$Electorate[Election2015$Electorate=="Kankesanturai"]<-"Kankesanthurai"
+Election2015$Electorate[Election2015$Electorate=="Medwachchiya"]<-"Medawachchiya"
+Election2015$Electorate[Election2015$Electorate=="Medirigiya"]<-"Medirigiriya"
+Election2015$Electorate[Election2015$Electorate=="Moneragala"]<-"Monaragala"
+Election2015$Electorate[Election2015$Electorate=="Negambo"]<-"Negombo"
+Election2015$Electorate[Election2015$Electorate=="Nuwara - Eliya"]<-"Nuwara-Eliya-Maskeliya"
+Election2015$Electorate[Election2015$Electorate=="Padiruppu"]<-"Paddiruppu"
+Election2015$Electorate[Election2015$Electorate=="Paduwasnuwara"]<-"Panduwasnuwara"
+Election2015$Electorate[Election2015$Electorate=="Patha Dumbara"]<-"Patha-Dumbara"
+Election2015$Electorate[Election2015$Electorate=="Point Pedero"]<-"Point-Pedro"
+Election2015$Electorate[Election2015$Electorate=="Potuvil"]<-"Pottuvil"
+Election2015$Electorate[Election2015$Electorate=="Puttalama"]<-"Puttalam"
+Election2015$Electorate[Election2015$Electorate=="Rabukkana"]<-"Rambukkana"
+Election2015$Electorate[Election2015$Electorate=="Sammanturai"]<-"Sammanthurai"
+```
+
+## Comparing Column Names
+
+1.  Lable changing in Year 1982.
+2.  Lable changing in Year 1988.
+3.  Lable changing in Year 1994.
+4.  Lable changing in Year 1999.
+5.  Lable changing in Year 2005.
+6.  Lable changing in Year 2010.
+7.  Lable changing in Year 2015.
+
+<!-- end list -->
+
+``` r
+Election2010$ColNames<-as.character(Election2010$ColNames)
+
+data.table(unique(Election1982$ColNames),
+           unique(Election1988$ColNames),
+           unique(Election1994$ColNames),
+           unique(Election1999$ColNames),
+           unique(Election2005$ColNames),
+           unique(Election2010$ColNames),
+           unique(Election2015$ColNames)
+           )
+
+# 1. Lable changing in Year 1982
+Election1982$ColNames[Election1982$ColNames=="No of Valid Votes"]<-"Total No of Valid Votes"
+
+# 2. Lable changing in Year 1988
+Election1988$ColNames[Election1988$ColNames=="Total No of Valied Votes"]<-"Total No of Valid Votes"
+
+# 3. Lable changing in Year 1994
+Election1994$ColNames[Election1994$ColNames=="No of valid votes"]<-"Total No of Valid Votes"
+Election1994$ColNames[Election1994$ColNames=="No of Rejected votes"]<-"No of Rejected Votes"
+Election1994$ColNames[Election1994$ColNames=="Total No. of votes polled"]<-"Total No of Votes Polled"
+
+# 4. Lable changing in Year 1999
+Election1999$ColNames[Election1999$ColNames=="SLMK"]<-"Abdul Rasool"
+Election1999$ColNames[Election1999$ColNames=="PFF"]<-"Alwis Weerakkody Premawardhana"
+Election1999$ColNames[Election1999$ColNames=="DUNF"]<-"Ariyawansha Dissanayaka"
+Election1999$ColNames[Election1999$ColNames=="JVP"]<-"M.D. Nandana Gunathilaka"
+Election1999$ColNames[Election1999$ColNames=="PLSF"]<-"Kamal Karunadasa"
+Election1999$ColNames[Election1999$ColNames=="PA"]<-"Chandrika Bandaranaike Kumaratunga"
+Election1999$ColNames[Election1999$ColNames=="IND1"]<-"Tennyson Edirisuriya"
+Election1999$ColNames[Election1999$ColNames=="IND2"]<-"W.V.M. Ranjith"
+Election1999$ColNames[Election1999$ColNames=="UNP"]<-"Ranil Wickramasinghe"
+Election1999$ColNames[Election1999$ColNames=="LP"]<-"Rajiva Wijesinha"
+Election1999$ColNames[Election1999$ColNames=="LDA"]<-"Vasudeva Nanayakkara"
+Election1999$ColNames[Election1999$ColNames=="IND3"]<-"Hudson Samarasinghe"
+Election1999$ColNames[Election1999$ColNames=="SMBP"]<-"Harishchandra Wijayatunga"
+Election1999$ColNames[Election1999$ColNames=="Valid Votes"]<-"Total No of Valid Votes"
+Election1999$ColNames[Election1999$ColNames=="Rejected Votes"]<-"No of Rejected Votes"
+Election1999$ColNames[Election1999$ColNames=="Total Polled"]<-"Total No of Votes Polled"
+Election1999$ColNames[Election1999$ColNames=="Registered Electors"]<-"No of Registered Electors"
+
+# 5. Lable changing in Year 2005
+Election2005$ColNames[Election2005$ColNames=="Total Valid"]<-"Total No of Valid Votes"
+Election2005$ColNames[Election2005$ColNames=="Total Rejected"]<-"No of Rejected Votes"
+Election2005$ColNames[Election2005$ColNames=="Total Polled"]<-"Total No of Votes Polled"
+Election2005$ColNames[Election2005$ColNames=="Total Registered"]<-"No of Registered Electors"
+
+# 6. Lable changing in Year 2010
+Election2010$ColNames[Election2010$ColNames=="Valid Votes"]<-"Total No of Valid Votes"
+Election2010$ColNames[Election2010$ColNames=="Rejected Votes"]<-"No of Rejected Votes"
+Election2010$ColNames[Election2010$ColNames=="Total Polled"]<-"Total No of Votes Polled"
+Election2010$ColNames[Election2010$ColNames=="Regis Electors"]<-"No of Registered Electors"
+
+# 7. Lable changing in Year 2015
+Election2015$ColNames[Election2015$ColNames=="Valid Votes"]<-"Total No of Valid Votes"
+Election2015$ColNames[Election2015$ColNames=="Rejected Votes"]<-"No of Rejected Votes"
+Election2015$ColNames[Election2015$ColNames=="Total Polled"]<-"Total No of Votes Polled"
+Election2015$ColNames[Election2015$ColNames=="Regis.Electors"]<-"No of Registered Electors"
+Election2015$ColNames[Election2015$ColNames=="Mahinda Rajapaksa"]<-"Mahinda Rajapaksha"
+```
+
+# Useful Data-frame
+
+## Format of Data-frame for 1982,1988 and 1999
+
+|         ColNames          | Electorate 1 | Electorate 1 | Electorate … | Electorate … | Postal District Votes | Postal District Votes | Final District Results | Final District Results |
+| :-----------------------: | :----------: | :----------: | :----------: | :----------: | :-------------------: | :-------------------: | :--------------------: | :--------------------: |
+|                           |    Votes     |  Percentage  |    Votes     |  Percentage  |         Votes         |      Percentage       |         Votes          |       Percentage       |
+|     Candidate Name 1      |     Yes      |     Yes      |     Yes      |     Yes      |          Yes          |          Yes          |          Yes           |          Yes           |
+|     Candidate Name …      |     Yes      |     Yes      |     Yes      |     Yes      |          Yes          |          Yes          |          Yes           |          Yes           |
+|  Total No of Valid Votes  |     Yes      |     Yes      |     Yes      |     Yes      |          Yes          |          Yes          |          Yes           |          Yes           |
+|   No of Rejected Votes    |     Yes      |     Yes      |     Yes      |     Yes      |          Yes          |          Yes          |          Yes           |          Yes           |
+| Total No of Votes Polled  |     Yes      |     Yes      |     Yes      |     Yes      |          Yes          |          No           |          Yes           |          Yes           |
+| No of Registered Electors |     Yes      |      No      |     Yes      |      No      |          No           |          No           |          Yes           |           No           |
+
+## Format of Data-frame for 1994, 2010 and 2015
+
+|         ColNames          | Electorate 1 | Electorate 1 | Electorate … | Electorate … | Postal District Votes | Postal District Votes | Final District Results | Final District Results |
+| :-----------------------: | :----------: | :----------: | :----------: | :----------: | :-------------------: | :-------------------: | :--------------------: | :--------------------: |
+|                           |    Votes     |  Percentage  |    Votes     |  Percentage  |         Votes         |      Percentage       |         Votes          |       Percentage       |
+|     Candidate Name 1      |     Yes      |     Yes      |     Yes      |     Yes      |          Yes          |          Yes          |          Yes           |          Yes           |
+|     Candidate Name …      |     Yes      |     Yes      |     Yes      |     Yes      |          Yes          |          Yes          |          Yes           |          Yes           |
+|  Total No of Valid Votes  |     Yes      |     Yes      |     Yes      |     Yes      |          Yes          |          Yes          |          Yes           |          Yes           |
+|   No of Rejected Votes    |     Yes      |     Yes      |     Yes      |     Yes      |          Yes          |          Yes          |          Yes           |          Yes           |
+| Total No of Votes Polled  |     Yes      |     Yes      |     Yes      |     Yes      |          Yes          |          Yes          |          Yes           |          Yes           |
+| No of Registered Electors |     Yes      |      No      |     Yes      |      No      |          Yes          |          No           |          Yes           |           No           |
+
+## Format of Data-frame for 2005
+
+|         ColNames          | Electorate 1 | Electorate 1 | Electorate … | Electorate … | Postal District Votes | Postal District Votes | Final District Results | Final District Results |
+| :-----------------------: | :----------: | :----------: | :----------: | :----------: | :-------------------: | :-------------------: | :--------------------: | :--------------------: |
+|                           |    Votes     |  Percentage  |    Votes     |  Percentage  |         Votes         |      Percentage       |         Votes          |       Percentage       |
+|     Candidate Name 1      |     Yes      |     Yes      |     Yes      |     Yes      |          Yes          |          No           |          Yes           |           No           |
+|     Candidate Name …      |     Yes      |     Yes      |     Yes      |     Yes      |          Yes          |          No           |          Yes           |           No           |
+|  Total No of Valid Votes  |     Yes      |     Yes      |     Yes      |     Yes      |          Yes          |          No           |          Yes           |           No           |
+|   No of Rejected Votes    |     Yes      |     Yes      |     Yes      |     Yes      |          Yes          |          No           |          Yes           |           No           |
+| Total No of Votes Polled  |     Yes      |     Yes      |     Yes      |     Yes      |          Yes          |          No           |          Yes           |           No           |
+| No of Registered Electors |     Yes      |      No      |     Yes      |      No      |          No           |          No           |          Yes           |           No           |
 
 *THANK YOU*
