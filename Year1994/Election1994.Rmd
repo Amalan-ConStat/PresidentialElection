@@ -235,7 +235,7 @@ No issues here.
 
 ```{r Vaildating the data 3}
 # Extracting only Final District Results of 
-# Mr.Galappaththi Arachchige
+# Mr.Galappaththi Arachchige Nihal
 # and then adding all the votes 
 ElecFinal1994<-subset(Election1994,Electorate=="Final District Results" 
                       & ColNames=="Mr. Galappaththi Arachchige Nihal")
@@ -243,7 +243,7 @@ ElecFinal1994<-subset(Election1994,Electorate=="Final District Results"
 ElecFinal1994[,sum(Votes),by="ColNames"]
 
 # Extracting except Final District Results of 
-# Mr.Galappaththi Arachchige
+# Mr.Galappaththi Arachchige Nihal
 # and then adding all the votes 
 ElecFinal1994<-subset(Election1994,Electorate!="Final District Results" 
                       & ColNames=="Mr. Galappaththi Arachchige Nihal")
@@ -283,7 +283,7 @@ No issues here.
 
 ```{r Vaildating the data 5}
 # Extracting only Final District Results of 
-#  Mr. A.J. Ranashinge
+# Dr. Harischandra Wijayatunga
 # and then adding all the votes 
 ElecFinal1994<-subset(Election1994,Electorate=="Final District Results" 
                       & ColNames=="Dr. Harischandra Wijayatunga")
@@ -291,7 +291,7 @@ ElecFinal1994<-subset(Election1994,Electorate=="Final District Results"
 ElecFinal1994[,sum(Votes),by="ColNames"]
 
 # Extracting except Final District Results of 
-#   Dr. Harischandra Wijayatunga
+# Dr. Harischandra Wijayatunga
 # and then adding all the votes 
 ElecFinal1994<-subset(Election1994,Electorate!="Final District Results" 
                       & ColNames=="Dr. Harischandra Wijayatunga")

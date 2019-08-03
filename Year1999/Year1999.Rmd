@@ -175,7 +175,7 @@ of the Jaffna district votes.
 
 ```{r Rejected Votes}
 # Extracting only Final District Results of 
-# Total Polled
+# Rejected Votes
 # and then adding all the votes 
 ElecFinal1999<-subset(Election1999,Electorate=="FINAL DISTRICT RESULTS" 
                       & ColNames=="Rejected Votes")
@@ -183,7 +183,7 @@ ElecFinal1999<-subset(Election1999,Electorate=="FINAL DISTRICT RESULTS"
 ElecFinal1999[,sum(Votes),by="ColNames"]
 
 # Extracting except Final District Results of 
-# Total Polled
+# Rejected Votes
 # and then adding all the votes 
 ElecFinal1999<-subset(Election1999,Electorate!="FINAL DISTRICT RESULTS" 
                       & ColNames=="Rejected Votes")

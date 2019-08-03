@@ -1,0 +1,136 @@
+---
+title: "Extracted Data Part 3"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,warning = FALSE,results='hide')
+
+# Load the packages
+library(data.table)
+library(stringr)
+library(splitstackshape)
+library(pdftools)
+
+# load the data
+load("Oneuseful3.RData")
+```
+
+# Useful Data-frame
+
+This table is a mock representation of how an entire district results can be represented 
+with all the necessary information. In the tables Yes means the value exists and No means
+the cell is empty.
+
+Clearly the percentage values for Postal District Votes and Final District Results are not 
+calculated. Also Displaced District Votes does not have percentage values as well. These
+calculations are different than previous situations. Yet they are done without any hustle.
+
+## Format of Data-frame for 2005
+
+Year 2005 is singularly the worst with a lot of missing values.
+
+|          ColNames         | Electorate 1 | Electorate 1 | Electorate ... | Electorate ... | Postal District  Votes | Postal District  Votes | Final District  Results | Final District  Results |
+|:-------------------------:|:------------:|:------------:|:--------------:|:--------------:|:----------------------:|:----------------------:|:-----------------------:|:-----------------------:|
+|                           |     Votes    |  Percentage  |      Votes     |   Percentage   |          Votes         |       Percentage       |          Votes          |        Percentage       |
+|      Candidate Name 1     |       Yes    |     Yes      |     Yes        |     Yes        |       Yes              |         No             |           Yes           |         No              |
+|     Candidate Name ...    |       Yes    |     Yes      |     Yes        |     Yes        |       Yes              |         No             |           Yes           |         No              |
+|  Total No of Valid Votes  |       Yes    |     Yes      |     Yes        |     Yes        |       Yes              |         No             |           Yes           |         No              |
+|   No of  Rejected Votes   |       Yes    |     Yes      |     Yes        |     Yes        |       Yes              |         No             |           Yes           |         No              |
+|  Total No of Votes Polled |       Yes    |     Yes      |     Yes        |     Yes        |       Yes              |         No             |           Yes           |         No              |
+| No of Registered Electors |       Yes    |     No       |     Yes        |     No         |       No               |         No             |           Yes           |         No              |
+
+
+## Rectify Data-frame for 2005
+
+Two functions developed to resolve the percentage calculations and successfully
+done as below mentioned code chunk. 
+
+```{r Rectify 2005}
+# adding percentage values for Final District Results
+# and Postal District Votes when district is given
+FixPercent<-function(Dis,Ele)
+{  
+if(Ele==TRUE)
+  {  
+  # Selecting Final District Results 
+  data<-Election2005[Electorate=="Final District Results" & District==Dis]
+  # calculating percentages
+  for(i in 1:(dim(data)[1]-2))
+      {
+      data[i,6]<-round((100*data[i,5])/data[(dim(data)[1]-1),5],2)
+      }
+      data[dim(data)[1]-1,6]<-round((100*data[(dim(data)[1]-1),5])/data[dim(data)[1],5],2)
+    return(data)    
+  }
+else
+  {
+  # Selecting Postal District Votes 
+  data<-Election2005[Electorate=="Postal District Votes" & District==Dis]
+  # calculating percentages
+  for(i in 1:(dim(data)[1]-2))
+      {
+      data[i,6]<-round((100*data[i,5])/data[(dim(data)[1]-1),5],2)
+      }
+  return(data)
+  }
+}
+# Obtaining the districts
+data<-unique(Election2005$District)
+
+# creating empty data-set
+datas<-NULL
+
+# calculating the percentage values
+# for Final District Results and 
+# Postal District Votes
+for (i in 1:length(data)) 
+{
+datas[[i]]<-FixPercent(Dis = data[i],Ele = TRUE)  
+datas[[i+22]]<-FixPercent(Dis = data[i],Ele = FALSE)
+}
+
+# adding percentage values for Displaced District Votes
+FixPercentD<-function(Dis)
+{  
+  # Selecting Final District Results 
+  data<-Election2005[Electorate=="Displaced District Votes" & District==Dis]
+  # calculating percentages
+  for(i in 1:(dim(data)[1]-2))
+      {
+      data[i,6]<-round((100*data[i,5])/data[(dim(data)[1]-1),5],2)
+      }
+  return(data)
+}
+
+# calculating percentage values for the three displaced 
+# districts
+datas[[45]]<-FixPercentD("Jaffna")
+datas[[46]]<-FixPercentD("Vanni")
+datas[[47]]<-FixPercentD("Trincomalee")
+
+# combining the lists into one data-frame
+Temp<-do.call("rbind",datas)
+
+# replacing the calculated percentages with their 
+# respective observations
+Election2005[(Electorate=="Displaced District Votes" | 
+              Electorate=="Final District Results" |
+              Electorate=="Postal District Votes")]<-Temp
+# removing rows with percentages and votes being zero 
+Election2005<-Election2005[!(Electorate=="Postal District Votes" & 
+                            ColNames=="No of Registered Electors" | 
+                            Electorate=="Displaced District Votes" &
+                            ColNames=="No of Registered Electors")]
+```
+
+# Useful Data-frames
+
+The data-frame looks fine, now is the final stage of exporting the data-frame 
+as a csv file.
+
+```{r Export csv file}
+write.csv(Election2005, file = "Election2005.csv")
+```
+
+*THANK YOu*

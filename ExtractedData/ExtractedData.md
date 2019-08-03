@@ -44,19 +44,21 @@ is the process of performing those tasks. If you need to take a thorough
 look at the issues please refer the respective folders, which includes a
 markdown page pin pointing exact issues and their respective places.
 
+First ensure out of the first four columns the last three are character
+variables and the rest three columns are numeric variables. This needs
+to be done for all seven data-frames.
+
 ## Resolving Year 1982 Data
 
-First ensure the first four columns of the data-set are factor variables
-and final two columns are numeric variables. The rectifying process is
-to change the misprinted values in the data-frame and in this case there
-are 10 values.
+The rectifying process is to change the misprinted values in the
+data-frame and in this case there are 10 values.
 
 ``` r
-# changing variable type
-Election1982$Year<-factor(Election1982$Year) ; class(Election1982$Year)
-Election1982$District<-factor(Election1982$District) ; class(Election1982$District)
-Election1982$Electorate<-factor(Election1982$Electorate) ; class(Election1982$Electorate)
-Election1982$ColNames<-factor(Election1982$ColNames) ; class(Election1982$ColNames)
+# checking variable type
+class(Election1982$Year)
+class(Election1982$District)
+class(Election1982$Electorate)
+class(Election1982$ColNames)
 class(Election1982$Votes)
 class(Election1982$Percentage)
 
@@ -246,11 +248,11 @@ Year 1988 presidential election file has no misprints that needs to be
 considered.
 
 ``` r
-# changing variable type
-Election1988$Year<-factor(Election1988$Year) ; class(Election1988$Year)
-Election1988$District<-factor(Election1988$District) ; class(Election1988$District)
-Election1988$Electorate<-factor(Election1988$Electorate) ; class(Election1988$Electorate)
-Election1988$ColNames<-factor(Election1988$ColNames) ; class(Election1988$ColNames)
+# checking variable type
+class(Election1988$Year)
+class(Election1988$District)
+class(Election1988$Electorate)
+class(Election1988$ColNames)
 class(Election1988$Votes)
 class(Election1988$Percentage)
 ```
@@ -260,15 +262,15 @@ There are no rectifications need to be done.
 ## Resolving Year 1994 Data
 
 In the year 1994 there is only rectification needs to be done.
-Rectifying the district tally value issues for Battiacaloa district in
+Rectifying the district tally value issues for Batticaloa district in
 related to Mr. Hudson Samarasinghe.
 
 ``` r
-# changing variable type
-Election1994$Year<-factor(Election1994$Year) ; class(Election1994$Year)
-Election1994$District<-factor(Election1994$District) ; class(Election1994$District)
-Election1994$Electorate<-factor(Election1994$Electorate) ; class(Election1994$Electorate)
-Election1994$ColNames<-factor(Election1994$ColNames) ; class(Election1994$ColNames)
+# checking variable type
+class(Election1994$Year)
+class(Election1994$District)
+class(Election1994$Electorate)
+class(Election1994$ColNames)
 class(Election1994$Votes)
 class(Election1994$Percentage)
 
@@ -306,11 +308,11 @@ rejected votes of Jaffna district and other is for Valid votes from
 Anuradhapura district.
 
 ``` r
-# changing variable type
-Election1999$Year<-factor(Election1999$Year) ; class(Election1999$Year)
-Election1999$District<-factor(Election1999$District) ; class(Election1999$District)
-Election1999$Electorate<-factor(Election1999$Electorate) ; class(Election1999$Electorate)
-Election1999$ColNames<-factor(Election1999$ColNames) ; class(Election1999$ColNames)
+# checking variable type
+class(Election1999$Year)
+class(Election1999$District)
+class(Election1999$Electorate)
+class(Election1999$ColNames)
 class(Election1999$Votes)
 class(Election1999$Percentage)
 
@@ -369,11 +371,11 @@ votes. The rectification needs to be done in a name replacing of “De”
 with “de”.
 
 ``` r
-# changing variable type
-Election2005$Year<-factor(Election2005$Year) ; class(Election2005$Year)
-Election2005$District<-factor(Election2005$District) ; class(Election2005$District)
-Election2005$Electorate<-factor(Election2005$Electorate) ; class(Election2005$Electorate)
-Election2005$ColNames<-factor(Election2005$ColNames) ; class(Election2005$ColNames)
+# checking variable type
+class(Election2005$Year)
+Election2005$District<-as.character(Election2005$District) ;class(Election2005$District)
+Election2005$Electorate<-as.character(Election2005$Electorate) ; class(Election2005$Electorate)
+class(Election2005$ColNames)
 class(Election2005$Votes)
 class(Election2005$Percentage)
 
@@ -412,11 +414,11 @@ and the issue is where the last vote value should be labelled as “Regis
 Electors” not “Total Polled”.
 
 ``` r
-# changing variable type
-Election2010$Year<-factor(Election2010$Year) ; class(Election2010$Year)
-Election2010$District<-factor(Election2010$District) ; class(Election2010$District)
-Election2010$Electorate<-factor(Election2010$Electorate) ; class(Election2010$Electorate)
-Election2010$ColNames<-factor(Election2010$ColNames) ; class(Election2010$ColNames)
+# checking variable type
+class(Election2010$Year)
+class(Election2010$District)
+class(Election2010$Electorate)
+class(Election2010$ColNames)
 class(Election2010$Votes)
 class(Election2010$Percentage)
 
@@ -470,11 +472,11 @@ There are no issues which needs to be resolved in the year 2015 and all
 looks good.
 
 ``` r
-# changing variable type
-Election2015$Year<-factor(Election2015$Year) ; class(Election2015$Year)
-Election2015$District<-factor(Election2015$District) ; class(Election2015$District)
-Election2015$Electorate<-factor(Election2015$Electorate) ; class(Election2015$Electorate)
-Election2015$ColNames<-factor(Election2015$ColNames) ; class(Election2015$ColNames)
+# checking variable type
+class(Election2015$Year)
+class(Election2015$District)
+class(Election2015$Electorate)
+class(Election2015$ColNames)
 class(Election2015$Votes)
 class(Election2015$Percentage)
 ```
@@ -487,7 +489,7 @@ enough because combining these seven presidential elections and
 producing one data-frame will be more useful.
 
 In order to create this one data-frame we have to ensure that in all
-years the districts and electorates are not mispelled. Further ensure
+years the districts and electorates are not misspelled. Further ensure
 vote counts such as Rejected, Polled, Valid and Registered are labelled
 throughout these respective seven years under similar names. This naming
 variables should also be used for “Postal votes” and “Final District
@@ -510,17 +512,14 @@ that task.
 <!-- end list -->
 
 ``` r
-Election2005$District<-as.character(Election2005$District)
-Election2010$District<-as.character(Election2010$District)
-
-data.table(sort(unique(Election1982$District)),
-           sort(unique(Election1988$District)),
-           sort(unique(Election1994$District)),
-           sort(unique(Election1999$District)),
-           sort(unique(Election2005$District)),
-           sort(unique(Election2010$District)),
-           sort(unique(Election2015$District))
-           )
+#data.table(sort(unique(Election1982$District)),
+#           sort(unique(Election1988$District)),
+#           sort(unique(Election1994$District)),
+#           sort(unique(Election1999$District)),
+#           sort(unique(Election2005$District)),
+#           sort(unique(Election2010$District)),
+#           sort(unique(Election2015$District))
+#           )
 
 # 1. Case sensitive
 Election1999$District<-tools::toTitleCase(tolower(Election1999$District))
@@ -561,9 +560,6 @@ Election2015$District[Election2015$District=="Kaluthara"]<-"Kalutara"
 <!-- end list -->
 
 ``` r
-Election2005$Electorate<-as.character(Election2005$Electorate)
-Election2010$Electorate<-as.character(Election2010$Electorate)
-
 #sort(unique(c(sort(unique(Election1982$Electorate)),
 #           sort(unique(Election1988$Electorate)),
 #           sort(unique(Election1994$Electorate)),
@@ -758,27 +754,25 @@ Election2015$Electorate[Election2015$Electorate=="Sammanturai"]<-"Sammanthurai"
 
 ## Comparing Column Names
 
-1.  Lable changing in Year 1982.
-2.  Lable changing in Year 1988.
-3.  Lable changing in Year 1994.
-4.  Lable changing in Year 1999.
-5.  Lable changing in Year 2005.
-6.  Lable changing in Year 2010.
-7.  Lable changing in Year 2015.
+1.  Label changing in Year 1982.
+2.  Label changing in Year 1988.
+3.  Label changing in Year 1994.
+4.  Label changing in Year 1999.
+5.  Label changing in Year 2005.
+6.  Label changing in Year 2010.
+7.  Label changing in Year 2015.
 
 <!-- end list -->
 
 ``` r
-Election2010$ColNames<-as.character(Election2010$ColNames)
-
-data.table(unique(Election1982$ColNames),
-           unique(Election1988$ColNames),
-           unique(Election1994$ColNames),
-           unique(Election1999$ColNames),
-           unique(Election2005$ColNames),
-           unique(Election2010$ColNames),
-           unique(Election2015$ColNames)
-           )
+#data.table(unique(Election1982$ColNames),
+#           unique(Election1988$ColNames),
+#           unique(Election1994$ColNames),
+#           unique(Election1999$ColNames),
+#           unique(Election2005$ColNames),
+#           unique(Election2010$ColNames),
+#           unique(Election2015$ColNames)
+#           )
 
 # 1. Lable changing in Year 1982
 Election1982$ColNames[Election1982$ColNames=="No of Valid Votes"]<-"Total No of Valid Votes"

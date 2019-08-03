@@ -270,7 +270,7 @@ There are no rectifications need to be done.
 ## Resolving Year 1994 Data
 
 In the year 1994 there is only rectification needs to be done.
-Rectifying the district tally value issues for Battiacaloa 
+Rectifying the district tally value issues for Batticaloa 
 district in related to Mr. Hudson Samarasinghe.
 
 ```{r Year 1994 Rectify}
@@ -498,7 +498,7 @@ because combining these seven presidential elections and producing one data-fram
 will be more useful. 
 
 In order to create this one data-frame we have to ensure that in all years
-the districts and electorates are not mispelled. Further ensure vote counts 
+the districts and electorates are not misspelled. Further ensure vote counts 
 such as Rejected, Polled, Valid and Registered are labelled throughout these
 respective seven years under similar names. This naming variables should also
 be used for "Postal votes" and "Final District Results".
@@ -756,13 +756,13 @@ Election2015$Electorate[Election2015$Electorate=="Sammanturai"]<-"Sammanthurai"
 
 ## Comparing Column Names
 
-1. Lable changing in Year 1982.
-2. Lable changing in Year 1988.
-3. Lable changing in Year 1994.
-4. Lable changing in Year 1999.
-5. Lable changing in Year 2005.
-6. Lable changing in Year 2010.
-7. Lable changing in Year 2015.
+1. Label changing in Year 1982.
+2. Label changing in Year 1988.
+3. Label changing in Year 1994.
+4. Label changing in Year 1999.
+5. Label changing in Year 2005.
+6. Label changing in Year 2010.
+7. Label changing in Year 2015.
 
 ```{r Column Names}
 #data.table(unique(Election1982$ColNames),

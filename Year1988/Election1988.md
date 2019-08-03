@@ -67,19 +67,19 @@ for (i in pages)
 # extracting from Kegalle District    
     Election1988[[25]]<-Extract_Type1_1988(25,Ke = TRUE)
 # extracting from Mahanuwara District
-Election1988[[7]]<-Extract_Type2_1988(7,Ma=TRUE)
+    Election1988[[7]]<-Extract_Type2_1988(7,Ma=TRUE)
 # extracting from Jaffna District
-Election1988[[13]]<-Extract_Type2_1988(13,Ja=TRUE)
+    Election1988[[13]]<-Extract_Type2_1988(13,Ja=TRUE)
 # extracting from Kurunegala District
-Election1988[[18]]<-Extract_Type2_1988(18,Ku=TRUE)
+    Election1988[[18]]<-Extract_Type2_1988(18,Ku=TRUE)
 # extracting from Anuradhapura District
-Election1988[[20]]<-Extract_Type2_1988(20,Anu=TRUE)
+    Election1988[[20]]<-Extract_Type2_1988(20,Anu=TRUE)
 # extracting from Galle District
-Election1988[[10]]<-Extract_Type2_1988(10,Ga=TRUE)
+    Election1988[[10]]<-Extract_Type2_1988(10,Ga=TRUE)
 # extracting from Matara District
-Election1988[[11]]<-Extract_Type2_1988(11,Mat=TRUE)
+    Election1988[[11]]<-Extract_Type2_1988(11,Mat=TRUE)
 # extracting from Hambantota District
-Election1988[[12]]<-Extract_Type2_1988(12,Ha=TRUE)
+    Election1988[[12]]<-Extract_Type2_1988(12,Ha=TRUE)
 
 # final data set
 Election1988<-do.call("rbind",Election1988)
