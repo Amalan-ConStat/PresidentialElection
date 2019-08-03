@@ -639,9 +639,9 @@ All three data-frames look fine, now is the final stage of exporting each
 data-frame as a csv file.
 
 ```{r Export csv file}
-write.csv(Election1994, file = "Election1994.csv")
-write.csv(Election2010, file = "Election2010.csv")
-write.csv(Election2015, file = "Election2015.csv")
+write.csv(Election1994, file = "Election1994.csv",row.names = FALSE)
+write.csv(Election2010, file = "Election2010.csv",row.names = FALSE)
+write.csv(Election2015, file = "Election2015.csv",row.names = FALSE)
 ```
 
 *THANK YOU*

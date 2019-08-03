@@ -1,0 +1,58 @@
+---
+title: "Final Data-Frame"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,message = FALSE)
+```
+
+# Importing the individual CSV files
+
+7 data frames which were extracted from 7 pdf files
+are now imported here, so that one complete data-frame 
+of Presidential election data can be produced.
+
+Further it is possible give suggestions on how the next 
+presidential election data can be stored, processed and 
+released in a more useful way than previous situations.
+
+```{r Import Data}
+# import the data frames
+Election1982<-read.csv("Election1982.csv")
+Election1988<-read.csv("Election1988.csv")
+Election1994<-read.csv("Election1994.csv")
+Election1999<-read.csv("Election1999.csv")
+Election2005<-read.csv("Election2005.csv")
+Election2010<-read.csv("Election2010.csv")
+Election2015<-read.csv("Election2015.csv")
+```
+
+# Producing one final CSV file
+
+Using rbind function we can produce one final complete data frame
+which will include all the results for 7 presidential elections 
+in Sri Lanka from 1982 to 2015.
+
+```{r Export Data}
+# combine the 7 data frames
+Final<-rbind.data.frame(Election1982,Election1988,Election1994,
+                        Election1999,Election2005,Election2010,
+                        Election2015)
+# export the data-frame
+write.csv(Final,"Final.csv",row.names = FALSE)
+```
+
+# Summary Statistics for Final Data
+
+With the help of summarytools package we can find the descriptive statistics
+for the final data.
+
+```{r Descriptive stat}
+# Complete summary
+summarytools::dfSummary(Final)
+# Numerical Summary
+summarytools::descr(Final[-1])
+```
+
+*THANK YOU*

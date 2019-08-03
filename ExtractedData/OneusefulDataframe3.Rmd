@@ -130,7 +130,7 @@ The data-frame looks fine, now is the final stage of exporting the data-frame
 as a csv file.
 
 ```{r Export csv file}
-write.csv(Election2005, file = "Election2005.csv")
+write.csv(Election2005, file = "Election2005.csv",row.names = FALSE)
 ```
 
-*THANK YOu*
+*THANK YOU*
