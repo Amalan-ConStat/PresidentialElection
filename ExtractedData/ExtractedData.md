@@ -508,6 +508,7 @@ that task.
 5.  Nuwara-Eliya - 1982,1988,2005 but Nuwara Eliya - 1999,2010,2015 and
     Nuwara - Eliya - 1994.
 6.  Kalutara - 1982,1988,1994,1999,2005,2010 but Kaluthara - 2015.
+7.  Batticaloa - 1982,1994,1999,2005,2010,2015 but Batticoloa - 1988.
 
 <!-- end list -->
 
@@ -544,6 +545,9 @@ Election1994$District[Election1994$District=="Nuwara - Eliya"]<-"Nuwara-Eliya"
 
 # 6. Kalutara or Kaluthara to Kalutara
 Election2015$District[Election2015$District=="Kaluthara"]<-"Kalutara"
+
+# 7. Batticaloa or Batticoloa to Batticaloa
+Election1988$District[Election1988$District=="Batticoloa"]<-"Batticaloa"
 ```
 
 ## Comparing Electorate Names

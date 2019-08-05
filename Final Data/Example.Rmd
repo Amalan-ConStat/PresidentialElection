@@ -1,0 +1,167 @@
+---
+title: "Example"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,message = FALSE,warning = FALSE,fig.width = 10,fig.height = 9)
+
+# Load packages
+library(ggplot2)
+library(gganimate)
+library(dplyr)
+library(ggthemr)
+# load data 
+Final<-read.csv("Final.csv",header = TRUE)
+years<-unique(Final$Year)
+
+# Chalk theme
+ggthemr("flat dark")
+```
+
+# General Votes
+
+## No of Registered Electors and Total No of Polled Votes Over the Years
+
+```{r Reg Electors and Polled Votes}
+Final %>%
+  subset(ColNames=="No of Registered Electors" & Electorate=="Final District Results" | 
+         ColNames=="Total No of Votes Polled" & Electorate=="Final District Results") %>%
+  group_by(Year,ColNames) %>%
+  summarise(Votes=sum(Votes)/100000) %>%
+ggplot(.,aes(Year,Votes,color=ColNames,label=Votes))+
+       ylab("Votes (in 100,000)")+
+       geom_point()+geom_line()+
+       geom_text(vjust=-1,size=3)+
+       scale_x_continuous(breaks = years)+
+       theme(legend.position = "bottom")
+```
+
+## No of Registered Electors and Total No of Polled Votes Over the years by district
+
+```{r Reg Electors and Polled Votes district}
+Final %>%
+   subset(ColNames=="No of Registered Electors" & Electorate=="Final District Results" | 
+          ColNames=="Total No of Votes Polled" & Electorate=="Final District Results") %>%
+ggplot(.,aes(District,Votes/10000,fill=ColNames))+
+       ylab("Votes (in 10,000)")+
+       geom_bar(stat = "identity",position = "dodge")+
+       transition_states(factor(Year),state_length = 2)+ 
+       theme(legend.position = "bottom",
+             axis.text.x = element_text(angle=90,vjust=-0.1))+
+       ggtitle("Year :{closest_state}")
+```
+
+
+## No of Rejected Votes Over the Years
+
+```{r Rejected Votes}
+Final %>%
+  subset(ColNames=="No of Rejected Votes" & Electorate=="Final District Results") %>%
+  group_by(Year,ColNames) %>%
+  summarise(Votes=sum(Votes)/100000) %>%
+ggplot(.,aes(Year,Votes,label=Votes))+
+       geom_col()+geom_text(vjust=1)+
+       ylab("Votes (in 100,000)")+
+       scale_x_continuous(breaks = years)
+```
+
+## No of Rejected Votes Over the Years by district
+
+```{r Rejected Votes by district}
+Final %>%
+  subset(ColNames=="No of Rejected Votes" & Electorate=="Final District Results") %>%
+ggplot(.,aes(District,Votes/10000,label=Votes/10000))+
+       geom_col()+geom_text(vjust=1,size=2)+
+       ylab("Votes (in 10,000)")+
+       transition_states(factor(Year),state_length = 2)+ 
+       theme(legend.position = "bottom",
+             axis.text.x = element_text(angle=90,vjust=-0.1))+
+       ggtitle("Year :{closest_state}")
+```
+
+
+# Postal Votes
+
+## Postal Votes Polled Over the Years
+
+```{r Postal Votes Polled}
+Final %>%
+  subset(ColNames=="Total No of Votes Polled" & Electorate=="Postal District Votes") %>%
+  group_by(Year,ColNames) %>%
+  summarise(Votes=sum(Votes)/100000) %>%
+ggplot(.,aes(Year,Votes,label=Votes))+
+       geom_col()+geom_text(vjust=1)+
+       ylab("Votes (in 100,000)")+
+       scale_x_continuous(breaks = years)
+```
+
+## Postal Votes Polled Over the Years by district
+
+```{r Postal Votes Polled by district}
+Final %>%
+  subset(ColNames=="Total No of Votes Polled" & Electorate=="Postal District Votes") %>%
+ggplot(.,aes(District,Votes/10000,label=Votes/10000))+
+       geom_col()+geom_text(vjust=1,size=2)+
+       ylab("Votes (in 10,000)")+
+       transition_states(factor(Year),state_length = 2)+ 
+       theme(legend.position = "bottom",
+             axis.text.x = element_text(angle=90,vjust=-0.1))+
+       ggtitle("Year :{closest_state}")
+```
+
+## Postal Votes Registered Over the Years
+
+```{r Postal Votes Registered}
+Final %>%
+  subset(ColNames=="No of Registered Electors" & Electorate=="Postal District Votes") %>%
+  group_by(Year,ColNames) %>%
+  summarise(Votes=sum(Votes)/100000) %>%
+ggplot(.,aes(Year,Votes,label=Votes))+
+       geom_col()+geom_text(vjust=1)+
+       ylab("Votes (in 100,000)")+
+       scale_x_continuous(breaks = years)
+```
+
+## Postal Votes Registered Over the Years by district
+
+```{r Postal Votes Registered by district}
+Final %>%
+  subset(ColNames=="No of Registered Electors" & Electorate=="Postal District Votes") %>%
+ggplot(.,aes(District,Votes,label=Votes))+
+       geom_col()+geom_text(vjust=1,size=2)+
+       ylab("Votes")+
+       transition_states(factor(Year),state_length = 2)+ 
+       theme(legend.position = "bottom",
+             axis.text.x = element_text(angle=90,vjust=-0.1))+
+       ggtitle("Year :{closest_state}")
+```
+
+## Postal Votes Rejected Over the Years
+
+```{r Postal Votes Rejected}
+Final %>%
+  subset(ColNames=="No of Rejected Votes" & Electorate=="Postal District Votes") %>%
+  group_by(Year,ColNames) %>%
+  summarise(Votes=sum(Votes)/1000) %>%
+ggplot(.,aes(Year,Votes,label=Votes))+
+       geom_col()+geom_text(vjust=1)+
+       ylab("Votes (in 1000)")+
+       scale_x_continuous(breaks = years)
+```
+
+## Postal Votes Rejected Over the Years by district
+
+```{r Postal Votes Rejected by district}
+Final %>%
+  subset(ColNames=="No of Rejected Votes" & Electorate=="Postal District Votes") %>%
+ggplot(.,aes(District,Votes,label=Votes))+
+       geom_col()+geom_text(vjust=1)+
+       ylab("Votes")+
+       transition_states(factor(Year),state_length = 2)+ 
+       theme(legend.position = "bottom",
+             axis.text.x = element_text(angle=90,vjust=-0.1))+
+       ggtitle("Year :{closest_state}")
+```
+
+*THANK YOU*
