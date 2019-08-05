@@ -152,4 +152,16 @@ can be extracted.
 It took me 3 weeks to complete this project to its entirety and I feel very
 successful and confident that it would be useful. 
 
+**Note** 
+I wrote an example [markdown file](https://github.com/Amalan-ConStat/PresidentialElection/blob/master/Final%20Data/Example.md) 
+with the full data frame and it has some interesting plots. Also below are a few 
+plots from this markdown file. 
+
+![](Fig2.png)
+
+![](Fig3.gif)
+
+At the beginning of this project I wrote a [blog post](https://amalan-con-stat.netlify.com/post/slelection/presidential-election/2015/2015/)
+regarding extracting data from the pdf file of year 2015.
+
 *THANK YOU*
